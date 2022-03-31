@@ -4,7 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/programming/Android/WhatsAppstatusdowloader/app/src/main/res/drawable/ic_bg_splash.xml" value="0.1385" />
+        <entry key="..\:/programming/Android/WhatsAppstatusdowloader/app/src/main/res/drawable/ic_business_whatsapp.xml" value="0.163" />
+        <entry key="..\:/programming/Android/WhatsAppstatusdowloader/app/src/main/res/drawable/ic_download.xml" value="0.163" />
+        <entry key="..\:/programming/Android/WhatsAppstatusdowloader/app/src/main/res/drawable/ic_menu.xml" value="0.163" />
+        <entry key="..\:/programming/Android/WhatsAppstatusdowloader/app/src/main/res/drawable/ic_question.xml" value="0.163" />
+        <entry key="..\:/programming/Android/WhatsAppstatusdowloader/app/src/main/res/drawable/ic_whats_app.xml" value="0.163" />
+        <entry key="..\:/programming/Android/WhatsAppstatusdowloader/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/programming/Android/WhatsAppstatusdowloader/app/src/main/res/layout/activity_splash.xml" value="0.22" />
+        <entry key="..\:/programming/Android/WhatsAppstatusdowloader/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.25625" />
       </map>
     </option>
   </component>

@@ -29,7 +29,11 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+
+
 }
+
 
 dependencies {
 
@@ -43,4 +47,11 @@ dependencies {
 
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
+    implementation 'com.google.android.material:material:1.6.0-beta01'
+
+    implementation 'com.github.naz013:smooth-bottom-bar:1.0.2'
+    implementation "androidx.dynamicanimation:dynamicanimation:1.0.0"
+
+    implementation 'com.github.ibrahimsn98:SmoothBottomBar:1.7.9'
+    implementation 'com.tbuonomo:morph-bottom-navigation:1.0.1'
 }

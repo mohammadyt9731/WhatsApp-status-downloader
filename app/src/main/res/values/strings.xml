@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">دانلودر وضعیت واتساپ</string>
     <string name="version">نسخه : 1.0.0</string>
+    <string name="guide">راهنما</string>
+    <string name="new_status">وضعیت جدید</string>
+    <string name="new_business_status">واتساپ تجاری</string>
+    <string name="downloads">دانلود ها</string>
 </resources>
