@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">WhatsAppstatus dowloader</string>
+    <string name="app_name">دانلودر وضعیت واتساپ</string>
+    <string name="version">نسخه : 1.0.0</string>
 </resources>
