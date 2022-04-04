@@ -1,9 +1,15 @@
 package com.test.whatsappstatusdowloader
 
+
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.flarebit.flarebarlib.Flaretab
+import com.test.whatsappstatusdowloader.adapter.ViewPagerAdapter
 import com.test.whatsappstatusdowloader.databinding.ActivityMainBinding
 import com.test.whatsappstatusdowloader.fragment.GuideFragment
 
@@ -17,17 +23,15 @@ class MainActivity : AppCompatActivity() {
         binding= ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setUpViewPager();
+
         setUpBottomNavigationView()
     }
 
-    private fun setUpViewPager(){
 
 
-    }
-    
 
     private fun setUpBottomNavigationView() {
+
 
         val tabs = ArrayList<Flaretab>()
         tabs.add(Flaretab(resources.getDrawable(R.drawable.ic_question), resources.getString(R.string.guide),"#ece5dd"))
@@ -38,20 +42,23 @@ class MainActivity : AppCompatActivity() {
         binding.bottomBar.attachTabs(this@MainActivity)
 
 
-
+        loadFragment(GuideFragment())
 
         binding.bottomBar.setTabChangedListener { selectedTab, selectedIndex, oldIndex -> //tabIndex starts from 0 (zero). Example : 4 tabs = last Index - 3
 
-
             loadFragment(GuideFragment())
-
-
         }
-    }
 
-    private fun loadFragment(fragment:Fragment){
 
-        supportFragmentManager.beginTransaction().add(R.id.fl_fragment_container,fragment).commit()
+
 
     }
+
+    private fun loadFragment(fragment: Fragment){
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fl_fragment_container,fragment).commit()
+
+    }
+
 }

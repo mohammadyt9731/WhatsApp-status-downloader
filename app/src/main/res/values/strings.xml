@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">دانلودر وضعیت واتساپ</string>
     <string name="version">نسخه : 1.0.0</string>
-    <string name="guide">راهنما</string>
+    <string name="guide">راهنما استفاده</string>
     <string name="new_status">وضعیت جدید</string>
     <string name="new_business_status">واتساپ تجاری</string>
     <string name="downloads">دانلود ها</string>
+    <string name="guide_text">1-وارد برنامه واتساپ شوید\n2-وضعیت های موردنظر را ببینید\n3-سپس به برنامه برگرید\n4-حالا با لمس دکمه دانلود میتوانید وضعیت های مورد نظر خود را ذخیره کنید</string>
 </resources>
