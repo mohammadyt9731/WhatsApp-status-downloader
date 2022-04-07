@@ -9,9 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/space_large"
-        android:backgroundTint="@color/green_100"
+        android:backgroundTint="@color/white"
         app:cardCornerRadius="@dimen/space_medium"
-        app:cardElevation="@dimen/space_middle"
+        app:cardElevation="@dimen/space_medium"
         app:strokeWidth="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -31,7 +31,7 @@
                 android:paddingVertical="@dimen/space_middle"
                 android:text="@string/guide"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size_20"
+                android:textSize="@dimen/text_size_18"
                 android:textStyle="bold"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,7 +46,7 @@
                 android:paddingVertical="@dimen/space_middle"
                 android:text="@string/guide_text"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size_16"
+                android:textSize="@dimen/text_size_14"
                 app:layout_constraintTop_toBottomOf="@id/tv_guide" />
 
 
