@@ -17,7 +17,6 @@ import com.test.whatsappstatusdowloader.utility.Utility
 
 class WhatsappStatusFragment : Fragment() {
 
-    lateinit var binding: FragmentWhatsappStatusBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -35,10 +34,9 @@ class WhatsappStatusFragment : Fragment() {
         setUpRecyclerView(view)
 
 
-
     }
 
-    fun setUpRecyclerView(view: View){
+    private fun setUpRecyclerView(view: View){
 
 
         val rvWhatsappStatus = view.findViewById<RecyclerView>(R.id.rv_whatsapp_status)
