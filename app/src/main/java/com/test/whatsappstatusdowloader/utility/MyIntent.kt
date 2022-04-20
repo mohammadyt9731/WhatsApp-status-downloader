@@ -85,16 +85,18 @@ object MyIntent {
 
         val sharePhotoIntent = Intent(Intent.ACTION_SEND).apply {
             type = "image/*"
-            flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
-            flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            putExtra(
-                Intent.EXTRA_SUBJECT,
-                "Sharing file from the AppName"
-            )
+
+
+            val shareMessage = """
+                ${context.getString(R.string.app_link_download)}${context.getString(R.string.app_name)}           
+                ${context.getString(R.string.app_id_caffe_bazaar)}${context.packageName}
+                
+                
+                """.trimIndent()
+
             putExtra(
                 Intent.EXTRA_TEXT,
-                "Sharing file from the AppName with some description"
+                shareMessage
             )
             val fileURI = FileProvider.getUriForFile(
                 context, context.packageName + ".provider",

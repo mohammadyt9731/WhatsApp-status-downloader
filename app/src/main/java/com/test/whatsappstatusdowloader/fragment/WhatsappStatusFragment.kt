@@ -36,7 +36,7 @@ class WhatsappStatusFragment : Fragment() {
 
         // /Download/Wahtsapp
         val file =
-            File(Environment.getExternalStorageDirectory().path + "/WhatsApp/Media/.Statuses")
+            File(Environment.getExternalStorageDirectory().path +"/WhatsApp/Media/.Statuses")
         Log.i("123321",file.toString())
         if (file.exists()) {
 

@@ -5,8 +5,7 @@
     android:id="@+id/cl_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-android:layout_marginLeft="@dimen/space_middle"
-    android:layout_marginVertical="@dimen/space_medium">
+android:layout_margin="@dimen/space_medium">
 
 
     <com.google.android.material.card.MaterialCardView
@@ -19,7 +18,7 @@ android:layout_marginLeft="@dimen/space_middle"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:strokeColor="@color/green"
-        app:strokeWidth="2dp">
+        app:strokeWidth="1dp">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
