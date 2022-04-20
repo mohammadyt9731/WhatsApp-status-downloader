@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/programming/Android/WhatsAppstatusdowloader/app/src/main/res/drawable/bg_item_icons.xml" value="0.151" />
+        <entry key="..\:/programming/Android/WhatsAppstatusdowloader/app/src/main/res/drawable/bg_place_holder.xml" value="0.192" />
         <entry key="..\:/programming/Android/WhatsAppstatusdowloader/app/src/main/res/drawable/ic_bg_splash.xml" value="0.1385" />
         <entry key="..\:/programming/Android/WhatsAppstatusdowloader/app/src/main/res/drawable/ic_business_whatsapp.xml" value="0.163" />
         <entry key="..\:/programming/Android/WhatsAppstatusdowloader/app/src/main/res/drawable/ic_download.xml" value="0.163" />
@@ -16,7 +17,7 @@
         <entry key="..\:/programming/Android/WhatsAppstatusdowloader/app/src/main/res/layout/activity_splash.xml" value="0.22" />
         <entry key="..\:/programming/Android/WhatsAppstatusdowloader/app/src/main/res/layout/fragment_guide.xml" value="0.25625" />
         <entry key="..\:/programming/Android/WhatsAppstatusdowloader/app/src/main/res/layout/fragment_whatsapp_status.xml" value="0.20077220077220076" />
-        <entry key="..\:/programming/Android/WhatsAppstatusdowloader/app/src/main/res/layout/layout_image_item.xml" value="0.22" />
+        <entry key="..\:/programming/Android/WhatsAppstatusdowloader/app/src/main/res/layout/layout_image_item.xml" value="0.18" />
         <entry key="..\:/programming/Android/WhatsAppstatusdowloader/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.25625" />
       </map>
     </option>

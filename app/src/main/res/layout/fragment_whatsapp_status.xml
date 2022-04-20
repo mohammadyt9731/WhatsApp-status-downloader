@@ -12,6 +12,13 @@
         android:layout_gravity="center"
         />
 
+    <ImageView
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/ic_sample_status"
+        android:id="@+id/iv_sample"/>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
