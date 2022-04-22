@@ -2,13 +2,14 @@ package com.test.whatsappstatusdowloader
 
 
 import android.os.Bundle
-import android.util.DisplayMetrics
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.flarebit.flarebarlib.Flaretab
 import com.test.whatsappstatusdowloader.databinding.ActivityMainBinding
 import com.test.whatsappstatusdowloader.fragment.GuideFragment
-import com.test.whatsappstatusdowloader.fragment.WhatsappStatusFragment
+import com.test.whatsappstatusdowloader.fragment.StatusFragment
+import com.test.whatsappstatusdowloader.utility.Constants
 
 
 class MainActivity : AppCompatActivity() {
@@ -20,45 +21,37 @@ class MainActivity : AppCompatActivity() {
         binding= ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         setUpBottomNavigationView()
-
     }
-
-
 
 
 
     private fun setUpBottomNavigationView() {
 
+        configTabs()
+        loadFragment(GuideFragment())
+        setTabChangeListener()
+
+    }
+
+    private fun configTabs (){
 
         val tabs = ArrayList<Flaretab>()
         val colorCode="#ece5dd"
-        tabs.add(Flaretab(resources.getDrawable(R.drawable.ic_question), resources.getString(R.string.guide),colorCode))
-        tabs.add(Flaretab(resources.getDrawable(R.drawable.ic_whats_app), resources.getString(R.string.new_status), colorCode))
-        tabs.add(Flaretab(resources.getDrawable(R.drawable.ic_business_whatsapp), resources.getString(R.string.new_business_status), colorCode))
-        tabs.add(Flaretab(resources.getDrawable(R.drawable.ic_download), resources.getString(R.string.downloads), colorCode))
+
+        tabs.add(getFlareTab(R.drawable.ic_question,getString(R.string.guide),colorCode))
+        tabs.add(getFlareTab(R.drawable.ic_whats_app,getString(R.string.new_status),colorCode))
+        tabs.add(getFlareTab(R.drawable.ic_business_whatsapp,getString(R.string.new_business_status),colorCode))
+        tabs.add(getFlareTab(R.drawable.ic_download,getString(R.string.downloads),colorCode))
+
         binding.bottomBar.tabList = tabs
         binding.bottomBar.attachTabs(this@MainActivity)
 
+    }
 
-
-        loadFragment(GuideFragment())
-
-        binding.bottomBar.setTabChangedListener { selectedTab, selectedIndex, oldIndex -> //tabIndex starts from 0 (zero). Example : 4 tabs = last Index - 3
-
-            when(selectedIndex){
-
-                0-> loadFragment(GuideFragment())
-                1-> loadFragment(WhatsappStatusFragment())
-                2-> loadFragment(WhatsappStatusFragment())
-                3-> loadFragment(WhatsappStatusFragment())
-                else-> loadFragment(GuideFragment())
-            }
-
-        }
-
-
-
+    private fun getFlareTab(resourceId:Int,text:String,colorCode:String):Flaretab{
+       return Flaretab(ResourcesCompat.getDrawable(resources,resourceId,null), text,colorCode)
 
     }
 
@@ -67,6 +60,21 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fl_fragment_container,fragment).commit()
 
+    }
+
+    private fun setTabChangeListener(){
+        binding.bottomBar.setTabChangedListener { selectedTab, selectedIndex, oldIndex ->
+
+            when(selectedIndex){
+
+                0-> loadFragment(GuideFragment())
+                1-> loadFragment(StatusFragment(Constants.WHATSAPP_DIRECTORY))
+                2-> loadFragment(StatusFragment(Constants.WHATSAPP_DIRECTORY))
+                3-> loadFragment(StatusFragment(Constants.SAVED_DIRECTORY))
+                else-> loadFragment(GuideFragment())
+            }
+
+        }
     }
 
 }

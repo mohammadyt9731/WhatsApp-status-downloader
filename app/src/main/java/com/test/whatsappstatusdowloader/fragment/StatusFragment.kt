@@ -2,7 +2,6 @@ package com.test.whatsappstatusdowloader.fragment
 
 
 import android.os.Bundle
-import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,15 +13,23 @@ import com.test.whatsappstatusdowloader.databinding.FragmentWhatsappStatusBindin
 import java.io.File
 
 
-class WhatsappStatusFragment : Fragment() {
+class StatusFragment(directoryAddress:String) : Fragment() {
 
     private lateinit var binding: FragmentWhatsappStatusBinding
-    var statusFileList: ArrayList<File> = ArrayList()
+    private var statusFileList: ArrayList<File> = ArrayList()
+    private var directoryAddress:String
+
+    init {
+        this.directoryAddress=directoryAddress
+    }
+
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = FragmentWhatsappStatusBinding.inflate(layoutInflater, container, false)
         return binding.root
@@ -31,39 +38,38 @@ class WhatsappStatusFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+    }
 
+    override fun onResume() {
+        super.onResume()
 
 
         // /Download/Wahtsapp
-        val file =
-            File(Environment.getExternalStorageDirectory().path +"/WhatsApp/Media/.Statuses")
-        Log.i("123321",file.toString())
+        val file = File(directoryAddress)
+
+        Log.i("123321",file.path.toString())
         if (file.exists()) {
 
             val statusListFile = file.listFiles()
-
             if (statusListFile?.isNotEmpty() == true)
-                for (f in statusListFile){
-                    if(f.toString().endsWith("jpg")){
-
-                        statusFileList.add(f)
-                     //   Log.i("123321",f.path.toString())
+                for (statusFile in statusListFile){
+                    if(statusFile.toString().endsWith("jpg")){
+                        statusFileList.add(statusFile)
+                      //  Log.i("123321",statusFile.path.toString())
                     }
 
                 }
 
-            setUpRecyclerView(view)
+            setUpRecyclerView()
         }
-
-
 
     }
 
-    private fun setUpRecyclerView(view: View) {
+    private fun setUpRecyclerView() {
 
         binding.rvWhatsappStatus.apply {
             layoutManager = GridLayoutManager(context, 2)
-            adapter = WhatsAppStatusAdapter(requireActivity(), statusFileList)
+            adapter = WhatsAppStatusAdapter(requireActivity(), statusFileList,directoryAddress)
         }
 
 
