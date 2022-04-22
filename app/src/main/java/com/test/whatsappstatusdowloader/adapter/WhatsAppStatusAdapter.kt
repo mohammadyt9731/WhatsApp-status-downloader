@@ -2,11 +2,12 @@ package com.test.whatsappstatusdowloader.adapter
 
 import android.app.Activity
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.media.MediaMetadataRetriever
+import android.media.ThumbnailUtils
 import android.os.Build
-import android.util.Log
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +22,7 @@ import com.test.whatsappstatusdowloader.utility.Constants
 import com.test.whatsappstatusdowloader.utility.MyIntent
 import com.test.whatsappstatusdowloader.utility.Utility
 import java.io.File
+import java.net.URLConnection
 
 
 class WhatsAppStatusAdapter(
@@ -73,13 +75,17 @@ class WhatsAppStatusAdapter(
         var ivStatus: ImageView
         var ivShareStatus: ImageView
         var ivActionOnStatus: ImageView
+        var ivVideo: ImageView
         var clRoot: ConstraintLayout
+
+
 
 
         init {
             ivStatus = view.findViewById(R.id.iv_status)
             ivShareStatus = view.findViewById(R.id.iv_share_status)
             ivActionOnStatus = view.findViewById(R.id.iv_action_on_status)
+            ivVideo = view.findViewById(R.id.iv_video)
             clRoot = view.findViewById(R.id.cl_root)
 
         }
@@ -87,6 +93,14 @@ class WhatsAppStatusAdapter(
         fun setUpViews(position: Int) {
 
             clRoot.layoutParams.width = itemWidth
+
+
+            if(isVideoFile(statusFileList[position].path))
+                ivVideo.visibility=View.VISIBLE
+            else
+                ivVideo.visibility=View.GONE
+
+
 
             if (isInSavedStatusPage()) {
                 ivActionOnStatus.setImageResource(R.drawable.ic_delete)
@@ -103,11 +117,24 @@ class WhatsAppStatusAdapter(
 
         fun setStatusImage(position: Int) {
 
-            ivStatus.load(statusFileList[position]) {
-                crossfade(true)
-                placeholder(ColorDrawable(Color.WHITE))
-            }
+            if(isVideoFile(statusFileList[position].path)){
 
+                val retriever = MediaMetadataRetriever()
+                retriever.setDataSource(statusFileList[position].path)
+                val bitmap = retriever.getFrameAtTime(1)
+
+                ivStatus.load(bitmap) {
+                    crossfade(true)
+                    placeholder(ColorDrawable(Color.WHITE))
+                }
+
+            }else{
+                ivStatus.load(statusFileList[position]) {
+                    crossfade(true)
+                    placeholder(ColorDrawable(Color.WHITE))
+                }
+
+            }
         }
 
         fun setOnClickListener(position: Int) {
@@ -185,6 +212,13 @@ class WhatsAppStatusAdapter(
         } catch (e: Exception) {
             Toast.makeText(activity,e.message.toString(),Toast.LENGTH_LONG).show()
         }
+
+    }
+
+    private fun isVideoFile(path:String):Boolean{
+
+        val mimeType = URLConnection.guessContentTypeFromName(path)
+        return  mimeType.startsWith("video")
 
     }
 }

@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.test.whatsappstatusdowloader.adapter.WhatsAppStatusAdapter
 import com.test.whatsappstatusdowloader.databinding.FragmentWhatsappStatusBinding
+import okhttp3.internal.notify
 import java.io.File
 import java.net.URLConnection
 
@@ -40,11 +41,18 @@ class StatusFragment(directoryAddress:String) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
     }
 
     override fun onResume() {
         super.onResume()
 
+        setUpList()
+    }
+
+    private fun setUpList(){
+        statusFileList.clear()
 
         // /Download/Wahtsapp
         val file = File(directoryAddress)
@@ -55,18 +63,19 @@ class StatusFragment(directoryAddress:String) : Fragment() {
             val statusListFile = file.listFiles()
             if (statusListFile?.isNotEmpty() == true)
                 for (statusFile in statusListFile){
-                  //  if(statusFile.toString().endsWith("jpg"))
+                    //  if(statusFile.toString().endsWith("jpg"))
                     if(isImageFile(statusFile.path)||isVideoFile(statusFile.path))
 
                     {
                         statusFileList.add(statusFile)
-                      //  Log.i("123321",statusFile.path.toString())
+                        //  Log.i("123321",statusFile.path.toString())
                     }
 
                 }
 
             setUpRecyclerView()
         }
+
 
     }
 
@@ -90,18 +99,12 @@ class StatusFragment(directoryAddress:String) : Fragment() {
     }
 
 
-
-
     private fun setUpRecyclerView() {
 
         binding.rvWhatsappStatus.apply {
             layoutManager = GridLayoutManager(context, 2)
             adapter = WhatsAppStatusAdapter(requireActivity(), statusFileList,directoryAddress)
         }
-
-
-
-
     }
 
 
