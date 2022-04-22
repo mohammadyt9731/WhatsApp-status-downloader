@@ -1,6 +1,7 @@
 package com.test.whatsappstatusdowloader.fragment
 
 
+import android.R.attr
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.test.whatsappstatusdowloader.adapter.WhatsAppStatusAdapter
 import com.test.whatsappstatusdowloader.databinding.FragmentWhatsappStatusBinding
 import java.io.File
+import java.net.URLConnection
 
 
 class StatusFragment(directoryAddress:String) : Fragment() {
@@ -53,7 +55,10 @@ class StatusFragment(directoryAddress:String) : Fragment() {
             val statusListFile = file.listFiles()
             if (statusListFile?.isNotEmpty() == true)
                 for (statusFile in statusListFile){
-                    if(statusFile.toString().endsWith("jpg")){
+                  //  if(statusFile.toString().endsWith("jpg"))
+                    if(isImageFile(statusFile.path)||isVideoFile(statusFile.path))
+
+                    {
                         statusFileList.add(statusFile)
                       //  Log.i("123321",statusFile.path.toString())
                     }
@@ -64,6 +69,28 @@ class StatusFragment(directoryAddress:String) : Fragment() {
         }
 
     }
+
+    private fun isImageFile(path:String):Boolean{
+//
+//        if(   file.name.toString().endsWith("jpg")
+//            ||file.name.toString().endsWith("jpeg")
+//            ||file.name.toString().endsWith("png")
+//        )
+
+        val mimeType: String = URLConnection.guessContentTypeFromName(path)
+        return mimeType.startsWith("image")
+
+    }
+
+    private fun isVideoFile(path:String):Boolean{
+
+        val mimeType = URLConnection.guessContentTypeFromName(path)
+        return  mimeType.startsWith("video")
+
+    }
+
+
+
 
     private fun setUpRecyclerView() {
 
@@ -76,4 +103,6 @@ class StatusFragment(directoryAddress:String) : Fragment() {
 
 
     }
+
+
 }
