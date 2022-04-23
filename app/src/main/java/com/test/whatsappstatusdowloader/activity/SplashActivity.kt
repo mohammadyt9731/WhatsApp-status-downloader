@@ -1,4 +1,4 @@
-package com.test.whatsappstatusdowloader
+package com.test.whatsappstatusdowloader.activity
 
 import android.Manifest
 import android.app.AlertDialog
@@ -13,6 +13,7 @@ import android.provider.Settings
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.test.whatsappstatusdowloader.R
 import java.util.*
 import kotlin.concurrent.timerTask
 

@@ -3,8 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/programming/Android/WhatsAppstatusdowloader/app/src/main/res/drawable/bg_btn_blue.xml" value="0.2245" />
+        <entry key="..\:/programming/Android/WhatsAppstatusdowloader/app/src/main/res/drawable/bg_btn_green.xml" value="0.2245" />
+        <entry key="..\:/programming/Android/WhatsAppstatusdowloader/app/src/main/res/drawable/bg_btn_red.xml" value="0.2245" />
+        <entry key="..\:/programming/Android/WhatsAppstatusdowloader/app/src/main/res/drawable/bg_button.xml" value="0.192" />
         <entry key="..\:/programming/Android/WhatsAppstatusdowloader/app/src/main/res/drawable/bg_item_icons.xml" value="0.151" />
         <entry key="..\:/programming/Android/WhatsAppstatusdowloader/app/src/main/res/drawable/bg_place_holder.xml" value="0.192" />
+        <entry key="..\:/programming/Android/WhatsAppstatusdowloader/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.2245" />
         <entry key="..\:/programming/Android/WhatsAppstatusdowloader/app/src/main/res/drawable/ic_bg_splash.xml" value="0.1385" />
         <entry key="..\:/programming/Android/WhatsAppstatusdowloader/app/src/main/res/drawable/ic_business_whatsapp.xml" value="0.163" />
         <entry key="..\:/programming/Android/WhatsAppstatusdowloader/app/src/main/res/drawable/ic_delete.xml" value="0.1215" />
@@ -16,6 +21,7 @@
         <entry key="..\:/programming/Android/WhatsAppstatusdowloader/app/src/main/res/drawable/ic_share.xml" value="0.142" />
         <entry key="..\:/programming/Android/WhatsAppstatusdowloader/app/src/main/res/drawable/ic_whats_app.xml" value="0.163" />
         <entry key="..\:/programming/Android/WhatsAppstatusdowloader/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/programming/Android/WhatsAppstatusdowloader/app/src/main/res/layout/activity_show_media.xml" value="0.25" />
         <entry key="..\:/programming/Android/WhatsAppstatusdowloader/app/src/main/res/layout/activity_splash.xml" value="0.22" />
         <entry key="..\:/programming/Android/WhatsAppstatusdowloader/app/src/main/res/layout/fragment_guide.xml" value="0.25625" />
         <entry key="..\:/programming/Android/WhatsAppstatusdowloader/app/src/main/res/layout/fragment_whatsapp_status.xml" value="0.20077220077220076" />

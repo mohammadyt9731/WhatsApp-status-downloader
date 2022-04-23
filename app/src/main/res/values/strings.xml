@@ -7,8 +7,6 @@
     <string name="exit">خروج</string>
 
 
-
-
     <string name="guide">راهنما استفاده</string>
     <string name="new_status">وضعیت جدید</string>
     <string name="new_business_status">واتساپ تجاری</string>
@@ -27,5 +25,9 @@
     <string name="need_install_caffe_bazaar">برای ثبت نظر باید اپلیکیشن کافه بازار را نصب داشته باشید</string>
     <string name="email_address">supttp@gmail.com</string>
     <string name="send_email">ارسال ایمیل</string>
+    <string name="save">ذخیره</string>
+    <string name="share">ارسال</string>
+    <string name="delete">حذف</string>
+    <string name="preview">پیش نمایش</string>
 
 </resources>

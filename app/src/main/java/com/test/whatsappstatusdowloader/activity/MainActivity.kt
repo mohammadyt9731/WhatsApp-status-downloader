@@ -1,11 +1,13 @@
-package com.test.whatsappstatusdowloader
+package com.test.whatsappstatusdowloader.activity
 
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.flarebit.flarebarlib.Flaretab
+import com.test.whatsappstatusdowloader.R
 import com.test.whatsappstatusdowloader.databinding.ActivityMainBinding
 import com.test.whatsappstatusdowloader.fragment.GuideFragment
 import com.test.whatsappstatusdowloader.fragment.StatusFragment

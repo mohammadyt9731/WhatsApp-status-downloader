@@ -2,6 +2,7 @@ package com.test.whatsappstatusdowloader.adapter
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.media.MediaMetadataRetriever
@@ -18,6 +19,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.test.whatsappstatusdowloader.R
+import com.test.whatsappstatusdowloader.activity.ShowMediaActivity
 import com.test.whatsappstatusdowloader.utility.Constants
 import com.test.whatsappstatusdowloader.utility.MyIntent
 import com.test.whatsappstatusdowloader.utility.Utility
@@ -42,7 +44,7 @@ class WhatsAppStatusAdapter(
         this.statusFileList = statusFileList
         this.activity = activity
         this.directoryAddress = directoryAddress
-        itemWidth = Utility().getScreenWidth(activity) * 44 / 100
+        itemWidth = Utility.getScreenWidth(activity) * 44 / 100
 
     }
 
@@ -95,7 +97,7 @@ class WhatsAppStatusAdapter(
             clRoot.layoutParams.width = itemWidth
 
 
-            if(isVideoFile(statusFileList[position].path))
+            if(Utility.isVideoFile(statusFileList[position].path))
                 ivVideo.visibility=View.VISIBLE
             else
                 ivVideo.visibility=View.GONE
@@ -117,7 +119,7 @@ class WhatsAppStatusAdapter(
 
         fun setStatusImage(position: Int) {
 
-            if(isVideoFile(statusFileList[position].path)){
+            if(Utility.isVideoFile(statusFileList[position].path)){
 
                 val retriever = MediaMetadataRetriever()
                 retriever.setDataSource(statusFileList[position].path)
@@ -183,6 +185,16 @@ class WhatsAppStatusAdapter(
 
                 }
             }
+
+            ivStatus.setOnClickListener(){
+
+                val intent=Intent(activity,ShowMediaActivity::class.java)
+                intent.putExtra(Constants.MEDIA_PATH_KEY,statusFileList[position])
+                activity.startActivity(intent)
+
+            }
+
+
         }
 
     }
@@ -215,10 +227,5 @@ class WhatsAppStatusAdapter(
 
     }
 
-    private fun isVideoFile(path:String):Boolean{
 
-        val mimeType = URLConnection.guessContentTypeFromName(path)
-        return  mimeType.startsWith("video")
-
-    }
 }

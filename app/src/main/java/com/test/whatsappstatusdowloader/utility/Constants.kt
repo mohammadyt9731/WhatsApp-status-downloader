@@ -10,6 +10,6 @@ object Constants {
     val WHATSAPP_BUSINESS_DIRECTORY=Environment.getExternalStorageDirectory().path + "/WhatsApp/Media/.Statuses"
     val SAVED_DIRECTORY=Environment.getExternalStorageDirectory().path+"/saveDirectory"
 
-
+    val MEDIA_PATH_KEY="media_path_key"
 
 }

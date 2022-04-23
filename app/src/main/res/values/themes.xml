@@ -28,4 +28,24 @@
     <style name="TextAppearance.BottomNavigation.Overline" parent="TextAppearance.MaterialComponents.Overline">
         <item name="android:textSize">@dimen/text_size_14</item>
     </style>
+
+
+    <style name="tv_medial_activity_style" >
+        <item name="android:width">0dp</item>
+        <item name="android:height">0dp</item>
+        <item name="android:layout_marginLeft">@dimen/space_medium</item>
+        <item name="android:layout_marginRight">@dimen/space_medium</item>
+        <item name="android:drawableTint">@color/white</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingLeft">@dimen/space_small</item>
+        <item name="android:paddingRight">@dimen/space_small</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/text_size_16</item>
+        <item name="layout_constraintDimensionRatio">2:1</item>
+
+
+    </style>
+
+
+
 </resources>
