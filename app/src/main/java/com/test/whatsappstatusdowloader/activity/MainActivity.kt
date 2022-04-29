@@ -1,8 +1,6 @@
 package com.test.whatsappstatusdowloader.activity
 
-
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
@@ -11,8 +9,8 @@ import com.test.whatsappstatusdowloader.R
 import com.test.whatsappstatusdowloader.databinding.ActivityMainBinding
 import com.test.whatsappstatusdowloader.fragment.GuideFragment
 import com.test.whatsappstatusdowloader.fragment.StatusFragment
-import com.test.whatsappstatusdowloader.utility.Constants
-import com.test.whatsappstatusdowloader.utility.MyIntent
+import com.test.whatsappstatusdowloader.utils.Constants
+import com.test.whatsappstatusdowloader.utils.MyIntent
 
 
 class MainActivity : AppCompatActivity() {
@@ -33,7 +31,10 @@ class MainActivity : AppCompatActivity() {
     private fun setUpBottomNavigationView() {
 
         configTabs()
+
+        //start fragment
         loadFragment(GuideFragment())
+
         setTabChangeListener()
         toolBarButtonClick()
 
@@ -42,20 +43,19 @@ class MainActivity : AppCompatActivity() {
     private fun configTabs (){
 
         val tabs = ArrayList<Flaretab>()
-        val colorCode=Constants.TAB_COLOR_CODE
 
-        tabs.add(getFlareTab(R.drawable.ic_question,getString(R.string.guide),colorCode))
-        tabs.add(getFlareTab(R.drawable.ic_whats_app,getString(R.string.new_status),colorCode))
-        tabs.add(getFlareTab(R.drawable.ic_business_whatsapp,getString(R.string.new_business_status),colorCode))
-        tabs.add(getFlareTab(R.drawable.ic_download,getString(R.string.downloads),colorCode))
+        tabs.add(createFlareTab(R.drawable.ic_question,getString(R.string.guide)))
+        tabs.add(createFlareTab(R.drawable.ic_whats_app,getString(R.string.whatsapp_status)))
+        tabs.add(createFlareTab(R.drawable.ic_business_whatsapp,getString(R.string.new_business_status)))
+        tabs.add(createFlareTab(R.drawable.ic_download,getString(R.string.downloads)))
 
         binding.bottomBar.tabList = tabs
         binding.bottomBar.attachTabs(this@MainActivity)
 
     }
 
-    private fun getFlareTab(resourceId:Int,text:String,colorCode:String):Flaretab{
-       return Flaretab(ResourcesCompat.getDrawable(resources,resourceId,null), text,colorCode)
+    private fun createFlareTab(resourceId:Int, text:String):Flaretab{
+       return Flaretab(ResourcesCompat.getDrawable(resources,resourceId,null), text,Constants.TAB_COLOR_CODE)
 
     }
 
@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setTabChangeListener(){
-        binding.bottomBar.setTabChangedListener { selectedTab, selectedIndex, oldIndex ->
+        binding.bottomBar.setTabChangedListener { _, selectedIndex, _ ->
 
             when(selectedIndex){
 

@@ -7,7 +7,7 @@
 
     <item android:id="@+id/menu_item_whatsapp_status"
         android:icon="@drawable/ic_whats_app"
-        android:title="@string/new_status"/>
+        android:title="@string/whatsapp_status"/>
 
     <item android:id="@+id/menu_item_bWhatsapp_status"
         android:icon="@drawable/ic_business_whatsapp"

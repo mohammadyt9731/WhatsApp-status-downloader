@@ -10,10 +10,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.test.whatsappstatusdowloader.R
 import com.test.whatsappstatusdowloader.adapter.WhatsAppStatusAdapter
 import com.test.whatsappstatusdowloader.databinding.FragmentWhatsappStatusBinding
-import com.test.whatsappstatusdowloader.utility.Constants
-import com.test.whatsappstatusdowloader.utility.Utility
+import com.test.whatsappstatusdowloader.utils.Constants
+import com.test.whatsappstatusdowloader.utils.Utils
 import java.io.File
-import java.net.URLConnection
 
 
 class StatusFragment(directoryAddress: String) : Fragment() {
@@ -77,7 +76,7 @@ class StatusFragment(directoryAddress: String) : Fragment() {
             for (statusFile in statusListFile) {
 
          //       Log.i("123321",statusFile.path.toString())
-                if (Utility.isImageFile(statusFile.path) || Utility.isVideoFile(statusFile.path)) {
+                if (Utils.isImageFile(statusFile.path) || Utils.isVideoFile(statusFile.path)) {
                     statusFileList.add(statusFile)
 
                 }

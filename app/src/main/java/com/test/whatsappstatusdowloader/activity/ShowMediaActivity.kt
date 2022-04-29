@@ -5,7 +5,6 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.media.MediaPlayer.OnPreparedListener
 import android.os.Bundle
-import android.view.MotionEvent
 import android.view.View
 import android.widget.MediaController
 import android.widget.Toast
@@ -14,9 +13,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.test.whatsappstatusdowloader.R
 import com.test.whatsappstatusdowloader.databinding.ActivityShowMediaBinding
-import com.test.whatsappstatusdowloader.utility.Constants
-import com.test.whatsappstatusdowloader.utility.MyIntent
-import com.test.whatsappstatusdowloader.utility.Utility
+import com.test.whatsappstatusdowloader.utils.Constants
+import com.test.whatsappstatusdowloader.utils.MyIntent
+import com.test.whatsappstatusdowloader.utils.Utils
 import java.io.File
 
 
@@ -46,7 +45,7 @@ class ShowMediaActivity : AppCompatActivity() {
     private fun checkFileType(file: File){
         binding.apply {
 
-            if(Utility.isImageFile(file.name))
+            if(Utils.isImageFile(file.name))
             {
                 ivPreview.visibility= View.VISIBLE
                 videoView.visibility= View.GONE

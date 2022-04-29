@@ -1,8 +1,7 @@
-package com.test.whatsappstatusdowloader.utility
+package com.test.whatsappstatusdowloader.utils
 
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.widget.Toast
 import androidx.core.content.FileProvider

@@ -4,25 +4,30 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.test.whatsappstatusdowloader.R
-import com.test.whatsappstatusdowloader.utility.Utility
+import com.test.whatsappstatusdowloader.databinding.FragmentGuideBinding
+import com.test.whatsappstatusdowloader.utils.Constants
 
 class GuideFragment : Fragment() {
 
-
+    private lateinit var binding: FragmentGuideBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_guide,container,false)
+        binding= FragmentGuideBinding.inflate(layoutInflater,container,false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //setUp view
+        binding.apply {
+            lottieDownload2.frame=Constants.LOTTIE_END_FRAME
+        }
 
     }
 

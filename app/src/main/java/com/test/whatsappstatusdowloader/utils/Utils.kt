@@ -1,13 +1,8 @@
-package com.test.whatsappstatusdowloader.utility
+package com.test.whatsappstatusdowloader.utils
 
 import android.app.Activity
-import android.util.DisplayMetrics
-import android.widget.Toast
-import com.test.whatsappstatusdowloader.R
-import java.io.File
-import java.net.URLConnection
 
-object Utility {
+object Utils {
 
     fun getScreenWidth(activity: Activity):Int{
         return activity.resources.displayMetrics.widthPixels
@@ -20,7 +15,7 @@ object Utility {
 
     fun isVideoFile(name: String): Boolean {
 
-        return (name.endsWith(".mp4")||name.endsWith(".mvi")||name.endsWith(".mkv"))
+        return (name.endsWith(".mp4")||name.endsWith(".mkv"))
     }
 
 
