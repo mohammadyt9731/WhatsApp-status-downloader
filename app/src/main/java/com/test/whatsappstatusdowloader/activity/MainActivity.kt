@@ -12,6 +12,7 @@ import com.test.whatsappstatusdowloader.databinding.ActivityMainBinding
 import com.test.whatsappstatusdowloader.fragment.GuideFragment
 import com.test.whatsappstatusdowloader.fragment.StatusFragment
 import com.test.whatsappstatusdowloader.utility.Constants
+import com.test.whatsappstatusdowloader.utility.MyIntent
 
 
 class MainActivity : AppCompatActivity() {
@@ -34,13 +35,14 @@ class MainActivity : AppCompatActivity() {
         configTabs()
         loadFragment(GuideFragment())
         setTabChangeListener()
+        toolBarButtonClick()
 
     }
 
     private fun configTabs (){
 
         val tabs = ArrayList<Flaretab>()
-        val colorCode="#ece5dd"
+        val colorCode=Constants.TAB_COLOR_CODE
 
         tabs.add(getFlareTab(R.drawable.ic_question,getString(R.string.guide),colorCode))
         tabs.add(getFlareTab(R.drawable.ic_whats_app,getString(R.string.new_status),colorCode))
@@ -61,7 +63,6 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.fl_fragment_container,fragment).commit()
-
     }
 
     private fun setTabChangeListener(){
@@ -76,6 +77,12 @@ class MainActivity : AppCompatActivity() {
                 else-> loadFragment(GuideFragment())
             }
 
+        }
+    }
+
+    private fun toolBarButtonClick(){
+        binding.ivWhatsapp.setOnClickListener{
+            MyIntent.openWhatsApp(this)
         }
     }
 

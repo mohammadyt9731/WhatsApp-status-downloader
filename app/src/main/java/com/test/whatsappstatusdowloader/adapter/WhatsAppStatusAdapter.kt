@@ -18,6 +18,8 @@ import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.test.whatsappstatusdowloader.R
 import com.test.whatsappstatusdowloader.activity.ShowMediaActivity
 import com.test.whatsappstatusdowloader.utility.Constants
@@ -81,8 +83,6 @@ class WhatsAppStatusAdapter(
         var clRoot: ConstraintLayout
 
 
-
-
         init {
             ivStatus = view.findViewById(R.id.iv_status)
             ivShareStatus = view.findViewById(R.id.iv_share_status)
@@ -125,16 +125,19 @@ class WhatsAppStatusAdapter(
                 retriever.setDataSource(statusFileList[position].path)
                 val bitmap = retriever.getFrameAtTime(1)
 
-                ivStatus.load(bitmap) {
-                    crossfade(true)
-                    placeholder(ColorDrawable(Color.WHITE))
-                }
+                Glide.with(activity).load(bitmap)
+                    .placeholder(ColorDrawable(Color.WHITE))
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    . into(ivStatus)
+
 
             }else{
-                ivStatus.load(statusFileList[position]) {
-                    crossfade(true)
-                    placeholder(ColorDrawable(Color.WHITE))
-                }
+
+                Glide.with(activity).load(statusFileList[position])
+                    .placeholder(ColorDrawable(Color.WHITE))
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    . into(ivStatus)
+
 
             }
         }
@@ -198,6 +201,8 @@ class WhatsAppStatusAdapter(
         }
 
     }
+
+
 
     fun isInSavedStatusPage():Boolean{
         return directoryAddress.equals(Constants.SAVED_DIRECTORY)

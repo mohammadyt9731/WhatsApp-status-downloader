@@ -1,7 +1,5 @@
 package com.test.whatsappstatusdowloader.fragment
 
-
-import android.R.attr
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,23 +7,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import com.test.whatsappstatusdowloader.R
 import com.test.whatsappstatusdowloader.adapter.WhatsAppStatusAdapter
 import com.test.whatsappstatusdowloader.databinding.FragmentWhatsappStatusBinding
-import okhttp3.internal.notify
+import com.test.whatsappstatusdowloader.utility.Constants
+import com.test.whatsappstatusdowloader.utility.Utility
 import java.io.File
 import java.net.URLConnection
 
 
-class StatusFragment(directoryAddress:String) : Fragment() {
+class StatusFragment(directoryAddress: String) : Fragment() {
 
     private lateinit var binding: FragmentWhatsappStatusBinding
-    private var statusFileList: ArrayList<File> = ArrayList()
-    private var directoryAddress:String
+    private var statusFileList: ArrayList<File>
+    private var directoryAddress: String
 
     init {
-        this.directoryAddress=directoryAddress
+        this.directoryAddress = directoryAddress
+        statusFileList = ArrayList()
     }
-
 
 
     override fun onCreateView(
@@ -42,7 +42,6 @@ class StatusFragment(directoryAddress:String) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
     }
 
     override fun onResume() {
@@ -51,61 +50,83 @@ class StatusFragment(directoryAddress:String) : Fragment() {
         setUpList()
     }
 
-    private fun setUpList(){
+    private fun setUpList() {
+
+
         statusFileList.clear()
+        val statusDirectory = File(directoryAddress)
+        Log.i("123321", statusDirectory.path.toString())
 
-        // /Download/Wahtsapp
-        val file = File(directoryAddress)
+        if (statusDirectory.exists())
+            prepareStatusList(statusDirectory)
+        else
+            showDirectoryNotExist()
 
-        Log.i("123321",file.path.toString())
-        if (file.exists()) {
+    }
 
-            val statusListFile = file.listFiles()
-            if (statusListFile?.isNotEmpty() == true)
-                for (statusFile in statusListFile){
-                    //  if(statusFile.toString().endsWith("jpg"))
-                    if(isImageFile(statusFile.path)||isVideoFile(statusFile.path))
+    private fun prepareStatusList(statusDirectory: File) {
 
-                    {
-                        statusFileList.add(statusFile)
-                        //  Log.i("123321",statusFile.path.toString())
-                    }
+        val statusListFile: Array<out File>? = statusDirectory.listFiles()
+        if (!statusListFile.isNullOrEmpty()) {
+
+            binding.apply {
+                rvWhatsappStatus.visibility = View.VISIBLE
+                tvWarning.visibility = View.GONE
+            }
+
+            for (statusFile in statusListFile) {
+
+         //       Log.i("123321",statusFile.path.toString())
+                if (Utility.isImageFile(statusFile.path) || Utility.isVideoFile(statusFile.path)) {
+                    statusFileList.add(statusFile)
 
                 }
+            }
+
 
             setUpRecyclerView()
+
+        } else {
+            showNoStatusWasObserved()
+        }
+    }
+
+    private fun showNoStatusWasObserved() {
+
+        binding.apply {
+            rvWhatsappStatus.visibility = View.GONE
+            if (directoryAddress == Constants.SAVED_DIRECTORY)
+                tvWarning.text = getString(R.string.no_status_saved)
+            else
+                tvWarning.text = getString(R.string.no_status_was_observed)
+            tvWarning.visibility = View.VISIBLE
+
         }
 
-
     }
 
-    private fun isImageFile(path:String):Boolean{
-//
-//        if(   file.name.toString().endsWith("jpg")
-//            ||file.name.toString().endsWith("jpeg")
-//            ||file.name.toString().endsWith("png")
-//        )
+    private fun showDirectoryNotExist() {
 
-        val mimeType: String = URLConnection.guessContentTypeFromName(path)
-        return mimeType.startsWith("image")
+        binding.apply {
+            rvWhatsappStatus.visibility = View.GONE
 
+            if (directoryAddress == Constants.SAVED_DIRECTORY)
+                tvWarning.text = getString(R.string.no_status_saved)
+            else
+                tvWarning.text = getString(R.string.directory_not_exist)
+
+            tvWarning.visibility = View.VISIBLE
+        }
     }
 
-    private fun isVideoFile(path:String):Boolean{
-
-        val mimeType = URLConnection.guessContentTypeFromName(path)
-        return  mimeType.startsWith("video")
-
-    }
 
 
     private fun setUpRecyclerView() {
 
         binding.rvWhatsappStatus.apply {
             layoutManager = GridLayoutManager(context, 2)
-            adapter = WhatsAppStatusAdapter(requireActivity(), statusFileList,directoryAddress)
+            adapter = WhatsAppStatusAdapter(requireActivity(), statusFileList, directoryAddress)
         }
     }
-
 
 }

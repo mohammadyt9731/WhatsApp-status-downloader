@@ -3,17 +3,22 @@ package com.test.whatsappstatusdowloader.activity
 import android.app.AlertDialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import androidx.appcompat.app.AppCompatActivity
+import android.media.MediaPlayer.OnPreparedListener
 import android.os.Bundle
-import android.util.Log
+import android.view.MotionEvent
+import android.view.View
+import android.widget.MediaController
 import android.widget.Toast
-import coil.load
+import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.test.whatsappstatusdowloader.R
-import com.test.whatsappstatusdowloader.databinding.ActivityMainBinding
 import com.test.whatsappstatusdowloader.databinding.ActivityShowMediaBinding
 import com.test.whatsappstatusdowloader.utility.Constants
 import com.test.whatsappstatusdowloader.utility.MyIntent
+import com.test.whatsappstatusdowloader.utility.Utility
 import java.io.File
+
 
 class ShowMediaActivity : AppCompatActivity() {
 
@@ -27,12 +32,67 @@ class ShowMediaActivity : AppCompatActivity() {
         statusFile= intent.getSerializableExtra(Constants.MEDIA_PATH_KEY) as File
 
 
-        binding.ivPreview.load(statusFile) {
-            crossfade(true)
-            placeholder(ColorDrawable(Color.WHITE))
+
+
+        Glide.with(this).load(statusFile)
+            .placeholder(ColorDrawable(Color.WHITE))
+            .transition(DrawableTransitionOptions.withCrossFade())
+            . into(binding.ivPreview)
+
+        checkFileType(statusFile)
+        setOnclick()
+    }
+
+    private fun checkFileType(file: File){
+        binding.apply {
+
+            if(Utility.isImageFile(file.name))
+            {
+                ivPreview.visibility= View.VISIBLE
+                videoView.visibility= View.GONE
+
+
+            }else{
+
+                ivPreview.visibility= View.GONE
+                videoView.visibility= View.VISIBLE
+
+
+//                val retriever = MediaMetadataRetriever()
+//                retriever.setDataSource(file.path)
+//                val bitmap = retriever.getFrameAtTime(1)
+//
+//                vvPreview.load(bitmap) {
+//                    crossfade(true)
+//                    placeholder(ColorDrawable(Color.WHITE))
+//                }
+
+                setUpVideoView(statusFile)
+            }
+        }
+    }
+
+    private fun setUpVideoView(file: File){
+
+        binding.apply {
+
+            val mediaController=MediaController(this@ShowMediaActivity)
+
+            videoView.setOnPreparedListener(OnPreparedListener { mp ->
+                mp.setOnVideoSizeChangedListener { _, _, _ ->
+                    mediaController.setAnchorView(videoView)
+                    mediaController.setMediaPlayer(videoView)
+                }
+            })
+
+            videoView.setVideoPath(file.path)
+            videoView.seekTo(1)
+            videoView.setMediaController(mediaController)
+            videoView.start()
+
+
         }
 
-        setOnclick()
     }
 
     private fun setOnclick(){
@@ -54,6 +114,7 @@ class ShowMediaActivity : AppCompatActivity() {
             tvShare.setOnClickListener(){
                 MyIntent.sharePhoto(this@ShowMediaActivity, statusFile.path)
             }
+
 
         }
 

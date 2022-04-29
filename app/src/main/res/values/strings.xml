@@ -29,5 +29,9 @@
     <string name="share">ارسال</string>
     <string name="delete">حذف</string>
     <string name="preview">پیش نمایش</string>
+    <string name="directory_not_exist">پوشه مورد نظر وجود ندارد</string>
+    <string name="no_status_was_observed">هیچ وضعیتی مشاهده نشده است</string>
+    <string name="no_status_saved">هیچ وضعیتی ذخیره نشده است</string>
+    <string name="whatapp_is_not_installed">واتساپ روی تلفن شما نصب نیست</string>
 
 </resources>

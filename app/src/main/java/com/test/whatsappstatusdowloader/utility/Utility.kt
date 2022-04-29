@@ -13,11 +13,14 @@ object Utility {
         return activity.resources.displayMetrics.widthPixels
     }
 
-     fun isVideoFile(path:String):Boolean{
+    fun isImageFile(name: String): Boolean {
 
-        val mimeType = URLConnection.guessContentTypeFromName(path)
-        return  mimeType.startsWith("video")
+        return (name.endsWith(".jpg")||name.endsWith(".png")||name.endsWith(".jpeg")||name.endsWith(".gif"))
+    }
 
+    fun isVideoFile(name: String): Boolean {
+
+        return (name.endsWith(".mp4")||name.endsWith(".mvi")||name.endsWith(".mkv"))
     }
 
 

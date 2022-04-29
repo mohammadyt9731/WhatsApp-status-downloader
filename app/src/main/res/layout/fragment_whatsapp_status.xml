@@ -8,16 +8,19 @@
         android:id="@+id/rv_whatsapp_status"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white_chocolate"
+        android:background="@color/white"
         android:layout_gravity="center"
         />
 
-    <ImageView
-        android:visibility="gone"
+    <TextView
+        android:id="@+id/tv_warning"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/ic_sample_status"
-        android:id="@+id/iv_sample"/>
+        android:gravity="center"
+        android:text="@string/directory_not_exist"
+        android:textColor="@color/gray"
+        android:textStyle="bold"
+        android:textSize="@dimen/text_size_22"/>
 
 
 

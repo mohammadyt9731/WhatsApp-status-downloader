@@ -2,6 +2,7 @@ package com.test.whatsappstatusdowloader.utility
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.widget.Toast
 import androidx.core.content.FileProvider
@@ -106,6 +107,20 @@ object MyIntent {
         }
         context.startActivity(sharePhotoIntent)
 
+
+    }
+
+    fun openWhatsApp(context: Context){
+
+        try {
+
+            val whatsAppIntent=context.packageManager.getLaunchIntentForPackage("com.whatsapp")
+            context.startActivity(whatsAppIntent)
+
+        }catch (e:Exception){
+
+            Toast.makeText(context,context.getString(R.string.whatapp_is_not_installed),Toast.LENGTH_LONG).show()
+        }
 
     }
 }

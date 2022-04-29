@@ -14,15 +14,14 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.test.whatsappstatusdowloader.R
+import com.test.whatsappstatusdowloader.utility.Constants
 import java.util.*
 import kotlin.concurrent.timerTask
 
 
 class SplashActivity : AppCompatActivity() {
 
-    private val DURATION: Long = 500
-    private val REQUEST_CODE = 1234
-    private val MANAGE_EXTERNAL_STORAGE_PERMISSION = "android:manage_external_storage"
+
 
     private var PERSMISSIONS = arrayOf(
         Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -40,7 +39,6 @@ class SplashActivity : AppCompatActivity() {
 
         if (arePermissionsDenied()) {
 
-
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, PERSMISSIONS[0])) {
                 showRequestPermissionDialog()
 
@@ -56,7 +54,6 @@ class SplashActivity : AppCompatActivity() {
 
     private fun arePermissionsDenied(): Boolean {
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
             //check for android > 11
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
@@ -66,15 +63,11 @@ class SplashActivity : AppCompatActivity() {
                     if (ActivityCompat.checkSelfPermission(this@SplashActivity, permission)
                         != PackageManager.PERMISSION_GRANTED
                     )
-
                         return true
                 }
-
                 return false
             }
-        } else {
-            return false
-        }
+
     }
 
     @RequiresApi(Build.VERSION_CODES.R)
@@ -82,7 +75,7 @@ class SplashActivity : AppCompatActivity() {
 
         val appOps = getSystemService(AppOpsManager::class.java)
         val mode = appOps.unsafeCheckOpNoThrow(
-            MANAGE_EXTERNAL_STORAGE_PERMISSION,
+            Constants.MANAGE_EXTERNAL_STORAGE_PERMISSION,
             applicationContext.applicationInfo.uid,
             applicationContext.packageName
         )
@@ -109,15 +102,15 @@ class SplashActivity : AppCompatActivity() {
 
     private fun requestPermission() {
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && arePermissionsDenied()) {
+        if ( arePermissionsDenied()) {
 
             // If Android 11 Request for Manage File Access Permission
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 val intent = Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION)
-                startActivityForResult(intent, REQUEST_CODE)
+                startActivityForResult(intent, Constants.REQUEST_CODE)
                 return
             } else
-                requestPermissions(PERSMISSIONS, REQUEST_CODE)
+                requestPermissions(PERSMISSIONS, Constants.REQUEST_CODE)
         }
     }
 
@@ -127,13 +120,13 @@ class SplashActivity : AppCompatActivity() {
 
             startActivity(Intent(this@SplashActivity, MainActivity::class.java))
             finish()
-        }, DURATION)
+        }, Constants.SPLASH_DURATION)
     }
 
     //for android > 11
     override fun onActivityResult(requestCode: Int, resultCode: Int,  data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_CODE) {
+        if (requestCode == Constants.REQUEST_CODE) {
             if (SDK_INT >= Build.VERSION_CODES.R) {
                 if (Environment.isExternalStorageManager()) {
                     goToMainActivity()
@@ -150,7 +143,7 @@ class SplashActivity : AppCompatActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == REQUEST_CODE && grantResults.isNotEmpty()) {
+        if (requestCode == Constants.REQUEST_CODE && grantResults.isNotEmpty()) {
 
             if (arePermissionsDenied()) {
                showRequestPermissionDialog()
