@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/space_middle">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:backgroundTint="@color/white"
+        app:cardCornerRadius="@dimen/space_medium">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingVertical="@dimen/space_small">
+
+            <TextView
+                android:id="@+id/tv_comment"
+                style="@style/tv_title_dialog_style"
+                android:text="@string/comment"
+                android:textSize="@dimen/_20ssp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:layout_width="match_parent"
+                android:id="@+id/view_horizontal_divider"
+                style="@style/view_divider_menu_style"
+                app:layout_constraintTop_toBottomOf="@id/tv_comment" />
+
+            <TextView
+                android:id="@+id/tv_rating"
+                style="@style/tv_dialog_style"
+                android:text="@string/how_main_point"
+                android:layout_width="match_parent"
+                app:layout_constraintTop_toBottomOf="@id/view_horizontal_divider" />
+
+            <RatingBar
+                android:id="@+id/rating_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/space_large"
+                android:numStars="5"
+                android:stepSize="1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_rating" />
+
+            <LinearLayout
+                android:id="@+id/cl_point"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@id/rating_bar"
+                app:layout_constraintLeft_toLeftOf="@id/rating_bar"
+                app:layout_constraintRight_toRightOf="@id/rating_bar"
+                app:layout_constraintTop_toBottomOf="@id/rating_bar"
+
+                >
+
+                <TextView
+                    style="@style/tv_point_style"
+                    android:text="@string/number_1" />
+
+                <TextView
+                    style="@style/tv_point_style"
+                    android:text="@string/number_2" />
+
+                <TextView
+                    style="@style/tv_point_style"
+                    android:text="@string/number_3" />
+
+                <TextView
+                    style="@style/tv_point_style"
+                    android:text="@string/number_4" />
+
+                <TextView
+                    style="@style/tv_point_style"
+                    android:text="@string/number_5" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_comment_caffe_bazzar"
+                style="@style/tv_dialog_style"
+                android:layout_marginTop="@dimen/space_medium"
+                android:gravity="center"
+                android:lineSpacingExtra="@dimen/space_medium"
+                android:paddingHorizontal="@dimen/space_medium"
+                android:text="@string/please_register_your_comment"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_14"
+                android:visibility="gone"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cl_point" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_close"
+                style="@style/btn_dialog_style"
+                android:text="@string/close"
+                app:layout_constraintLeft_toRightOf="@id/btn_comment"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_comment_caffe_bazzar"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_comment"
+                style="@style/btn_dialog_style"
+                android:textColor="@color/dark_green"
+                android:enabled="false"
+                android:text="@string/comment"
+                app:layout_constraintBottom_toBottomOf="@id/btn_close"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/btn_close"
+                app:layout_constraintTop_toTopOf="@id/btn_close" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

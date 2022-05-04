@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/menu_item_guide"
-        android:icon="@drawable/ic_question"
+        android:icon="@drawable/ic_guide"
         android:title="@string/guide"/>
 
     <item android:id="@+id/menu_item_whatsapp_status"
