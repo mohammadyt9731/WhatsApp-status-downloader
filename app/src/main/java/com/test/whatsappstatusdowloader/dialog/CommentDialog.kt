@@ -7,7 +7,9 @@ import android.widget.AbsListView
 import android.widget.RatingBar
 import com.test.whatsappstatusdowloader.R
 import com.test.whatsappstatusdowloader.databinding.DialogCommentBinding
+import com.test.whatsappstatusdowloader.utils.Constants
 import com.test.whatsappstatusdowloader.utils.MyIntent
+import com.test.whatsappstatusdowloader.utils.Utils
 
 class CommentDialog(context: Context) : Dialog(context) {
 
@@ -23,7 +25,7 @@ class CommentDialog(context: Context) : Dialog(context) {
         window!!.setBackgroundDrawableResource(android.R.color.transparent)
         window!!.attributes.windowAnimations = R.style.scale_anim_style
         window!!.setLayout(
-            AbsListView.LayoutParams.MATCH_PARENT,
+            Utils.getScreenWidth(context,Constants.DIALOG_WIDTH_PERCENTAGE),
             AbsListView.LayoutParams.WRAP_CONTENT
         )
     }

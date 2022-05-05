@@ -22,6 +22,8 @@ object Constants {
 
     const val MEDIA_PATH_KEY="media_path_key"
 
+  const val DIALOG_WIDTH_PERCENTAGE=90
+
 
 
 

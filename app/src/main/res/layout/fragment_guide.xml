@@ -65,6 +65,7 @@
                 android:layout_height="@dimen/_40sdp"
                 android:rotation="180"
                 android:scaleType="fitXY"
+                android:layoutDirection="ltr"
                 android:src="@drawable/ic_arrow"
                 app:layout_constraintBottom_toBottomOf="@id/lottie_download_1"
                 app:layout_constraintLeft_toRightOf="@id/lottie_download_2"

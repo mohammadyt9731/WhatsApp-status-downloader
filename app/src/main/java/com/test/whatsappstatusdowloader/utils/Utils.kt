@@ -1,11 +1,11 @@
 package com.test.whatsappstatusdowloader.utils
 
-import android.app.Activity
+import android.content.Context
 
 object Utils {
 
-    fun getScreenWidth(activity: Activity):Int{
-        return activity.resources.displayMetrics.widthPixels
+    fun getScreenWidth(context: Context,percentage:Int=100):Int{
+        return context.resources.displayMetrics.widthPixels * percentage/100
     }
 
     fun isImageFile(fileName: String): Boolean {
