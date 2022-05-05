@@ -25,6 +25,16 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+
+            <ImageView
+                android:id="@+id/iv_close"
+                android:layout_width="@dimen/_26sdp"
+                android:layout_height="@dimen/_26sdp"
+                android:layout_margin="@dimen/space_x_small"
+                android:src="@drawable/ic_close"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <View
                 android:layout_width="match_parent"
                 android:id="@+id/view_horizontal_divider"
@@ -99,25 +109,19 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cl_point" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_close"
-                style="@style/btn_dialog_style"
-                android:text="@string/close"
-                app:layout_constraintLeft_toRightOf="@id/btn_comment"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_comment_caffe_bazzar"
-                />
+
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_comment"
                 style="@style/btn_dialog_style"
-                android:textColor="@color/dark_green"
-                android:enabled="false"
+                android:textColor="@color/white"
                 android:text="@string/comment"
-                app:layout_constraintBottom_toBottomOf="@id/btn_close"
+                app:backgroundTint="@color/dark_green"
+                android:alpha="0.5"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/btn_close"
-                app:layout_constraintTop_toTopOf="@id/btn_close" />
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_comment_caffe_bazzar" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
