@@ -29,20 +29,12 @@
                 android:id="@+id/tv_about_us"
                 style="@style/tv_title_dialog_style"
                 android:text="@string/about_us"
-                android:textSize="@dimen/_20ssp"
-                android:textStyle="bold"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <View
-                android:layout_width="match_parent"
-                android:id="@+id/view_horizontal_divider"
-                style="@style/view_divider_menu_style"
-                app:layout_constraintTop_toBottomOf="@id/tv_about_us" />
-
             <ImageView
-                android:id="@+id/iv_calculator_icon"
+                android:id="@+id/iv_icon"
                 android:layout_width="@dimen/_60sdp"
                 android:layout_height="@dimen/_60sdp"
                 android:layout_margin="@dimen/space_medium"
@@ -52,13 +44,20 @@
                 app:layout_constraintTop_toBottomOf="@id/view_horizontal_divider"
                 />
 
+            <View
+                android:layout_width="match_parent"
+                android:id="@+id/view_horizontal_divider"
+                style="@style/view_divider_menu_style"
+                app:layout_constraintTop_toBottomOf="@id/tv_about_us" />
+
+
             <TextView
                 android:id="@+id/tv_calculator_name"
                 style="@style/tv_dialog_style"
                 android:text="@string/app_name"
                 android:textStyle="bold"
                 android:layout_width="match_parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_calculator_icon" />
+                app:layout_constraintTop_toBottomOf="@id/iv_icon" />
 
             <ImageView
                 android:id="@+id/iv_version"

@@ -26,6 +26,8 @@ object Constants {
 
     //Dialogs
     const val DIALOG_WIDTH_PERCENTAGE = 90
+    const val DISABLE_BUTTON_ALPHA = 0.4f
+    const val ENABLE_BUTTON_ALPHA = 1f
 
     //MyIntent
     const val WHATSAPP_PACKAGE = "com.whatsapp"

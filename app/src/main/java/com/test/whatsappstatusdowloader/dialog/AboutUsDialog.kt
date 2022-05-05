@@ -20,8 +20,13 @@ class AboutUsDialog(context: Context) : Dialog(context) {
 
 
     private fun config() {
+        //background transparent
         window!!.setBackgroundDrawableResource(android.R.color.transparent)
+
+        //dialog animation
         window!!.attributes.windowAnimations = R.style.scale_anim_style
+
+        //set width and height
         window!!.setLayout(
             UtilsMethod.getScreenWidth(context, Constants.DIALOG_WIDTH_PERCENTAGE),
             AbsListView.LayoutParams.WRAP_CONTENT
@@ -34,8 +39,5 @@ class AboutUsDialog(context: Context) : Dialog(context) {
             cancel()
         }
 
-
     }
-
-
 }

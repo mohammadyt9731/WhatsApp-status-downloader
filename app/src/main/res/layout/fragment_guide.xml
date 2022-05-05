@@ -4,14 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/space_large"
         android:backgroundTint="@color/white"
         app:cardCornerRadius="@dimen/space_medium"
-        app:cardElevation="@dimen/space_medium"
+        app:cardElevation="@dimen/space_small"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:strokeColor="@color/white_chocolate"
@@ -53,19 +52,19 @@
                 android:layout_width="@dimen/_40sdp"
                 android:layout_height="@dimen/_40sdp"
                 android:layout_marginVertical="@dimen/space_medium"
-               app:lottie_rawRes="@raw/lottie_download"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/iv_left_arrow"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_guide_text" />
+                app:layout_constraintTop_toBottomOf="@id/tv_guide_text"
+                app:lottie_rawRes="@raw/lottie_download" />
 
             <ImageView
                 android:id="@+id/iv_left_arrow"
                 android:layout_width="@dimen/_60sdp"
                 android:layout_height="@dimen/_40sdp"
+                android:layoutDirection="ltr"
                 android:rotation="180"
                 android:scaleType="fitXY"
-                android:layoutDirection="ltr"
                 android:src="@drawable/ic_arrow"
                 app:layout_constraintBottom_toBottomOf="@id/lottie_download_1"
                 app:layout_constraintLeft_toRightOf="@id/lottie_download_2"
@@ -76,15 +75,14 @@
                 android:id="@+id/lottie_download_2"
                 android:layout_width="@dimen/_40sdp"
                 android:layout_height="@dimen/_40sdp"
-                app:lottie_rawRes="@raw/lottie_download"
                 app:layout_constraintBottom_toBottomOf="@id/lottie_download_1"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/iv_left_arrow"
-                app:layout_constraintTop_toTopOf="@id/lottie_download_1" />
+                app:layout_constraintTop_toTopOf="@id/lottie_download_1"
+                app:lottie_rawRes="@raw/lottie_download" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

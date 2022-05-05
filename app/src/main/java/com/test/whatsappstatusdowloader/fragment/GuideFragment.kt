@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.test.whatsappstatusdowloader.R
 import com.test.whatsappstatusdowloader.databinding.FragmentGuideBinding
 import com.test.whatsappstatusdowloader.utils.Constants
 
@@ -16,7 +15,8 @@ class GuideFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+
         binding= FragmentGuideBinding.inflate(layoutInflater,container,false)
         return binding.root
     }
@@ -25,11 +25,7 @@ class GuideFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //setUp view
-        binding.apply {
-            lottieDownload2.frame=Constants.LOTTIE_END_FRAME
-        }
+        binding.lottieDownload2.frame=Constants.LOTTIE_END_FRAME
 
     }
-
-
 }

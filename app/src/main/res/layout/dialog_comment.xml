@@ -20,7 +20,6 @@
                 android:id="@+id/tv_comment"
                 style="@style/tv_title_dialog_style"
                 android:text="@string/comment"
-                android:textSize="@dimen/_20ssp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -52,6 +51,7 @@
                 android:id="@+id/rating_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layoutDirection="ltr"
                 android:layout_margin="@dimen/space_large"
                 android:numStars="5"
                 android:stepSize="1"
@@ -60,6 +60,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_rating" />
 
             <LinearLayout
+                android:layoutDirection="ltr"
                 android:id="@+id/cl_point"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -108,8 +109,6 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cl_point" />
-
-
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_comment"

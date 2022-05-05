@@ -22,15 +22,21 @@ class CommentDialog(context: Context) : Dialog(context) {
         setOnClick()
     }
 
+
     private fun config() {
+
+        //background transparent
         window!!.setBackgroundDrawableResource(android.R.color.transparent)
+
+        //dialog animation
         window!!.attributes.windowAnimations = R.style.scale_anim_style
+
+        //set width and height
         window!!.setLayout(
             UtilsMethod.getScreenWidth(context,Constants.DIALOG_WIDTH_PERCENTAGE),
             AbsListView.LayoutParams.WRAP_CONTENT
         )
     }
-
 
     private fun setOnClick() {
 
@@ -41,22 +47,25 @@ class CommentDialog(context: Context) : Dialog(context) {
                     if (v == 0f) {
                         tvCommentCaffeBazzar.visibility = View.GONE
                         btnComment.text=context.getString(R.string.comment)
-                        btnComment.alpha=0.5f
+                        btnComment.alpha=Constants.DISABLE_BUTTON_ALPHA
                     } else {
                         tvCommentCaffeBazzar.visibility = View.VISIBLE
-                        btnComment.alpha=1f
+                        btnComment.alpha=Constants.ENABLE_BUTTON_ALPHA
 
                         if (v < 4) {
                             btnComment.text = context.getString(R.string.send_email)
                             tvCommentCaffeBazzar.text = context.getString(R.string.please_send_email)
                         } else {
-                            tvCommentCaffeBazzar.text = context.getString(R.string.please_register_your_comment)
                             btnComment.text = context.getString(R.string.comment)
+                            tvCommentCaffeBazzar.text = context.getString(R.string.please_register_your_comment)
                         }
                     }
 
                 }
+
+
             ivClose.setOnClickListener(View.OnClickListener { cancel() })
+
             btnComment.setOnClickListener(View.OnClickListener {
 
                 when(ratingBar.rating){
