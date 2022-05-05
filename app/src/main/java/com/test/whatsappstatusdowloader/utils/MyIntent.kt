@@ -7,30 +7,85 @@ import android.widget.Toast
 import androidx.core.content.FileProvider
 import com.test.whatsappstatusdowloader.R
 import java.io.File
-import java.lang.Exception
 
 object MyIntent {
 
     fun shareAppIntent(context: Context) {
         try {
-            val shareIntent = Intent(Intent.ACTION_SEND)
-            shareIntent.setType("text/plain")
-            val shareMessage = """
+
+            val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                type = "text/plain"
+                val shareMessage = """
                 ${context.getString(R.string.app_link_download)}${context.getString(R.string.app_name)}           
-                ${context.getString(R.string.app_id_caffe_bazaar)}${context.packageName}
-                
-                
+                ${context.getString(R.string.app_id_caffe_bazaar)}${context.packageName}                          
                 """.trimIndent()
-            shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage)
+                putExtra(Intent.EXTRA_TEXT, shareMessage)
+
+            }
             context.startActivity(
                 Intent.createChooser(
                     shareIntent,
                     context.getString(R.string.share_app_with)
                 )
             )
+
         } catch (e: Exception) {
-            Toast.makeText(context, context.getString(R.string.unknown_error), Toast.LENGTH_SHORT)
-                .show()
+            showErrorToast(context)
+        }
+    }
+
+    fun sharePhoto(context: Context, photoPath: String) {
+
+        try {
+            val sharePhotoIntent = Intent(Intent.ACTION_SEND).apply {
+                type = "image/*"
+
+                val shareMessage = """
+                ${context.getString(R.string.app_link_download)}${context.getString(R.string.app_name)}           
+                ${context.getString(R.string.app_id_caffe_bazaar)}${context.packageName}                               
+                """.trimIndent()
+
+                putExtra(
+                    Intent.EXTRA_TEXT,
+                    shareMessage
+                )
+                val fileURI = FileProvider.getUriForFile(
+                    context, context.packageName + ".provider",
+                    File(photoPath)
+                )
+                putExtra(Intent.EXTRA_STREAM, fileURI)
+            }
+            context.startActivity(sharePhotoIntent)
+        } catch (e: Exception) {
+            showErrorToast(context)
+        }
+    }
+
+    fun shareVideo(context: Context, videoPath: String) {
+
+        try {
+            val sharePhotoIntent = Intent(Intent.ACTION_SEND).apply {
+                type = "video/*"
+
+                val shareMessage = """
+                ${context.getString(R.string.app_link_download)}${context.getString(R.string.app_name)}           
+                ${context.getString(R.string.app_id_caffe_bazaar)}${context.packageName}                             
+                """.trimIndent()
+
+                putExtra(
+                    Intent.EXTRA_TEXT,
+                    shareMessage
+                )
+                val fileURI = FileProvider.getUriForFile(
+                    context, context.packageName + ".provider",
+                    File(videoPath)
+                )
+                putExtra(Intent.EXTRA_STREAM, fileURI)
+            }
+            context.startActivity(sharePhotoIntent)
+
+        } catch (e: Exception) {
+            showErrorToast(context)
         }
     }
 
@@ -42,8 +97,7 @@ object MyIntent {
             )
             context.startActivity(otherAppIntent)
         } catch (e: Exception) {
-            Toast.makeText(context, context.getString(R.string.unknown_error), Toast.LENGTH_SHORT)
-                .show()
+            showErrorToast(context)
         }
     }
 
@@ -63,12 +117,16 @@ object MyIntent {
     }
 
     fun emailIntent(context: Context) {
-        val emailIntent = Intent(Intent.ACTION_SENDTO)
-        emailIntent.setData(Uri.parse("mailto:"))
-        val emailAddress = arrayOf(context.getString(R.string.email_address))
-        emailIntent.putExtra(Intent.EXTRA_EMAIL, emailAddress)
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.app_name))
+
         try {
+
+            val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
+                data = Uri.parse("mailto:")
+                val emailAddress = arrayOf(context.getString(R.string.email_address))
+                putExtra(Intent.EXTRA_EMAIL, emailAddress)
+                putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.app_name))
+            }
+
             context.startActivity(
                 Intent.createChooser(
                     emailIntent,
@@ -76,77 +134,30 @@ object MyIntent {
                 )
             )
         } catch (e: Exception) {
-            Toast.makeText(context, context.getString(R.string.unknown_error), Toast.LENGTH_LONG)
-                .show()
+            showErrorToast(context)
         }
     }
 
-    fun sharePhoto(context: Context,photoPath:String){
-
-        val sharePhotoIntent = Intent(Intent.ACTION_SEND).apply {
-            type = "image/*"
-
-
-            val shareMessage = """
-                ${context.getString(R.string.app_link_download)}${context.getString(R.string.app_name)}           
-                ${context.getString(R.string.app_id_caffe_bazaar)}${context.packageName}
-                
-                
-                """.trimIndent()
-
-            putExtra(
-                Intent.EXTRA_TEXT,
-                shareMessage
-            )
-            val fileURI = FileProvider.getUriForFile(
-                context, context.packageName + ".provider",
-                File(photoPath)
-            )
-            putExtra(Intent.EXTRA_STREAM, fileURI)
-        }
-        context.startActivity(sharePhotoIntent)
-
-
-    }
-
-    fun shareVideo(context: Context, videoPath:String){
-
-        val sharePhotoIntent = Intent(Intent.ACTION_SEND).apply {
-            type = "video/*"
-
-
-            val shareMessage = """
-                ${context.getString(R.string.app_link_download)}${context.getString(R.string.app_name)}           
-                ${context.getString(R.string.app_id_caffe_bazaar)}${context.packageName}                             
-                """.trimIndent()
-
-            putExtra(
-                Intent.EXTRA_TEXT,
-                shareMessage
-            )
-            val fileURI = FileProvider.getUriForFile(
-                context, context.packageName + ".provider",
-                File(videoPath)
-            )
-            putExtra(Intent.EXTRA_STREAM, fileURI)
-        }
-        context.startActivity(sharePhotoIntent)
-
-
-    }
-
-
-    fun openWhatsApp(context: Context){
+    fun openWhatsApp(context: Context) {
 
         try {
-
-            val whatsAppIntent=context.packageManager.getLaunchIntentForPackage("com.whatsapp")
+            val whatsAppIntent = context.packageManager.getLaunchIntentForPackage(Constants.WHATSAPP_PACKAGE)
             context.startActivity(whatsAppIntent)
 
-        }catch (e:Exception){
+        } catch (e: Exception) {
 
-            Toast.makeText(context,context.getString(R.string.whatapp_is_not_installed),Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                context,
+                context.getString(R.string.whatapp_is_not_installed),
+                Toast.LENGTH_LONG
+            ).show()
         }
 
+    }
+
+
+    private fun showErrorToast(context: Context) {
+        Toast.makeText(context, context.getString(R.string.unknown_error), Toast.LENGTH_SHORT)
+            .show()
     }
 }

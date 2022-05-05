@@ -11,7 +11,7 @@ import com.test.whatsappstatusdowloader.R
 import com.test.whatsappstatusdowloader.adapter.WhatsAppStatusAdapter
 import com.test.whatsappstatusdowloader.databinding.FragmentWhatsappStatusBinding
 import com.test.whatsappstatusdowloader.utils.Constants
-import com.test.whatsappstatusdowloader.utils.Utils
+import com.test.whatsappstatusdowloader.utils.UtilsMethod
 import java.io.File
 
 
@@ -76,7 +76,7 @@ class StatusFragment(directoryAddress: String) : Fragment() {
             for (statusFile in statusListFile) {
 
          //       Log.i("123321",statusFile.path.toString())
-                if (Utils.isImageFile(statusFile.path) || Utils.isVideoFile(statusFile.path)) {
+                if (UtilsMethod.isImageFile(statusFile.path) || UtilsMethod.isVideoFile(statusFile.path)) {
                     statusFileList.add(statusFile)
 
                 }

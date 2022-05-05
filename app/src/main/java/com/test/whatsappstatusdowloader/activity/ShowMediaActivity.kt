@@ -15,7 +15,7 @@ import com.test.whatsappstatusdowloader.R
 import com.test.whatsappstatusdowloader.databinding.ActivityShowMediaBinding
 import com.test.whatsappstatusdowloader.utils.Constants
 import com.test.whatsappstatusdowloader.utils.MyIntent
-import com.test.whatsappstatusdowloader.utils.Utils
+import com.test.whatsappstatusdowloader.utils.UtilsMethod
 import java.io.File
 
 
@@ -45,7 +45,7 @@ class ShowMediaActivity : AppCompatActivity() {
     private fun checkFileType(file: File){
         binding.apply {
 
-            if(Utils.isImageFile(file.name))
+            if(UtilsMethod.isImageFile(file.name))
             {
                 ivPreview.visibility= View.VISIBLE
                 videoView.visibility= View.GONE

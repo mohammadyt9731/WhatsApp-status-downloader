@@ -22,7 +22,7 @@ import com.test.whatsappstatusdowloader.R
 import com.test.whatsappstatusdowloader.activity.ShowMediaActivity
 import com.test.whatsappstatusdowloader.utils.Constants
 import com.test.whatsappstatusdowloader.utils.MyIntent
-import com.test.whatsappstatusdowloader.utils.Utils
+import com.test.whatsappstatusdowloader.utils.UtilsMethod
 import java.io.File
 
 
@@ -43,7 +43,7 @@ class WhatsAppStatusAdapter(
         this.statusFileList = statusFileList
         this.activity = activity
         this.directoryAddress = directoryAddress
-        itemWidth = Utils.getScreenWidth(activity) * 44 / 100
+        itemWidth = UtilsMethod.getScreenWidth(activity) * 44 / 100
 
     }
 
@@ -96,7 +96,7 @@ class WhatsAppStatusAdapter(
             clRoot.layoutParams.width = itemWidth
 
 
-            if (Utils.isVideoFile(statusFileList[position].path))
+            if (UtilsMethod.isVideoFile(statusFileList[position].path))
                 ivVideo.visibility = View.VISIBLE
             else
                 ivVideo.visibility = View.GONE
@@ -124,7 +124,7 @@ class WhatsAppStatusAdapter(
 
         fun setStatusImage(position: Int) {
 
-            if (Utils.isVideoFile(statusFileList[position].path)) {
+            if (UtilsMethod.isVideoFile(statusFileList[position].path)) {
                 try {
                     val retriever = MediaMetadataRetriever()
                     retriever.setDataSource(statusFileList[position].path)
@@ -154,9 +154,9 @@ class WhatsAppStatusAdapter(
 
             ivShareStatus.setOnClickListener() {
 
-                if(Utils.isImageFile(statusFileList[position].name))
+                if(UtilsMethod.isImageFile(statusFileList[position].name))
                 MyIntent.sharePhoto(activity, statusFileList[position].absolutePath)
-                else if(Utils.isVideoFile(statusFileList[position].name))
+                else if(UtilsMethod.isVideoFile(statusFileList[position].name))
                     MyIntent.shareVideo(activity, statusFileList[position].absolutePath)
                 else
                     Toast.makeText(activity,activity.getString(R.string.unknown_error),Toast.LENGTH_SHORT).show()

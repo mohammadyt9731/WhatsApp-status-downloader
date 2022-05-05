@@ -2,7 +2,7 @@ package com.test.whatsappstatusdowloader.utils
 
 import android.content.Context
 
-object Utils {
+object UtilsMethod {
 
     fun getScreenWidth(context: Context,percentage:Int=100):Int{
         return context.resources.displayMetrics.widthPixels * percentage/100
@@ -17,6 +17,5 @@ object Utils {
 
         return (fileName.endsWith(".mp4")||fileName.endsWith(".mkv"))
     }
-
 
 }
