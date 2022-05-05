@@ -153,9 +153,14 @@ class WhatsAppStatusAdapter(
         fun setOnClickListener(position: Int) {
 
             ivShareStatus.setOnClickListener() {
-                MyIntent.sharePhoto(activity, statusFileList[position].absolutePath)
-            }
 
+                if(Utils.isImageFile(statusFileList[position].name))
+                MyIntent.sharePhoto(activity, statusFileList[position].absolutePath)
+                else if(Utils.isVideoFile(statusFileList[position].name))
+                    MyIntent.shareVideo(activity, statusFileList[position].absolutePath)
+                else
+                    Toast.makeText(activity,activity.getString(R.string.unknown_error),Toast.LENGTH_SHORT).show()
+            }
             ivActionOnStatus.setOnClickListener() {
 
                 if (isInSavedStatusPage()) {
