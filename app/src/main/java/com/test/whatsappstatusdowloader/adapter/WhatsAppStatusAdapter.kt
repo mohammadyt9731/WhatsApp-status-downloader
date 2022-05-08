@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.media.MediaMetadataRetriever
 import android.os.Build
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,7 +46,6 @@ class WhatsAppStatusAdapter(
         return ViewHolder()
     }
 
-    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.setUpViews(position)
@@ -57,6 +57,10 @@ class WhatsAppStatusAdapter(
     override fun getItemCount(): Int {
 
         return differ.currentList.size
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
     }
 
     inner class ViewHolder() : RecyclerView.ViewHolder(binding.root) {
@@ -112,7 +116,6 @@ class WhatsAppStatusAdapter(
         fun setOnClickListener(position: Int) {
             binding.apply {
 
-
                 ivShareStatus.setOnClickListener() {
                     FileOperation.shareFile(activity, differ.currentList[position])
                 }
@@ -126,7 +129,36 @@ class WhatsAppStatusAdapter(
                 }
 
                 lottieDownload.setOnClickListener() {
-                    saveFile(position)
+                    val sourceFile = File(differ.currentList[position].path)
+                    val destinationFile =
+                        File(Constants.SAVED_DIRECTORY + "/" + differ.currentList[position].name)
+
+                    if (destinationFile.exists()) {
+                        Toast.makeText(activity, "قبلا ذخیره شده است.", Toast.LENGTH_SHORT)
+                            .show()
+                        return@setOnClickListener
+                    }
+
+
+
+                    try {
+                        sourceFile.copyTo(destinationFile)
+                        Toast.makeText(
+                            activity,
+                            "در پوشه saveDirectory ذخیره شد",
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                       lottieDownload.playAnimation()
+                        Log.i("asff",position.toString())
+                    } catch (e: Exception) {
+                        Toast.makeText(
+                            activity,
+                            activity.getString(R.string.unknown_error),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        Toast.makeText(activity, e.message.toString(), Toast.LENGTH_LONG).show()
+                    }
 
                 }
             }
@@ -135,38 +167,6 @@ class WhatsAppStatusAdapter(
     }
 
 
-    private fun saveFile(position: Int) {
-        val sourceFile = File(differ.currentList[position].path)
-        val destinationFile =
-            File(Constants.SAVED_DIRECTORY + "/" + differ.currentList[position].name)
-
-        if (destinationFile.exists()) {
-            Toast.makeText(activity, "قبلا ذخیره شده است.", Toast.LENGTH_SHORT)
-                .show()
-            return
-        }
-
-
-
-        try {
-            sourceFile.copyTo(destinationFile)
-            Toast.makeText(
-                activity,
-                "در پوشه saveDirectory ذخیره شد",
-                Toast.LENGTH_SHORT
-            )
-                .show()
-            binding.lottieDownload.playAnimation()
-        } catch (e: Exception) {
-            Toast.makeText(
-                activity,
-                activity.getString(R.string.unknown_error),
-                Toast.LENGTH_SHORT
-            ).show()
-            Toast.makeText(activity, e.message.toString(), Toast.LENGTH_LONG).show()
-        }
-
-    }
 
     private val differCallBack = object : DiffUtil.ItemCallback<File>() {
         override fun areItemsTheSame(oldItem: File, newItem: File): Boolean {

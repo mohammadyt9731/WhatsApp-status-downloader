@@ -132,7 +132,10 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_item_other_app -> MyIntent.otherAppIntent(this@MainActivity)
                 R.id.nav_item_comment -> CommentDialog(this@MainActivity).show()
                 R.id.nav_item_about_us -> AboutUsDialog(this@MainActivity).show()
-                R.id.nav_item_exit -> closeDrawer()
+                R.id.nav_item_exit -> {
+                    closeDrawer()
+                    finish()
+                }
             }
 
             closeDrawer()

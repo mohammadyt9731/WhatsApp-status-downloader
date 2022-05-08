@@ -1,6 +1,7 @@
 package com.test.whatsappstatusdowloader.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -135,6 +136,7 @@ class StatusFragment(directoryAddress: String) : Fragment() {
                 binding.rvStatus.apply {
                     layoutManager = GridLayoutManager(context, 2)
                     adapter = statusAdapter
+
                 }
             }
 

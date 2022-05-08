@@ -44,7 +44,6 @@ class SavedStatusAdapter(
         return ViewHolder()
     }
 
-    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.setUpViews(position)
@@ -139,7 +138,7 @@ class SavedStatusAdapter(
     private fun deleteStatus(position: Int) {
 
         FileOperation.deleteFile(activity, differ.currentList[position])
-        differ.currentList.removeAt(position)
+   //     differ.currentList.removeAt(position)
     }
 
 
