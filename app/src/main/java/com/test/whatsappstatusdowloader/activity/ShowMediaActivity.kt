@@ -14,6 +14,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.test.whatsappstatusdowloader.R
 import com.test.whatsappstatusdowloader.databinding.ActivityShowMediaBinding
 import com.test.whatsappstatusdowloader.utils.Constants
+import com.test.whatsappstatusdowloader.utils.FileOperation
 import com.test.whatsappstatusdowloader.utils.MyIntent
 import com.test.whatsappstatusdowloader.utils.UtilsMethod
 import java.io.File
@@ -102,16 +103,16 @@ class ShowMediaActivity : AppCompatActivity() {
                 finish()
             }
 
-            tvDelete.setOnClickListener(){
+            btnDelete.setOnClickListener(){
                 showDeleteDialog()
             }
 
-            tvSave.setOnClickListener(){
+            btnSave.setOnClickListener(){
                 saveFile()
             }
 
-            tvShare.setOnClickListener(){
-                MyIntent.sharePhoto(this@ShowMediaActivity, statusFile.path)
+            btnShare.setOnClickListener(){
+                FileOperation.shareFile(this@ShowMediaActivity,statusFile)
             }
 
 
@@ -126,7 +127,7 @@ class ShowMediaActivity : AppCompatActivity() {
             .setMessage("آیا میخواید این پست را حذف کنید؟")
             .setCancelable(true)
             .setPositiveButton("بله") { _, _ ->
-                statusFile.delete()
+                FileOperation.deleteFile(this,statusFile)
                 finish()
             }
             .setNegativeButton("خیر") { dialog,_  -> dialog.cancel() }

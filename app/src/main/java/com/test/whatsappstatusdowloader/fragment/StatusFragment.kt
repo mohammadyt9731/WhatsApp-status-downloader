@@ -1,13 +1,13 @@
 package com.test.whatsappstatusdowloader.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.test.whatsappstatusdowloader.R
+import com.test.whatsappstatusdowloader.adapter.SavedStatusAdapter
 import com.test.whatsappstatusdowloader.adapter.WhatsAppStatusAdapter
 import com.test.whatsappstatusdowloader.databinding.FragmentWhatsappStatusBinding
 import com.test.whatsappstatusdowloader.utils.Constants
@@ -54,31 +54,27 @@ class StatusFragment(directoryAddress: String) : Fragment() {
 
         statusFileList.clear()
         val statusDirectory = File(directoryAddress)
-        Log.i("123321", statusDirectory.path.toString())
 
         if (statusDirectory.exists())
             prepareStatusList(statusDirectory)
         else
             showDirectoryNotExist()
-
     }
 
     private fun prepareStatusList(statusDirectory: File) {
 
-        val statusListFile: Array<out File>? = statusDirectory.listFiles()
-        if (!statusListFile.isNullOrEmpty()) {
+        val fileList: Array<out File>? = statusDirectory.listFiles()
+        if (!fileList.isNullOrEmpty()) {
 
             binding.apply {
-                rvWhatsappStatus.visibility = View.VISIBLE
+                rvStatus.visibility = View.VISIBLE
                 tvWarning.visibility = View.GONE
             }
 
-            for (statusFile in statusListFile) {
+            for (file in fileList) {
 
-         //       Log.i("123321",statusFile.path.toString())
-                if (UtilsMethod.isImageFile(statusFile.path) || UtilsMethod.isVideoFile(statusFile.path)) {
-                    statusFileList.add(statusFile)
-
+                if (UtilsMethod.isImageFile(file.path) || UtilsMethod.isVideoFile(file.path)) {
+                    statusFileList.add(file)
                 }
             }
 
@@ -93,12 +89,15 @@ class StatusFragment(directoryAddress: String) : Fragment() {
     private fun showNoStatusWasObserved() {
 
         binding.apply {
-            rvWhatsappStatus.visibility = View.GONE
+            rvStatus.visibility = View.GONE
             if (directoryAddress == Constants.SAVED_DIRECTORY)
                 tvWarning.text = getString(R.string.no_status_saved)
             else
                 tvWarning.text = getString(R.string.no_status_was_observed)
+
             tvWarning.visibility = View.VISIBLE
+            ivWarning.visibility = View.VISIBLE
+
 
         }
 
@@ -107,7 +106,7 @@ class StatusFragment(directoryAddress: String) : Fragment() {
     private fun showDirectoryNotExist() {
 
         binding.apply {
-            rvWhatsappStatus.visibility = View.GONE
+            rvStatus.visibility = View.GONE
 
             if (directoryAddress == Constants.SAVED_DIRECTORY)
                 tvWarning.text = getString(R.string.no_status_saved)
@@ -115,17 +114,35 @@ class StatusFragment(directoryAddress: String) : Fragment() {
                 tvWarning.text = getString(R.string.directory_not_exist)
 
             tvWarning.visibility = View.VISIBLE
+            ivWarning.visibility = View.VISIBLE
         }
     }
-
-
 
     private fun setUpRecyclerView() {
 
-        binding.rvWhatsappStatus.apply {
-            layoutManager = GridLayoutManager(context, 2)
-            adapter = WhatsAppStatusAdapter(requireActivity(), statusFileList, directoryAddress)
-        }
+            if (directoryAddress == Constants.SAVED_DIRECTORY){
+                val statusAdapter =  SavedStatusAdapter( requireActivity())
+                statusAdapter.differ.submitList(statusFileList)
+
+                binding.rvStatus.apply {
+                    layoutManager = GridLayoutManager(context, 2)
+                    adapter = statusAdapter
+                }
+            }
+            else{
+                val statusAdapter =WhatsAppStatusAdapter(requireActivity())
+                statusAdapter.differ.submitList(statusFileList)
+                binding.rvStatus.apply {
+                    layoutManager = GridLayoutManager(context, 2)
+                    adapter = statusAdapter
+                }
+            }
+
+
+
+
+
     }
+
 
 }

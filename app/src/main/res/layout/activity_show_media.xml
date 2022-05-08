@@ -52,7 +52,7 @@
         android:layout_height="0dp"
         android:layout_marginVertical="@dimen/space_large"
         android:src="@drawable/ic_sample_status"
-        app:layout_constraintBottom_toTopOf="@id/tv_save"
+        app:layout_constraintBottom_toTopOf="@id/btn_save"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
     <VideoView
@@ -63,7 +63,7 @@
         android:layout_height="0dp"
         android:layout_marginVertical="@dimen/space_large"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@id/tv_save"
+        app:layout_constraintBottom_toTopOf="@id/btn_save"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
 
@@ -76,7 +76,7 @@
 
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/tv_save"
+        android:id="@+id/btn_save"
         style="@style/tv_medial_activity_style"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -85,11 +85,11 @@
         android:text="@string/save"
         app:drawableLeftCompat="@drawable/ic_download"
         app:layout_constraintBottom_toTopOf="@+id/guideline_horizontal2"
-        app:layout_constraintLeft_toRightOf="@id/tv_share"
+        app:layout_constraintLeft_toRightOf="@id/btn_share"
         app:layout_constraintRight_toRightOf="parent" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/tv_share"
+        android:id="@+id/btn_share"
         style="@style/tv_medial_activity_style"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -97,11 +97,11 @@
         android:text="@string/share"
         app:drawableLeftCompat="@drawable/ic_share"
         app:layout_constraintBottom_toTopOf="@+id/guideline_horizontal2"
-        app:layout_constraintLeft_toRightOf="@id/tv_delete"
-        app:layout_constraintRight_toLeftOf="@id/tv_save" />
+        app:layout_constraintLeft_toRightOf="@id/btn_delete"
+        app:layout_constraintRight_toLeftOf="@id/btn_save" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/tv_delete"
+        android:id="@+id/btn_delete"
         style="@style/tv_medial_activity_style"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -110,6 +110,6 @@
         app:drawableLeftCompat="@drawable/ic_delete"
         app:layout_constraintBottom_toTopOf="@+id/guideline_horizontal2"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/tv_share" />
+        app:layout_constraintRight_toLeftOf="@id/btn_share" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -34,60 +34,7 @@ object MyIntent {
         }
     }
 
-    fun sharePhoto(context: Context, photoPath: String) {
 
-        try {
-            val sharePhotoIntent = Intent(Intent.ACTION_SEND).apply {
-                type = "image/*"
-
-                val shareMessage = """
-                ${context.getString(R.string.app_link_download)}${context.getString(R.string.app_name)}           
-                ${context.getString(R.string.app_id_caffe_bazaar)}${context.packageName}                               
-                """.trimIndent()
-
-                putExtra(
-                    Intent.EXTRA_TEXT,
-                    shareMessage
-                )
-                val fileURI = FileProvider.getUriForFile(
-                    context, context.packageName + ".provider",
-                    File(photoPath)
-                )
-                putExtra(Intent.EXTRA_STREAM, fileURI)
-            }
-            context.startActivity(sharePhotoIntent)
-        } catch (e: Exception) {
-            showErrorToast(context)
-        }
-    }
-
-    fun shareVideo(context: Context, videoPath: String) {
-
-        try {
-            val sharePhotoIntent = Intent(Intent.ACTION_SEND).apply {
-                type = "video/*"
-
-                val shareMessage = """
-                ${context.getString(R.string.app_link_download)}${context.getString(R.string.app_name)}           
-                ${context.getString(R.string.app_id_caffe_bazaar)}${context.packageName}                             
-                """.trimIndent()
-
-                putExtra(
-                    Intent.EXTRA_TEXT,
-                    shareMessage
-                )
-                val fileURI = FileProvider.getUriForFile(
-                    context, context.packageName + ".provider",
-                    File(videoPath)
-                )
-                putExtra(Intent.EXTRA_STREAM, fileURI)
-            }
-            context.startActivity(sharePhotoIntent)
-
-        } catch (e: Exception) {
-            showErrorToast(context)
-        }
-    }
 
     fun otherAppIntent(context: Context) {
         try {
