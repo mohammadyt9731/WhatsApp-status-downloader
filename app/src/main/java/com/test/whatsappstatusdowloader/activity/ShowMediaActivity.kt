@@ -58,15 +58,6 @@ class ShowMediaActivity : AppCompatActivity() {
                 videoView.visibility= View.VISIBLE
 
 
-//                val retriever = MediaMetadataRetriever()
-//                retriever.setDataSource(file.path)
-//                val bitmap = retriever.getFrameAtTime(1)
-//
-//                vvPreview.load(bitmap) {
-//                    crossfade(true)
-//                    placeholder(ColorDrawable(Color.WHITE))
-//                }
-
                 setUpVideoView(statusFile)
             }
         }

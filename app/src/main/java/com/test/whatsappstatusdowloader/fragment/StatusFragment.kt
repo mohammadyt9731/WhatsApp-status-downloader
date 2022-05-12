@@ -16,14 +16,24 @@ import com.test.whatsappstatusdowloader.utils.UtilsMethod
 import java.io.File
 
 
-class StatusFragment(directoryAddress: String) : Fragment() {
+class StatusFragment() : Fragment() {
 
     private lateinit var binding: FragmentWhatsappStatusBinding
     private var statusFileList: ArrayList<File>
-    private var directoryAddress: String
+    private lateinit var directoryAddress: String
 
     init {
-        this.directoryAddress = directoryAddress
+
+
+//        if(arguments?.getString(Constants.DIRECTORY_KEY) !=null)
+//            this.directoryAddress= arguments!!.getString(Constants.DIRECTORY_KEY).toString()
+
+
+//        if (directoryAddress.isEmpty())
+//            this.directoryAddress = directoryAddress
+
+
+
         statusFileList = ArrayList()
     }
 
@@ -33,6 +43,9 @@ class StatusFragment(directoryAddress: String) : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+
+        this.directoryAddress= arguments?.getString(Constants.DIRECTORY_KEY).toString()
 
         binding = FragmentWhatsappStatusBinding.inflate(layoutInflater, container, false)
         return binding.root

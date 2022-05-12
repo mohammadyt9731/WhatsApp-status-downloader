@@ -10,11 +10,15 @@ object Constants {
     const val MANAGE_EXTERNAL_STORAGE_PERMISSION = "android:manage_external_storage"
 
     //MainActivity
+    const val DIRECTORY_KEY = "directory_key"
     const val TAB_COLOR_CODE = "#ece5dd"
+
     val WHATSAPP_DIRECTORY =
         Environment.getExternalStorageDirectory().path + "/WhatsApp/Media/.Statuses"
 
-    //val WHATSAPP_DIRECTORY=Environment.getExternalStorageDirectory().path + "/Download/Wahtsapp"
+    val NEW_WHATSAPP_DIRECTORY =
+        Environment.getExternalStorageDirectory().path + "Android/media/com.whatsapp/WhatsApp/Media/.Statuses"
+
     val WHATSAPP_BUSINESS_DIRECTORY =
         Environment.getExternalStorageDirectory().path + "/WhatsApp/Media/.Statuses"
     val SAVED_DIRECTORY = Environment.getExternalStorageDirectory().path + "/saveDirectory"
