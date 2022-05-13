@@ -31,7 +31,7 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_splash_screen)
+        setContentView(R.layout.activity_splash_screen)
 
 
         checkStoragePermission()

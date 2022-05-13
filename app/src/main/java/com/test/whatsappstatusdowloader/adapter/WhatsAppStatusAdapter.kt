@@ -122,7 +122,7 @@ class WhatsAppStatusAdapter(
 
                     val bundle= Bundle()
                     bundle.putSerializable(Constants.MEDIA_PATH_KEY, differ.currentList[position])
-                    binding.root.findNavController().navigate(R.id.show_media_fragment,bundle)
+                    activity.findNavController(R.id.nav_controller).navigate(R.id.show_media_fragment,bundle)
 
                 }
 

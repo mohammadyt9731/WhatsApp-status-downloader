@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             
             binding.apply {
 
-                if(destination.id==R.id.show_media_fragment || destination.id==R.id.splashScreenFragment){
+                if(destination.id==R.id.show_media_fragment ){
                     toolbar.visibility = View.GONE
                     bottomBar.visibility = View.GONE
                 }else{
