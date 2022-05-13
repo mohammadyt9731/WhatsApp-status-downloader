@@ -1,38 +1,48 @@
-package com.test.whatsappstatusdowloader.activity
+package com.test.whatsappstatusdowloader.fragment
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.AppOpsManager
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
-import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
 import android.os.Environment
+import android.os.Handler
 import android.provider.Settings
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
+import androidx.navigation.NavOptions
+import androidx.navigation.fragment.findNavController
 import com.test.whatsappstatusdowloader.R
+import com.test.whatsappstatusdowloader.databinding.FragmentSplashScreenBinding
 import com.test.whatsappstatusdowloader.utils.Constants
 import java.util.*
-import kotlin.concurrent.timerTask
 
 
-@SuppressLint("CustomSplashScreen")
-class SplashActivity : AppCompatActivity() {
+class SplashScreenFragment : Fragment() {
 
     //required permission list
     private val PERMISSION_LIST = arrayOf(
         Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE
     )
 
+    private lateinit var binding: FragmentSplashScreenBinding
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding=FragmentSplashScreenBinding.inflate(layoutInflater,container,false)
+        return binding.root
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_splash_screen)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         checkStoragePermission()
     }
@@ -41,7 +51,7 @@ class SplashActivity : AppCompatActivity() {
 
 
         if (arePermissionsDenied())
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, PERMISSION_LIST[0]))
+            if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), PERMISSION_LIST[0]))
                 showRequestPermissionDialog()
             else
                 requestPermission()
@@ -54,11 +64,11 @@ class SplashActivity : AppCompatActivity() {
 
 
         //check for android > 11
-        if (SDK_INT >= Build.VERSION_CODES.R)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R)
             return checkStorageForApi30()
         else {
             for (permission in PERMISSION_LIST) {
-                if (ActivityCompat.checkSelfPermission(this@SplashActivity, permission)
+                if (ActivityCompat.checkSelfPermission(requireContext(), permission)
                     != PackageManager.PERMISSION_GRANTED
                 )
                     return true
@@ -71,18 +81,18 @@ class SplashActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.R)
     private fun checkStorageForApi30(): Boolean {
 
-        val appOps = getSystemService(AppOpsManager::class.java)
+        val appOps = requireActivity().getSystemService(AppOpsManager::class.java)
         val mode = appOps.unsafeCheckOpNoThrow(
             Constants.MANAGE_EXTERNAL_STORAGE_PERMISSION,
-            applicationContext.applicationInfo.uid,
-            applicationContext.packageName
+            requireContext().applicationInfo.uid,
+            requireContext().packageName
         )
         return mode != AppOpsManager.MODE_ALLOWED
     }
 
     private fun showRequestPermissionDialog() {
 
-        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+        val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
         builder.apply {
             setTitle(resources.getString(R.string.storage_permission_request))
             setMessage(resources.getString(R.string.need_access_storage))
@@ -90,7 +100,7 @@ class SplashActivity : AppCompatActivity() {
 
             setNegativeButton(resources.getString(R.string.exit)) { dialog, _ ->
                 dialog.dismiss()
-                finish()
+                requireActivity().finish()
             }
             create()
             show()
@@ -102,7 +112,7 @@ class SplashActivity : AppCompatActivity() {
         if (arePermissionsDenied()) {
 
             // android >= 11
-            if (SDK_INT >= Build.VERSION_CODES.R) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 val intent = Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION)
                 startActivityForResult(intent, Constants.REQUEST_CODE)
                 return
@@ -115,11 +125,17 @@ class SplashActivity : AppCompatActivity() {
 
     private fun goToMainActivity() {
 
-        Timer().schedule(timerTask {
+        Handler().postDelayed(Runnable {
+//
+//            val navBuilder = NavOptions.Builder()
+//            navBuilder.setEnterAnim(android.R.anim.slide_in_left).setExitAnim(android.R.anim.slide_out_right)
+//                .setPopEnterAnim(android.R.anim.slide_in_left).setPopExitAnim(android.R.anim.slide_out_right)
+          //  findNavController().navigate(R.id.guide_fragment,null,navBuilder.build())
 
-            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
-            finish()
-        }, Constants.SPLASH_DELAY)
+            findNavController().navigate(R.id.action_splashScreenFragment_to_guide_fragment)
+        },Constants.SPLASH_DELAY)
+
+
     }
 
     //for android >= 11
@@ -127,7 +143,7 @@ class SplashActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == Constants.REQUEST_CODE) {
 
-            if (SDK_INT >= Build.VERSION_CODES.R) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 if (Environment.isExternalStorageManager()) {
                     goToMainActivity()
                 } else {
@@ -153,6 +169,4 @@ class SplashActivity : AppCompatActivity() {
             }
         }
     }
-
-
 }

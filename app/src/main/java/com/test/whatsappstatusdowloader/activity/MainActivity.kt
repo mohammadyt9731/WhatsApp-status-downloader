@@ -3,9 +3,9 @@ package com.test.whatsappstatusdowloader.activity
 import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
-import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.flarebit.flarebarlib.Flaretab
@@ -13,8 +13,6 @@ import com.test.whatsappstatusdowloader.R
 import com.test.whatsappstatusdowloader.databinding.ActivityMainBinding
 import com.test.whatsappstatusdowloader.dialog.AboutUsDialog
 import com.test.whatsappstatusdowloader.dialog.CommentDialog
-import com.test.whatsappstatusdowloader.fragment.GuideFragment
-import com.test.whatsappstatusdowloader.fragment.StatusFragment
 import com.test.whatsappstatusdowloader.utils.Constants
 import com.test.whatsappstatusdowloader.utils.MyIntent
 
@@ -29,25 +27,39 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        navController=findNavController(R.id.nav_controller)
 
+        setUpNavController()
         setUpBottomNavigationView()
         toolBarButtonClick()
         setUpNavigationView()
+    }
+
+    private fun setUpNavController(){
+        navController=findNavController(R.id.nav_controller)
+
+        navController.addOnDestinationChangedListener{ _,destination,_,->
+            
+            binding.apply {
+
+                if(destination.id==R.id.show_media_fragment || destination.id==R.id.splashScreenFragment){
+                    toolbar.visibility = View.GONE
+                    bottomBar.visibility = View.GONE
+                }else{
+                    toolbar.visibility = View.VISIBLE
+                    bottomBar.visibility = View.VISIBLE
+                } 
+            }
+
+
+        }
+
     }
 
 
     private fun setUpBottomNavigationView() {
 
         configTabs()
-
-        //start fragment
-     //   loadFragment(StatusFragment(Constants.WHATSAPP_DIRECTORY))
-
-
         setTabChangeListener()
-
-
     }
 
     private fun configTabs() {
@@ -56,22 +68,13 @@ class MainActivity : AppCompatActivity() {
 
         tabs.add(createFlareTab(R.drawable.ic_guide, getString(R.string.guide)))
         tabs.add(createFlareTab(R.drawable.ic_whats_app, getString(R.string.whatsapp_status)))
-        tabs.add(
-            createFlareTab(
-                R.drawable.ic_business_whatsapp,
-                getString(R.string.new_business_status)
-            )
-        )
+        tabs.add(createFlareTab(R.drawable.ic_business_whatsapp, getString(R.string.new_business_status)))
         tabs.add(createFlareTab(R.drawable.ic_download, getString(R.string.downloads)))
 
         binding.bottomBar.apply {
             tabList = tabs
             attachTabs(this@MainActivity)
-
-           // selectTab(1)
-
         }
-
 
     }
 
@@ -84,35 +87,17 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-//    private fun loadFragment(fragment: Fragment) {
-//
-//        supportFragmentManager.beginTransaction()
-//            .replace(R.id.fl_fragment_container, fragment).commit()
-//    }
-
     private fun setTabChangeListener() {
-//        binding.bottomBar.setTabChangedListener { _, selectedIndex, _ ->
-//
-//            when (selectedIndex) {
-//
-//                0 -> loadFragment(GuideFragment())
-//                1 -> loadFragment(StatusFragment(Constants.WHATSAPP_DIRECTORY))
-//                2 -> loadFragment(StatusFragment(Constants.WHATSAPP_DIRECTORY))
-//                3 -> loadFragment(StatusFragment(Constants.SAVED_DIRECTORY))
-//                else -> loadFragment(GuideFragment())
-//            }
-//
-//        }
 
         binding.bottomBar.setTabChangedListener { _, selectedIndex, _ ->
-            val bundle:Bundle= Bundle()
+            val bundle= Bundle()
 
             when (selectedIndex) {
 
                 0 -> navController.navigate(R.id.guide_fragment)
                 1 ->{
                     if(Build.VERSION.SDK_INT>=30)
-                    bundle.putString(Constants.DIRECTORY_KEY,Constants.WHATSAPP_DIRECTORY)
+                    bundle.putString(Constants.DIRECTORY_KEY,Constants.NEW_WHATSAPP_DIRECTORY)
                    else
                         bundle.putString(Constants.DIRECTORY_KEY,Constants.WHATSAPP_DIRECTORY)
 
@@ -121,7 +106,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 2 -> {
                     if(Build.VERSION.SDK_INT>=30)
-                        bundle.putString(Constants.DIRECTORY_KEY,Constants.WHATSAPP_DIRECTORY)
+                        bundle.putString(Constants.DIRECTORY_KEY,Constants.NEW_WHATSAPP_DIRECTORY)
                     else
                         bundle.putString(Constants.DIRECTORY_KEY,Constants.WHATSAPP_DIRECTORY)
                     navController.navigate(R.id.wb_status_fragment,bundle)
@@ -130,12 +115,13 @@ class MainActivity : AppCompatActivity() {
                     bundle.putString(Constants.DIRECTORY_KEY,Constants.SAVED_DIRECTORY)
                     navController.navigate(R.id.saved_status_fragment,bundle)
                 }
-                else -> navController.navigate(R.id.guide_fragment)
+                else -> return@setTabChangedListener
             }
 
         }
 
     }
+
 
     private fun toolBarButtonClick() {
 
@@ -187,8 +173,12 @@ class MainActivity : AppCompatActivity() {
 
             if (drawerLayout.isDrawerOpen(Gravity.RIGHT))
                closeDrawer()
-            else
+            else if(navController.currentDestination?.id==R.id.show_media_fragment){
+                navController.navigateUp()
+            }else
                 super.onBackPressed()
+
+
 
         }
     }
@@ -197,5 +187,7 @@ class MainActivity : AppCompatActivity() {
         binding.drawerLayout.closeDrawer(Gravity.RIGHT)
 
     }
+
+
 
 }

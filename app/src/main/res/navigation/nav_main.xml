@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_main"
-    app:startDestination="@id/guide_fragment">
+    app:startDestination="@id/splashScreenFragment">
 
     <fragment
         android:id="@+id/guide_fragment"
@@ -29,5 +29,25 @@
         <argument
             android:name="directory_key"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/show_media_fragment"
+        android:name="com.test.whatsappstatusdowloader.fragment.ShowMediaFragment"
+        android:label="ShowMediaFragment"
+        tools:layout="@layout/fragment_show_media"
+        />
+    <fragment
+        android:id="@+id/splashScreenFragment"
+        android:name="com.test.whatsappstatusdowloader.fragment.SplashScreenFragment"
+        android:label="SplashScreenFragment"
+        tools:layout="@layout/fragment_splash_screen"
+        >
+        <action
+            android:id="@+id/action_splashScreenFragment_to_guide_fragment"
+            app:destination="@id/guide_fragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
 </navigation>

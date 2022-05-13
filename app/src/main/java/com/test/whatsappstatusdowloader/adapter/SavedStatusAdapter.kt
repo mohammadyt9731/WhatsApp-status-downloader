@@ -2,21 +2,20 @@ package com.test.whatsappstatusdowloader.adapter
 
 import android.app.Activity
 import android.app.AlertDialog
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.media.MediaMetadataRetriever
-import android.os.Build
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.test.whatsappstatusdowloader.activity.ShowMediaActivity
+import com.test.whatsappstatusdowloader.R
 import com.test.whatsappstatusdowloader.databinding.SavedStatusBinding
 import com.test.whatsappstatusdowloader.utils.Constants
 import com.test.whatsappstatusdowloader.utils.FileOperation
@@ -55,6 +54,10 @@ class SavedStatusAdapter(
     override fun getItemCount(): Int {
 
         return differ.currentList.size
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
     }
 
     inner class ViewHolder() : RecyclerView.ViewHolder(binding.root) {
@@ -111,9 +114,10 @@ class SavedStatusAdapter(
 
                 ivStatus.setOnClickListener() {
 
-                    val intent = Intent(activity, ShowMediaActivity::class.java)
-                    intent.putExtra(Constants.MEDIA_PATH_KEY, differ.currentList[position])
-                    activity.startActivity(intent)
+                    val bundle=Bundle()
+                    bundle.putSerializable(Constants.MEDIA_PATH_KEY, differ.currentList[position])
+                    binding.root.findNavController().navigate(R.id.show_media_fragment,bundle)
+
 
                 }
             }

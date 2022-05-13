@@ -2,19 +2,17 @@
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:openDrawer="right"
-    tools:context=".activity.MainActivity">
+    tools:context=".activity.MainActivity"
+    tools:openDrawer="right">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        >
-
+        android:background="@color/white">
 
 
         <androidx.appcompat.widget.Toolbar
@@ -57,12 +55,12 @@
                     android:layout_height="@dimen/_35sdp"
                     android:layout_margin="@dimen/space_small"
                     android:visibility="gone"
-                    app:lottie_rawRes="@raw/lottie_ad"
-                    app:lottie_autoPlay="true"
-                    app:lottie_loop="true"
                     app:layout_constraintBottom_toBottomOf="@id/iv_whatsapp"
                     app:layout_constraintLeft_toRightOf="@id/iv_whatsapp"
-                    app:layout_constraintTop_toTopOf="@id/iv_whatsapp" />
+                    app:layout_constraintTop_toTopOf="@id/iv_whatsapp"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/lottie_ad" />
 
                 <ImageView
                     android:id="@+id/iv_whatsapp"
@@ -82,33 +80,34 @@
             android:id="@+id/nav_controller"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/bottomBar"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
             app:navGraph="@navigation/nav_main" />
 
         <FrameLayout
-            android:visibility="gone"
             android:id="@+id/fl_fragment_container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@id/bottomBar"
             app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
         <com.flarebit.flarebarlib.FlareBar
             android:id="@+id/bottomBar"
-            android:layoutDirection="ltr"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/dark_green"
+            android:layoutDirection="ltr"
             app:layout_constraintBottom_toBottomOf="parent" />
 
 
         <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/vertical_guide_line"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:id="@+id/vertical_guide_line"
-            app:layout_constraintGuide_percent="0.25"/>
+            app:layout_constraintGuide_percent="0.25" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -119,10 +118,10 @@
         android:layout_height="match_parent"
         android:layout_gravity="right"
         android:fitsSystemWindows="true"
+        android:layoutDirection="rtl"
         app:headerLayout="@layout/header_menu"
         app:itemIconTint="@color/green"
         app:itemTextColor="@color/black"
-        android:layoutDirection="rtl"
         app:menu="@menu/nav_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

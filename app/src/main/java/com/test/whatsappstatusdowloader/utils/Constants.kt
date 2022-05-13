@@ -5,7 +5,7 @@ import android.os.Environment
 object Constants {
 
     //SplashActivity
-    const val SPLASH_DELAY: Long = 500
+    const val SPLASH_DELAY: Long = 1500
     const val REQUEST_CODE = 1234
     const val MANAGE_EXTERNAL_STORAGE_PERMISSION = "android:manage_external_storage"
 
@@ -17,7 +17,7 @@ object Constants {
         Environment.getExternalStorageDirectory().path + "/WhatsApp/Media/.Statuses"
 
     val NEW_WHATSAPP_DIRECTORY =
-        Environment.getExternalStorageDirectory().path + "Android/media/com.whatsapp/WhatsApp/Media/.Statuses"
+        Environment.getExternalStorageDirectory().path + "/Android/media/com.whatsapp/WhatsApp/Media/.Statuses"
 
     val WHATSAPP_BUSINESS_DIRECTORY =
         Environment.getExternalStorageDirectory().path + "/WhatsApp/Media/.Statuses"
