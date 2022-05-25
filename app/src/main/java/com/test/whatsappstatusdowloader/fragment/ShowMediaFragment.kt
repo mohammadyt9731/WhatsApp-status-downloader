@@ -54,7 +54,14 @@ class ShowMediaFragment : Fragment() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding.apply {
+            if(videoView.isPlaying)
+                videoView.pause()
 
+        }
+    }
 
     private fun checkFileType(file: File){
         binding.apply {

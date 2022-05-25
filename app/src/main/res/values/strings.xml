@@ -32,7 +32,8 @@
     <string name="directory_not_exist">پوشه مورد نظر وجود ندارد</string>
     <string name="no_status_was_observed">هیچ وضعیتی مشاهده نشده است</string>
     <string name="no_status_saved">هیچ وضعیتی ذخیره نشده است</string>
-    <string name="whatapp_is_not_installed">واتساپ روی تلفن شما نصب نیست</string>
+    <string name="whatsapp_is_not_installed">واتساپ روی تلفن شما نصب نیست</string>
+    <string name="whatsapp_business_is_not_installed">واتساپ تجاری روی تلفن شما نصب نیست</string>
     <string name="share_app">ارسال برنامه به دوستان</string>
     <string name="other_apps">سایر برنامه ها</string>
     <string name="about_us">درباره ما</string>
@@ -55,5 +56,7 @@
     <string name="number_2">2</string>
     <string name="number_1">1</string>
     <string name="submitt_comment">لطفا امتیاز خود را مشخص کنید</string>
+    <string name="deleted_successfully">با موفقیت حذف شد</string>
+    <string name="open_whatsapp">باز کردن واتساپ</string>
 
 </resources>

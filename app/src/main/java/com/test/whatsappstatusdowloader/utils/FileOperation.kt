@@ -14,6 +14,8 @@ object FileOperation {
 
         try {
            file.delete()
+
+            Toast.makeText(context,context.getString(R.string.deleted_successfully),Toast.LENGTH_SHORT).show()
         } catch (e: Exception) {
             Toast.makeText(context, e.message.toString(), Toast.LENGTH_LONG).show()
         }

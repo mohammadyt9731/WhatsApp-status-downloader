@@ -15,6 +15,7 @@ import com.test.whatsappstatusdowloader.dialog.AboutUsDialog
 import com.test.whatsappstatusdowloader.dialog.CommentDialog
 import com.test.whatsappstatusdowloader.utils.Constants
 import com.test.whatsappstatusdowloader.utils.MyIntent
+import kotlin.system.measureTimeMillis
 
 
 class MainActivity : AppCompatActivity() {
@@ -34,23 +35,21 @@ class MainActivity : AppCompatActivity() {
         setUpNavigationView()
     }
 
-    private fun setUpNavController(){
-        navController=findNavController(R.id.nav_controller)
+    private fun setUpNavController() {
+        navController = findNavController(R.id.nav_controller)
 
-        navController.addOnDestinationChangedListener{ _,destination,_,->
-            
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+
             binding.apply {
 
-                if(destination.id==R.id.show_media_fragment ){
+                if (destination.id == R.id.show_media_fragment) {
                     toolbar.visibility = View.GONE
                     bottomBar.visibility = View.GONE
-                }else{
+                } else {
                     toolbar.visibility = View.VISIBLE
                     bottomBar.visibility = View.VISIBLE
-                } 
+                }
             }
-
-
         }
 
     }
@@ -68,12 +67,18 @@ class MainActivity : AppCompatActivity() {
 
         tabs.add(createFlareTab(R.drawable.ic_guide, getString(R.string.guide)))
         tabs.add(createFlareTab(R.drawable.ic_whats_app, getString(R.string.whatsapp_status)))
-        tabs.add(createFlareTab(R.drawable.ic_business_whatsapp, getString(R.string.new_business_status)))
+        tabs.add(
+            createFlareTab(
+                R.drawable.ic_business_whatsapp,
+                getString(R.string.new_business_status)
+            )
+        )
         tabs.add(createFlareTab(R.drawable.ic_download, getString(R.string.downloads)))
 
         binding.bottomBar.apply {
             tabList = tabs
             attachTabs(this@MainActivity)
+
         }
 
     }
@@ -90,30 +95,30 @@ class MainActivity : AppCompatActivity() {
     private fun setTabChangeListener() {
 
         binding.bottomBar.setTabChangedListener { _, selectedIndex, _ ->
-            val bundle= Bundle()
+            val bundle = Bundle()
 
             when (selectedIndex) {
 
                 0 -> navController.navigate(R.id.guide_fragment)
-                1 ->{
-                    if(Build.VERSION.SDK_INT>=30)
-                    bundle.putString(Constants.DIRECTORY_KEY,Constants.NEW_WHATSAPP_DIRECTORY)
-                   else
-                        bundle.putString(Constants.DIRECTORY_KEY,Constants.WHATSAPP_DIRECTORY)
+                1 -> {
+                    if (Build.VERSION.SDK_INT >= 40)
+                        bundle.putString(Constants.DIRECTORY_KEY, Constants.NEW_WHATSAPP_DIRECTORY)
+                    else
+                        bundle.putString(Constants.DIRECTORY_KEY, Constants.WHATSAPP_DIRECTORY)
 
 
-                    navController.navigate(R.id.whatsapp_status_fragment,bundle)
+                    navController.navigate(R.id.whatsapp_status_fragment, bundle)
                 }
                 2 -> {
-                    if(Build.VERSION.SDK_INT>=30)
-                        bundle.putString(Constants.DIRECTORY_KEY,Constants.NEW_WHATSAPP_DIRECTORY)
+                    if (Build.VERSION.SDK_INT >= 30)
+                        bundle.putString(Constants.DIRECTORY_KEY, Constants.NEW_WHATSAPP_BUSINESS_DIRECTORY)
                     else
-                        bundle.putString(Constants.DIRECTORY_KEY,Constants.WHATSAPP_DIRECTORY)
-                    navController.navigate(R.id.wb_status_fragment,bundle)
+                        bundle.putString(Constants.DIRECTORY_KEY, Constants.WHATSAPP_BUSINESS_DIRECTORY)
+                    navController.navigate(R.id.wb_status_fragment, bundle)
                 }
                 3 -> {
-                    bundle.putString(Constants.DIRECTORY_KEY,Constants.SAVED_DIRECTORY)
-                    navController.navigate(R.id.saved_status_fragment,bundle)
+                    bundle.putString(Constants.DIRECTORY_KEY, Constants.SAVED_DIRECTORY)
+                    navController.navigate(R.id.saved_status_fragment, bundle)
                 }
                 else -> return@setTabChangedListener
             }
@@ -147,9 +152,9 @@ class MainActivity : AppCompatActivity() {
 
             when (it.itemId) {
 
-                R.id.nav_item_guide ->
-                {navController.navigate(R.id.guide_fragment)
-                   binding.bottomBar.selectTab(0)
+                R.id.nav_item_guide -> {
+                    navController.navigate(R.id.guide_fragment)
+                    binding.bottomBar.selectTab(0)
                 }
                 R.id.nav_item_share_app -> MyIntent.shareAppIntent(this@MainActivity)
                 R.id.nav_item_other_app -> MyIntent.otherAppIntent(this@MainActivity)
@@ -172,22 +177,20 @@ class MainActivity : AppCompatActivity() {
         binding.apply {
 
             if (drawerLayout.isDrawerOpen(Gravity.RIGHT))
-               closeDrawer()
-            else if(navController.currentDestination?.id==R.id.show_media_fragment){
+                closeDrawer()
+            else if (navController.currentDestination?.id == R.id.show_media_fragment) {
                 navController.navigateUp()
-            }else
+            } else
                 super.onBackPressed()
-
 
 
         }
     }
 
-    private fun closeDrawer(){
+    private fun closeDrawer() {
         binding.drawerLayout.closeDrawer(Gravity.RIGHT)
 
     }
-
 
 
 }

@@ -12,30 +12,17 @@ import com.test.whatsappstatusdowloader.adapter.SavedStatusAdapter
 import com.test.whatsappstatusdowloader.adapter.WhatsAppStatusAdapter
 import com.test.whatsappstatusdowloader.databinding.FragmentWhatsappStatusBinding
 import com.test.whatsappstatusdowloader.utils.Constants
+import com.test.whatsappstatusdowloader.utils.MyIntent
 import com.test.whatsappstatusdowloader.utils.UtilsMethod
 import java.io.File
+import kotlin.system.measureTimeMillis
 
 
 class StatusFragment() : Fragment() {
 
     private lateinit var binding: FragmentWhatsappStatusBinding
-    private var statusFileList: ArrayList<File>
+    private var statusFileList: ArrayList<File> = ArrayList()
     private lateinit var directoryAddress: String
-
-    init {
-
-
-//        if(arguments?.getString(Constants.DIRECTORY_KEY) !=null)
-//            this.directoryAddress= arguments!!.getString(Constants.DIRECTORY_KEY).toString()
-
-
-//        if (directoryAddress.isEmpty())
-//            this.directoryAddress = directoryAddress
-
-
-
-        statusFileList = ArrayList()
-    }
 
 
     override fun onCreateView(
@@ -55,12 +42,32 @@ class StatusFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setOnClick()
+
+    }
+
+    private fun setOnClick (){
+
+        binding.btnOpenWhatsapp.setOnClickListener(){
+            if(directoryAddress==Constants.WHATSAPP_BUSINESS_DIRECTORY
+                ||directoryAddress==Constants.NEW_WHATSAPP_BUSINESS_DIRECTORY){
+                MyIntent.openWhatsAppBusiness(requireContext())
+
+            }else {
+                MyIntent.openWhatsApp(requireContext())
+            }
+        }
+
     }
 
     override fun onResume() {
         super.onResume()
+        val time = measureTimeMillis {
+                setUpList()
+        }
+        Log.i("taggg",time.toString())
 
-        setUpList()
+
     }
 
     private fun setUpList() {
@@ -77,21 +84,23 @@ class StatusFragment() : Fragment() {
 
     private fun prepareStatusList(statusDirectory: File) {
 
+
         val fileList: Array<out File>? = statusDirectory.listFiles()
-        if (!fileList.isNullOrEmpty()) {
+
+        for (file in fileList!!){
+            if(UtilsMethod.isImageFile(file.name) || UtilsMethod.isVideoFile(file.name))
+                statusFileList.add(file)
+        }
+
+
+
+        if (!statusFileList.isNullOrEmpty()) {
 
             binding.apply {
                 rvStatus.visibility = View.VISIBLE
                 tvWarning.visibility = View.GONE
+                btnOpenWhatsapp.visibility = View.GONE
             }
-
-            for (file in fileList) {
-
-                if (UtilsMethod.isImageFile(file.path) || UtilsMethod.isVideoFile(file.path)) {
-                    statusFileList.add(file)
-                }
-            }
-
 
             setUpRecyclerView()
 
@@ -111,6 +120,8 @@ class StatusFragment() : Fragment() {
 
             tvWarning.visibility = View.VISIBLE
             ivWarning.visibility = View.VISIBLE
+            if (directoryAddress != Constants.SAVED_DIRECTORY)
+                btnOpenWhatsapp.visibility=View.VISIBLE
 
 
         }
@@ -122,13 +133,24 @@ class StatusFragment() : Fragment() {
         binding.apply {
             rvStatus.visibility = View.GONE
 
-            if (directoryAddress == Constants.SAVED_DIRECTORY)
-                tvWarning.text = getString(R.string.no_status_saved)
-            else
-                tvWarning.text = getString(R.string.directory_not_exist)
+
+            tvWarning.text = when(directoryAddress){
+
+                Constants.WHATSAPP_DIRECTORY->getString(R.string.whatsapp_is_not_installed)
+                Constants.NEW_WHATSAPP_DIRECTORY->getString(R.string.whatsapp_is_not_installed)
+                Constants.WHATSAPP_BUSINESS_DIRECTORY->getString(R.string.whatsapp_business_is_not_installed)
+                Constants.NEW_WHATSAPP_BUSINESS_DIRECTORY->getString(R.string.whatsapp_business_is_not_installed)
+                Constants.SAVED_DIRECTORY->getString(R.string.no_status_saved)
+                else -> getString(R.string.directory_not_exist)
+            }
+
+
 
             tvWarning.visibility = View.VISIBLE
             ivWarning.visibility = View.VISIBLE
+
+
+
         }
     }
 

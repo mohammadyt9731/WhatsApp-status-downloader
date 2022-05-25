@@ -4,9 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
-import androidx.core.content.FileProvider
 import com.test.whatsappstatusdowloader.R
-import java.io.File
 
 object MyIntent {
 
@@ -95,7 +93,24 @@ object MyIntent {
 
             Toast.makeText(
                 context,
-                context.getString(R.string.whatapp_is_not_installed),
+                context.getString(R.string.whatsapp_is_not_installed),
+                Toast.LENGTH_LONG
+            ).show()
+        }
+
+    }
+
+    fun openWhatsAppBusiness(context: Context) {
+
+        try {
+            val whatsAppIntent = context.packageManager.getLaunchIntentForPackage(Constants.WHATSAPP_BUSINESS_PACKAGE)
+            context.startActivity(whatsAppIntent)
+
+        } catch (e: Exception) {
+
+            Toast.makeText(
+                context,
+                context.getString(R.string.whatsapp_business_is_not_installed),
                 Toast.LENGTH_LONG
             ).show()
         }
