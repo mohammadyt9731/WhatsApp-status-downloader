@@ -19,11 +19,11 @@
     <string name="unknown_error">خطای ناشناخته</string>
     <string name="share_app_with">اشتراک گذاری با</string>
     <string name="app_link_download">لینک دانلود برنامه&#160;</string>
-    <string name="app_id_caffe_bazaar">http://cafebazaar.ir/app/?id=</string>
-    <string name="developer_caffe_bazaar_link">https://cafebazaar.ir/developer/mohammad9731</string>
+    <string name="app_id_caffe_bazaar">https://cafebazaar.ir/app/?id=</string>
+    <string name="developer_caffe_bazaar_link">https://cafebazaar.ir/developer/mohammad_yazdi</string>
     <string name="comment_caffe_bazaar_link">bazaar://details?id=</string>
     <string name="need_install_caffe_bazaar">برای ثبت نظر باید اپلیکیشن کافه بازار را نصب داشته باشید</string>
-    <string name="email_address">supttp@gmail.com</string>
+    <string name="email_address">ddt.supp@gmail.com</string>
     <string name="send_email">ارسال ایمیل</string>
     <string name="save">ذخیره</string>
     <string name="share">ارسال</string>
