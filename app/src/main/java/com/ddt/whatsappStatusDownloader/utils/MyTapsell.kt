@@ -10,7 +10,7 @@ import ir.tapsell.plus.TapsellPlusBannerType
 import ir.tapsell.plus.model.TapsellPlusAdModel
 import ir.tapsell.plus.model.TapsellPlusErrorModel
 
-object Tapsell {
+object MyTapsell {
 
     private const val MAX_REQUEST_NUMBER = 10
     private var standardAdCounter = 0

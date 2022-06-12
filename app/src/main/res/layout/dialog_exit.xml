@@ -14,7 +14,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingVertical="@dimen/space_small">
+            android:paddingTop="@dimen/space_small">
 
 
             <TextView
@@ -37,7 +37,6 @@
                 android:id="@+id/rl_advertising"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/space_small"
                 android:gravity="center|bottom"
                 app:layout_constraintBottom_toTopOf="@id/btn_no"
                 app:layout_constraintTop_toBottomOf="@id/view_horizontal_divider" />
@@ -46,22 +45,21 @@
                 android:id="@+id/btn_no"
                 style="@style/btn_dialog_style"
                 android:text="@string/no"
+                app:backgroundTint="@color/dark_green"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/btn_yes"
-                app:layout_constraintTop_toBottomOf="@id/rl_advertising"
-                app:backgroundTint="@color/dark_green"/>
+                app:layout_constraintTop_toBottomOf="@id/rl_advertising" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_yes"
                 style="@style/btn_dialog_style"
                 android:text="@string/yes"
+                app:backgroundTint="@color/red"
                 app:layout_constraintBottom_toBottomOf="@id/btn_no"
                 app:layout_constraintLeft_toRightOf="@id/btn_no"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@id/btn_no"
-                app:backgroundTint="@color/red"
-                />
+                app:layout_constraintTop_toTopOf="@id/btn_no" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

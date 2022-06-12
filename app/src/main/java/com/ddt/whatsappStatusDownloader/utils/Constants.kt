@@ -41,5 +41,12 @@ object Constants {
     const val WHATSAPP_PACKAGE = "com.whatsapp"
     const val WHATSAPP_BUSINESS_PACKAGE = "com.com.whatsapp.w4b"
 
+    //MyTapsell
+    const val TAPSELL_KEY = "skmldklsmmsfjneespcsfmlrlimhtofdisdhagscgtctrknioitmdldehpajcseshrminp"
+    const val STANDARD_BANNER_MAIN_ACTIVITY = "6297efb1305e375a5fb6a42e"
+    const val STANDARD_BANNER_EXIT_DIALOG = "6297f016305e375a5fb6a42f"
+    const val INTERSTITIAL_START_APP = "6297f06ce309116932dfa497"
+    const val INTERSTITIAL_VIDEO = "6297f0d873843918417ab379"
+
 
 }

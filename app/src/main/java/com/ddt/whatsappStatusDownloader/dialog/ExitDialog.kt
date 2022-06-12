@@ -6,7 +6,12 @@ import android.widget.AbsListView
 import com.ddt.whatsappStatusDownloader.R
 import com.ddt.whatsappStatusDownloader.databinding.DialogExitBinding
 import com.ddt.whatsappStatusDownloader.utils.Constants
+import com.ddt.whatsappStatusDownloader.utils.MyTapsell
+import com.ddt.whatsappStatusDownloader.utils.MyTapsell.showStandardBanner
 import com.ddt.whatsappStatusDownloader.utils.UtilsMethod
+import ir.tapsell.plus.TapsellPlus
+import ir.tapsell.plus.TapsellPlusBannerType
+import ir.tapsell.sdk.Tapsell
 
 class ExitDialog(activity: Activity) : Dialog(activity) {
 
@@ -37,12 +42,12 @@ class ExitDialog(activity: Activity) : Dialog(activity) {
 
     private fun showAdvertising() {
 
-//        Tapsell.showStandardBanner(
-//            activity,
-//            Constants.STANDARD_BANNER_EXIT_DIALOG,
-//            binding.rlAdvertising,
-//            TapsellPlusBannerType.BANNER_300x250
-//        )
+        showStandardBanner(
+            activity,
+            Constants.STANDARD_BANNER_EXIT_DIALOG,
+            binding.rlAdvertising,
+            TapsellPlusBannerType.BANNER_300x250
+        )
 
     }
 
