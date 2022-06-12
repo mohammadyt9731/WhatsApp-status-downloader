@@ -74,4 +74,6 @@ dependencies {
     //Lifecycle
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.1'
+    //Tapsell
+    implementation 'ir.tapsell.plus:tapsell-plus-sdk-android:2.1.3'
 }

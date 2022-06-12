@@ -14,7 +14,9 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingVertical="@dimen/space_small">
+            android:paddingTop="@dimen/space_small"
+            android:paddingBottom="@dimen/space_medium"
+            >
 
             <ImageView
                 android:id="@+id/iv_close"

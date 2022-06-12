@@ -162,7 +162,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_item_about_us -> AboutUsDialog(this@MainActivity).show()
                 R.id.nav_item_exit -> {
                     closeDrawer()
-                    finish()
+                    ExitDialog(this@MainActivity).show()
                 }
             }
 
