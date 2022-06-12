@@ -64,7 +64,6 @@ class MainActivity : AppCompatActivity() {
     private fun configTabs() {
 
         val tabs = ArrayList<Flaretab>()
-
         tabs.add(createFlareTab(R.drawable.ic_guide, getString(R.string.guide)))
         tabs.add(createFlareTab(R.drawable.ic_whats_app, getString(R.string.whatsapp_status)))
         tabs.add(

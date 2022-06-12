@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:lineSpacingExtra="10dp"
-                android:paddingHorizontal="@dimen/space_middle"
+                android:paddingHorizontal="@dimen/space_small"
                 android:paddingVertical="@dimen/space_middle"
                 android:text="@string/guide_text"
                 android:textColor="@color/black"

@@ -11,8 +11,12 @@
     <string name="whatsapp_status">وضعیت واتساپ</string>
     <string name="new_business_status">واتساپ تجاری</string>
     <string name="downloads">دانلود ها</string>
-    <string name="guide_text">1 - وارد برنامه واتساپ شوید\n2 - وضعیت های موردنظر را ببینید\n3 - سپس به برنامه برگرید\n4 - حالا با لمس دکمه دانلود میتوانید وضعیت های مورد نظر خود را ذخیره کنید</string>
+    <string name="guide_text">1 - از منو بالا سمت چپ وارد برنامه واتساپ شوید
+        \n2 - وضعیت های موردنظر را ببینید
+        \n3 - سپس به برنامه برگردید
+        \n4 - حالا با لمس دکمه دانلود میتوانید وضعیت های مورد نظر خود را ذخیره کنید
 
+</string>
 
     <!--MyIntent-->
     <string name="no_connection">اتصال به اینترنت برقرار نیست</string>
@@ -30,8 +34,8 @@
     <string name="delete">حذف</string>
     <string name="preview">پیش نمایش</string>
     <string name="directory_not_exist">پوشه مورد نظر وجود ندارد</string>
-    <string name="no_status_was_observed">هیچ وضعیتی مشاهده نشده است</string>
-    <string name="no_status_saved">هیچ وضعیتی ذخیره نشده است</string>
+    <string name="no_status_was_observed">شما هنوز در واتساپ وضعیتی را تماشا نکرده اید.لطفا روی علامت سوال پایین صفحه کلیک کنید و طبق آموزش وضعیت ها رو دانلود کنید</string>
+    <string name="no_status_saved">هیچ وضعیتی ذخیره نشده است\nلطفا روی علامت سوال پایین صفحه کلیک کنید و طبق آموزش وضعیت ها رو دانلود کنید</string>
     <string name="whatsapp_is_not_installed">واتساپ روی تلفن شما نصب نیست</string>
     <string name="whatsapp_business_is_not_installed">واتساپ تجاری روی تلفن شما نصب نیست</string>
     <string name="share_app">ارسال برنامه به دوستان</string>
