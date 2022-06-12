@@ -13,6 +13,7 @@ import com.test.whatsappstatusdowloader.R
 import com.test.whatsappstatusdowloader.databinding.ActivityMainBinding
 import com.test.whatsappstatusdowloader.dialog.AboutUsDialog
 import com.test.whatsappstatusdowloader.dialog.CommentDialog
+import com.test.whatsappstatusdowloader.dialog.ExitDialog
 import com.test.whatsappstatusdowloader.utils.Constants
 import com.test.whatsappstatusdowloader.utils.MyIntent
 import kotlin.system.measureTimeMillis
@@ -181,7 +182,7 @@ class MainActivity : AppCompatActivity() {
             else if (navController.currentDestination?.id == R.id.show_media_fragment) {
                 navController.navigateUp()
             } else
-                super.onBackPressed()
+                ExitDialog(this@MainActivity).show()
 
 
         }

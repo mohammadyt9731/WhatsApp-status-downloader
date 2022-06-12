@@ -59,4 +59,10 @@
     <string name="deleted_successfully">با موفقیت حذف شد</string>
     <string name="open_whatsapp">باز کردن واتساپ</string>
 
+
+    <!--dialog-exit-->
+    <string name="do_you_want_to_exit">آیا مایل به خروج هستید؟</string>
+    <string name="yes">بله</string>
+    <string name="no">خیر</string>
+
 </resources>
