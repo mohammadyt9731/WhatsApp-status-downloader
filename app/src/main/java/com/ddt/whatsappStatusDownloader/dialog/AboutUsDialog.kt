@@ -1,12 +1,12 @@
-package com.test.whatsappstatusdowloader.dialog
+package com.ddt.whatsappStatusDownloader.dialog
 
-import com.test.whatsappstatusdowloader.R
+import com.ddt.whatsappStatusDownloader.R
 import android.app.Dialog
 import android.content.Context
 import android.widget.AbsListView
-import com.test.whatsappstatusdowloader.databinding.DialogAboutUsBinding
-import com.test.whatsappstatusdowloader.utils.Constants
-import com.test.whatsappstatusdowloader.utils.UtilsMethod
+import com.ddt.whatsappStatusDownloader.databinding.DialogAboutUsBinding
+import com.ddt.whatsappStatusDownloader.utils.Constants
+import com.ddt.whatsappStatusDownloader.utils.UtilsMethod
 
 class AboutUsDialog(context: Context) : Dialog(context) {
 

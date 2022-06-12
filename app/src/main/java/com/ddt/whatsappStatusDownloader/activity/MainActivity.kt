@@ -1,4 +1,4 @@
-package com.test.whatsappstatusdowloader.activity
+package com.ddt.whatsappStatusDownloader.activity
 
 import android.os.Build
 import android.os.Bundle
@@ -9,14 +9,13 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.flarebit.flarebarlib.Flaretab
-import com.test.whatsappstatusdowloader.R
-import com.test.whatsappstatusdowloader.databinding.ActivityMainBinding
-import com.test.whatsappstatusdowloader.dialog.AboutUsDialog
-import com.test.whatsappstatusdowloader.dialog.CommentDialog
-import com.test.whatsappstatusdowloader.dialog.ExitDialog
-import com.test.whatsappstatusdowloader.utils.Constants
-import com.test.whatsappstatusdowloader.utils.MyIntent
-import kotlin.system.measureTimeMillis
+import com.ddt.whatsappStatusDownloader.R
+import com.ddt.whatsappStatusDownloader.databinding.ActivityMainBinding
+import com.ddt.whatsappStatusDownloader.dialog.AboutUsDialog
+import com.ddt.whatsappStatusDownloader.dialog.CommentDialog
+import com.ddt.whatsappStatusDownloader.dialog.ExitDialog
+import com.ddt.whatsappStatusDownloader.utils.Constants
+import com.ddt.whatsappStatusDownloader.utils.MyIntent
 
 
 class MainActivity : AppCompatActivity() {

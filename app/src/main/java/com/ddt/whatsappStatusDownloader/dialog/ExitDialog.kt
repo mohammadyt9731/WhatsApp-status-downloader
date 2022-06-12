@@ -1,12 +1,12 @@
-package com.test.whatsappstatusdowloader.dialog
+package com.ddt.whatsappStatusDownloader.dialog
 
 import android.app.Activity
 import android.app.Dialog
 import android.widget.AbsListView
-import com.test.whatsappstatusdowloader.R
-import com.test.whatsappstatusdowloader.databinding.DialogExitBinding
-import com.test.whatsappstatusdowloader.utils.Constants
-import com.test.whatsappstatusdowloader.utils.UtilsMethod
+import com.ddt.whatsappStatusDownloader.R
+import com.ddt.whatsappStatusDownloader.databinding.DialogExitBinding
+import com.ddt.whatsappStatusDownloader.utils.Constants
+import com.ddt.whatsappStatusDownloader.utils.UtilsMethod
 
 class ExitDialog(activity: Activity) : Dialog(activity) {
 

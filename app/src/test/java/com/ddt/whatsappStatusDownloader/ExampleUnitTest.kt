@@ -1,4 +1,4 @@
-package com.test.whatsappstatusdowloader
+package com.ddt.whatsappStatusDownloader
 
 import org.junit.Test
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.test.whatsappstatusdowloader">
+    package="com.ddt.whatsappStatusDownloader">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -20,7 +20,7 @@
         android:theme="@style/Theme.WhatsAppstatusDowloader">
 
         <activity
-            android:name=".activity.SplashActivity"
+            android:name="com.ddt.whatsappStatusDownloader.activity.SplashActivity"
             android:exported="true">
 
             <intent-filter>
@@ -32,13 +32,13 @@
 
 
         <activity
-            android:name=".activity.MainActivity"
+            android:name="com.ddt.whatsappStatusDownloader.activity.MainActivity"
             android:exported="true">
         </activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.test.whatsappstatusdowloader.provider"
+            android:authorities="com.ddt.whatsappStatusDownloader.provider"
             android:exported="false"
             android:grantUriPermissions="true"
             tools:replace="android:authorities">

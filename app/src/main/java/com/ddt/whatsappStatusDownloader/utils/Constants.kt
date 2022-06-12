@@ -1,4 +1,4 @@
-package com.test.whatsappstatusdowloader.utils
+package com.ddt.whatsappStatusDownloader.utils
 
 import android.os.Environment
 

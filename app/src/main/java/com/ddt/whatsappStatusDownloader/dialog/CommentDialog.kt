@@ -1,4 +1,4 @@
-package com.test.whatsappstatusdowloader.dialog
+package com.ddt.whatsappStatusDownloader.dialog
 
 import android.app.Dialog
 import android.content.Context
@@ -6,11 +6,11 @@ import android.view.View
 import android.widget.AbsListView
 import android.widget.RatingBar
 import android.widget.Toast
-import com.test.whatsappstatusdowloader.R
-import com.test.whatsappstatusdowloader.databinding.DialogCommentBinding
-import com.test.whatsappstatusdowloader.utils.Constants
-import com.test.whatsappstatusdowloader.utils.MyIntent
-import com.test.whatsappstatusdowloader.utils.UtilsMethod
+import com.ddt.whatsappStatusDownloader.R
+import com.ddt.whatsappStatusDownloader.databinding.DialogCommentBinding
+import com.ddt.whatsappStatusDownloader.utils.Constants
+import com.ddt.whatsappStatusDownloader.utils.MyIntent
+import com.ddt.whatsappStatusDownloader.utils.UtilsMethod
 
 class CommentDialog(context: Context) : Dialog(context) {
 

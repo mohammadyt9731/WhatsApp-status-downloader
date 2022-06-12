@@ -1,12 +1,12 @@
-package com.test.whatsappstatusdowloader.fragment
+package com.ddt.whatsappStatusDownloader.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.test.whatsappstatusdowloader.databinding.FragmentGuideBinding
-import com.test.whatsappstatusdowloader.utils.Constants
+import com.ddt.whatsappStatusDownloader.databinding.FragmentGuideBinding
+import com.ddt.whatsappStatusDownloader.utils.Constants
 
 class GuideFragment : Fragment() {
 

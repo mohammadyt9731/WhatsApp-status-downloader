@@ -11,7 +11,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.test.whatsappstatusdowloader"
+        applicationId "com.ddt.whatsappStatusDownloader"
         minSdk 23
         targetSdk 31
         versionCode 1

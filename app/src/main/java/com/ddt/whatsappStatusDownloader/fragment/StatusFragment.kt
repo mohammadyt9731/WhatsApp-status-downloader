@@ -1,4 +1,4 @@
-package com.test.whatsappstatusdowloader.fragment
+package com.ddt.whatsappStatusDownloader.fragment
 
 import android.os.Bundle
 import android.util.Log
@@ -7,13 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import com.test.whatsappstatusdowloader.R
-import com.test.whatsappstatusdowloader.adapter.SavedStatusAdapter
-import com.test.whatsappstatusdowloader.adapter.WhatsAppStatusAdapter
-import com.test.whatsappstatusdowloader.databinding.FragmentWhatsappStatusBinding
-import com.test.whatsappstatusdowloader.utils.Constants
-import com.test.whatsappstatusdowloader.utils.MyIntent
-import com.test.whatsappstatusdowloader.utils.UtilsMethod
+import com.ddt.whatsappStatusDownloader.R
+import com.ddt.whatsappStatusDownloader.adapter.SavedStatusAdapter
+import com.ddt.whatsappStatusDownloader.adapter.WhatsAppStatusAdapter
+import com.ddt.whatsappStatusDownloader.databinding.FragmentWhatsappStatusBinding
+import com.ddt.whatsappStatusDownloader.utils.Constants
+import com.ddt.whatsappStatusDownloader.utils.MyIntent
+import com.ddt.whatsappStatusDownloader.utils.UtilsMethod
 import java.io.File
 import kotlin.system.measureTimeMillis
 

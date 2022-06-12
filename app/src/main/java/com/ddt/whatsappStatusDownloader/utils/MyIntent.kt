@@ -1,10 +1,10 @@
-package com.test.whatsappstatusdowloader.utils
+package com.ddt.whatsappStatusDownloader.utils
 
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
-import com.test.whatsappstatusdowloader.R
+import com.ddt.whatsappStatusDownloader.R
 
 object MyIntent {
 

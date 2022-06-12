@@ -1,4 +1,4 @@
-package com.test.whatsappstatusdowloader.activity
+package com.ddt.whatsappStatusDownloader.activity
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -14,8 +14,8 @@ import android.provider.Settings
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import com.test.whatsappstatusdowloader.R
-import com.test.whatsappstatusdowloader.utils.Constants
+import com.ddt.whatsappStatusDownloader.R
+import com.ddt.whatsappStatusDownloader.utils.Constants
 import java.util.*
 import kotlin.concurrent.timerTask
 

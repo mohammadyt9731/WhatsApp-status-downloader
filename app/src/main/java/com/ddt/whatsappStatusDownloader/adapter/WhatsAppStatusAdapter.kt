@@ -1,33 +1,34 @@
-package com.test.whatsappstatusdowloader.adapter
+package com.ddt.whatsappStatusDownloader.adapter
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.media.MediaMetadataRetriever
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.test.whatsappstatusdowloader.R
-import com.test.whatsappstatusdowloader.databinding.SavedStatusBinding
-import com.test.whatsappstatusdowloader.utils.Constants
-import com.test.whatsappstatusdowloader.utils.FileOperation
-import com.test.whatsappstatusdowloader.utils.UtilsMethod
+import com.ddt.whatsappStatusDownloader.R
+import com.ddt.whatsappStatusDownloader.databinding.WhatsappStatusBinding
+import com.ddt.whatsappStatusDownloader.utils.Constants
+import com.ddt.whatsappStatusDownloader.utils.FileOperation
+import com.ddt.whatsappStatusDownloader.utils.UtilsMethod
 import java.io.File
 
-private lateinit var binding: SavedStatusBinding
+private lateinit var binding: WhatsappStatusBinding
 
-class SavedStatusAdapter(
+class WhatsAppStatusAdapter(
     activity: Activity,
 ) :
-    RecyclerView.Adapter<SavedStatusAdapter.ViewHolder>() {
+    RecyclerView.Adapter<WhatsAppStatusAdapter.ViewHolder>() {
 
     var activity: Activity
     var itemWidth: Int
@@ -39,7 +40,7 @@ class SavedStatusAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        binding = SavedStatusBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        binding = WhatsappStatusBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder()
     }
 
@@ -73,6 +74,12 @@ class SavedStatusAdapter(
                 else
                     ivVideo.visibility = View.GONE
 
+
+                if (File(Constants.SAVED_DIRECTORY + "/" + differ.currentList[position].name).exists()) {
+                    lottieDownload.frame = Constants.LOTTIE_END_FRAME
+                } else
+                    lottieDownload.frame = Constants.LOTTIE_START_FRAME
+
             }
         }
 
@@ -88,63 +95,75 @@ class SavedStatusAdapter(
                         .placeholder(ColorDrawable(Color.WHITE))
                         .transition(DrawableTransitionOptions.withCrossFade())
                         .into(binding.ivStatus)
-
                 } catch (e: Exception) {
 
                 }
 
 
             } else {
+
                 Glide.with(activity).load(differ.currentList[position])
                     .placeholder(ColorDrawable(Color.WHITE))
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .into(binding.ivStatus)
+
+
             }
         }
 
         fun setOnClickListener(position: Int) {
             binding.apply {
+
                 ivShareStatus.setOnClickListener() {
                     FileOperation.shareFile(activity, differ.currentList[position])
                 }
 
-                ivDelete.setOnClickListener() {
-                    showDeleteDialog(position)
-                }
-
                 ivStatus.setOnClickListener() {
 
-                    val bundle=Bundle()
+                    val bundle= Bundle()
                     bundle.putSerializable(Constants.MEDIA_PATH_KEY, differ.currentList[position])
                     activity.findNavController(R.id.nav_controller).navigate(R.id.show_media_fragment,bundle)
 
+                }
 
+                lottieDownload.setOnClickListener() {
+                    val sourceFile = File(differ.currentList[position].path)
+                    val destinationFile =
+                        File(Constants.SAVED_DIRECTORY + "/" + differ.currentList[position].name)
+
+                    if (destinationFile.exists()) {
+                        Toast.makeText(activity, "قبلا ذخیره شده است.", Toast.LENGTH_SHORT)
+                            .show()
+                        return@setOnClickListener
+                    }
+
+
+
+                    try {
+                        sourceFile.copyTo(destinationFile)
+                        Toast.makeText(
+                            activity,
+                            "در پوشه saveDirectory ذخیره شد",
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                       lottieDownload.playAnimation()
+                        Log.i("asff",position.toString())
+                    } catch (e: Exception) {
+                        Toast.makeText(
+                            activity,
+                            activity.getString(R.string.unknown_error),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        Toast.makeText(activity, e.message.toString(), Toast.LENGTH_LONG).show()
+                    }
 
                 }
             }
+
         }
-
     }
 
-
-    fun showDeleteDialog(position: Int) {
-
-        val deleteDialog = AlertDialog.Builder(activity)
-            .setTitle("حذف پست")
-            .setMessage("آیا میخواید این پست را حذف کنید؟")
-            .setCancelable(true)
-            .setPositiveButton("بله") { _, _ -> deleteStatus(position) }
-            .setNegativeButton("خیر") { dialog, _ -> dialog.cancel() }
-            .create()
-            .show()
-
-    }
-
-    private fun deleteStatus(position: Int) {
-
-        FileOperation.deleteFile(activity, differ.currentList[position])
-   //     differ.currentList.removeAt(position)
-    }
 
 
     private val differCallBack = object : DiffUtil.ItemCallback<File>() {
