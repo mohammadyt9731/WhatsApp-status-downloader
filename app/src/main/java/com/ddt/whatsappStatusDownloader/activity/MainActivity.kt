@@ -16,6 +16,8 @@ import com.ddt.whatsappStatusDownloader.dialog.CommentDialog
 import com.ddt.whatsappStatusDownloader.dialog.ExitDialog
 import com.ddt.whatsappStatusDownloader.utils.Constants
 import com.ddt.whatsappStatusDownloader.utils.MyIntent
+import com.ddt.whatsappStatusDownloader.utils.gone
+import com.ddt.whatsappStatusDownloader.utils.visible
 
 
 class MainActivity : AppCompatActivity() {
@@ -43,11 +45,11 @@ class MainActivity : AppCompatActivity() {
             binding.apply {
 
                 if (destination.id == R.id.show_media_fragment) {
-                    toolbar.visibility = View.GONE
-                    bottomBar.visibility = View.GONE
+                    toolbar.gone()
+                    bottomBar.gone()
                 } else {
-                    toolbar.visibility = View.VISIBLE
-                    bottomBar.visibility = View.VISIBLE
+                    toolbar.visible()
+                    bottomBar.visible()
                 }
             }
         }
