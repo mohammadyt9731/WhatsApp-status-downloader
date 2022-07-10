@@ -102,7 +102,7 @@ class MainActivity : AppCompatActivity() {
 
                 0 -> navController.navigate(R.id.guide_fragment)
                 1 -> {
-                    if (Build.VERSION.SDK_INT >= 40)
+                    if (Build.VERSION.SDK_INT >= 30)
                         bundle.putString(Constants.DIRECTORY_KEY, Constants.NEW_WHATSAPP_DIRECTORY)
                     else
                         bundle.putString(Constants.DIRECTORY_KEY, Constants.WHATSAPP_DIRECTORY)
