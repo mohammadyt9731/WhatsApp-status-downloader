@@ -3,12 +3,10 @@ package com.ddt.whatsappStatusDownloader.activity
 import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import com.flarebit.flarebarlib.Flaretab
 import com.ddt.whatsappStatusDownloader.R
 import com.ddt.whatsappStatusDownloader.databinding.ActivityMainBinding
 import com.ddt.whatsappStatusDownloader.dialog.AboutUsDialog
@@ -18,6 +16,7 @@ import com.ddt.whatsappStatusDownloader.utils.Constants
 import com.ddt.whatsappStatusDownloader.utils.MyIntent
 import com.ddt.whatsappStatusDownloader.utils.gone
 import com.ddt.whatsappStatusDownloader.utils.visible
+import com.flarebit.flarebarlib.Flaretab
 
 
 class MainActivity : AppCompatActivity() {
@@ -32,14 +31,16 @@ class MainActivity : AppCompatActivity() {
 
 
         setUpNavController()
-        setUpBottomNavigationView()
+        setUpBottomNavigation()
         toolBarButtonClick()
         setUpNavigationView()
     }
 
+    //navController
     private fun setUpNavController() {
+        //init
         navController = findNavController(R.id.nav_controller)
-
+        //destinationChange
         navController.addOnDestinationChangedListener { _, destination, _ ->
 
             binding.apply {
@@ -56,8 +57,8 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
-    private fun setUpBottomNavigationView() {
+    //bottomNavigation
+    private fun setUpBottomNavigation() {
 
         configTabs()
         setTabChangeListener()
@@ -79,7 +80,6 @@ class MainActivity : AppCompatActivity() {
         binding.bottomBar.apply {
             tabList = tabs
             attachTabs(this@MainActivity)
-
         }
 
     }
@@ -112,9 +112,15 @@ class MainActivity : AppCompatActivity() {
                 }
                 2 -> {
                     if (Build.VERSION.SDK_INT >= 30)
-                        bundle.putString(Constants.DIRECTORY_KEY, Constants.NEW_WHATSAPP_BUSINESS_DIRECTORY)
+                        bundle.putString(
+                            Constants.DIRECTORY_KEY,
+                            Constants.NEW_WHATSAPP_BUSINESS_DIRECTORY
+                        )
                     else
-                        bundle.putString(Constants.DIRECTORY_KEY, Constants.WHATSAPP_BUSINESS_DIRECTORY)
+                        bundle.putString(
+                            Constants.DIRECTORY_KEY,
+                            Constants.WHATSAPP_BUSINESS_DIRECTORY
+                        )
                     navController.navigate(R.id.wb_status_fragment, bundle)
                 }
                 3 -> {
@@ -128,7 +134,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
+    //toolbar
     private fun toolBarButtonClick() {
 
         binding.apply {
@@ -146,7 +152,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
+    //navigationView
     private fun setUpNavigationView() {
 
         binding.navigationView.setNavigationItemSelectedListener {
@@ -161,10 +167,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_item_other_app -> MyIntent.otherAppIntent(this@MainActivity)
                 R.id.nav_item_comment -> CommentDialog(this@MainActivity).show()
                 R.id.nav_item_about_us -> AboutUsDialog(this@MainActivity).show()
-                R.id.nav_item_exit -> {
-                    closeDrawer()
-                    ExitDialog(this@MainActivity).show()
-                }
+                R.id.nav_item_exit -> ExitDialog(this@MainActivity).show()
+
             }
 
             closeDrawer()

@@ -56,10 +56,10 @@
                 style="@style/btn_dialog_style"
                 android:text="@string/yes"
                 app:backgroundTint="@color/red"
-                app:layout_constraintBottom_toBottomOf="@id/btn_no"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/btn_no"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@id/btn_no" />
+                 />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
