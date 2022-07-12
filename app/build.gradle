@@ -68,6 +68,9 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.4.2'
     implementation 'androidx.navigation:navigation-ui-ktx:2.4.2'
 
+    implementation 'com.gauravk.bubblenavigation:bubblenavigation:1.0.7'
+
+
     //Coroutine
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
