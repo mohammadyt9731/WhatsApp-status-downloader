@@ -1,11 +1,13 @@
 package com.ddt.whatsappStatusDownloader.adapter
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.media.MediaMetadataRetriever
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +19,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.ddt.whatsappStatusDownloader.R
 import com.ddt.whatsappStatusDownloader.databinding.SavedStatusBinding
+import com.ddt.whatsappStatusDownloader.fragment.StatusFragment
 import com.ddt.whatsappStatusDownloader.utils.Constants
 import com.ddt.whatsappStatusDownloader.utils.FileOperation
 import com.ddt.whatsappStatusDownloader.utils.UtilsMethod
@@ -24,16 +27,13 @@ import java.io.File
 
 private lateinit var binding: SavedStatusBinding
 
-class SavedStatusAdapter(
-    activity: Activity,
-) :
+class SavedStatusAdapter(activity: Activity) :
     RecyclerView.Adapter<SavedStatusAdapter.ViewHolder>() {
 
     var activity: Activity
     var itemWidth: Int
 
     init {
-
         this.activity = activity
         itemWidth = UtilsMethod.getScreenWidth(activity, 44)
     }
@@ -140,10 +140,11 @@ class SavedStatusAdapter(
 
     }
 
+
     private fun deleteStatus(position: Int) {
 
         FileOperation.deleteFile(activity, differ.currentList[position])
-   //     differ.currentList.removeAt(position)
+        notifyItemRemoved(position);
     }
 
 

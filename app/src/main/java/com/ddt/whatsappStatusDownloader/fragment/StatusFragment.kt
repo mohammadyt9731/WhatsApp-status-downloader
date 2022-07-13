@@ -2,7 +2,6 @@ package com.ddt.whatsappStatusDownloader.fragment
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,30 +28,32 @@ class StatusFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        if(arguments!=null){
-            this.directoryAddress = arguments?.getString(Constants.DIRECTORY_KEY).toString()
-        }else{
+        init()
 
-            directoryAddress= if (Build.VERSION.SDK_INT >= 30)
+        binding = FragmentWhatsappStatusBinding.inflate(layoutInflater, container, false)
+        return binding.root
+    }
+
+    private fun init() {
+
+        if (arguments != null) {
+            this.directoryAddress = arguments?.getString(Constants.DIRECTORY_KEY).toString()
+        } else {
+
+            directoryAddress = if (Build.VERSION.SDK_INT >= 30)
                 Constants.NEW_WHATSAPP_DIRECTORY
             else
                 Constants.WHATSAPP_DIRECTORY
         }
 
 
-
-
-
-        binding = FragmentWhatsappStatusBinding.inflate(layoutInflater, container, false)
-        return binding.root
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setOnClick()
-
+        setUpList()
     }
 
     private fun setOnClick() {
@@ -70,27 +71,16 @@ class StatusFragment : Fragment() {
 
     }
 
-    override fun onResume() {
-        super.onResume()
-
-        setUpList()
-    }
-
     private fun setUpList() {
 
 
         statusFileList.clear()
         val statusDirectory = File(directoryAddress)
 
-        if (statusDirectory.exists()) {
-
-
+        if (statusDirectory.exists())
             prepareStatusList(statusDirectory)
-        } else {
+        else
             showDirectoryNotExist()
-
-
-        }
 
     }
 
@@ -194,9 +184,10 @@ class StatusFragment : Fragment() {
         }
 
 
+    }
 
-
-
+    interface MyCallBack{
+        fun callBack()
     }
 
 
