@@ -5,7 +5,7 @@ import android.os.Environment
 object Constants {
 
     //SplashActivity
-    const val SPLASH_DELAY: Long = 1500
+    const val SPLASH_DELAY: Long = 500
     const val REQUEST_CODE = 1234
     const val MANAGE_EXTERNAL_STORAGE_PERMISSION = "android:manage_external_storage"
 

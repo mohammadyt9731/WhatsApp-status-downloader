@@ -26,6 +26,7 @@
 
         <activity
             android:name="com.ddt.whatsappStatusDownloader.activity.SplashActivity"
+            android:screenOrientation="portrait"
             android:exported="true">
 
             <intent-filter>
@@ -38,6 +39,7 @@
 
         <activity
             android:name="com.ddt.whatsappStatusDownloader.activity.MainActivity"
+            android:screenOrientation="portrait"
             android:exported="true">
         </activity>
 
