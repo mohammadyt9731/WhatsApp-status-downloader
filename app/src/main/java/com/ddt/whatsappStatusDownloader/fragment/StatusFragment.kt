@@ -166,7 +166,13 @@ class StatusFragment : Fragment() {
     private fun setUpRecyclerView() {
 
         if (directoryAddress == Constants.SAVED_DIRECTORY) {
-            val statusAdapter = SavedStatusAdapter(requireActivity())
+            val statusAdapter:SavedStatusAdapter
+            statusAdapter = SavedStatusAdapter(requireActivity(),object : MyCallBack{
+                override fun callBack(position: Int) {
+                    statusFileList.removeAt(position)
+                }
+
+            })
             statusAdapter.differ.submitList(statusFileList)
 
             binding.rvStatus.apply {
@@ -186,8 +192,10 @@ class StatusFragment : Fragment() {
 
     }
 
+
+
     interface MyCallBack{
-        fun callBack()
+        fun callBack(position:Int)
     }
 
 

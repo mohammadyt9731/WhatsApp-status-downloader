@@ -44,14 +44,25 @@
     </androidx.appcompat.widget.Toolbar>
 
 
-    <ImageView
+
+
+    <com.jsibbold.zoomage.ZoomageView
         android:id="@+id/iv_preview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginVertical="@dimen/space_small"
         android:src="@drawable/ic_sample_status"
+        app:zoomage_restrictBounds="false"
+        app:zoomage_animateOnReset="true"
+        app:zoomage_autoResetMode="UNDER"
+        app:zoomage_autoCenter="true"
+        app:zoomage_zoomable="true"
+        app:zoomage_translatable="true"
+        app:zoomage_minScale="0.4"
+        app:zoomage_maxScale="10"
         app:layout_constraintBottom_toTopOf="@id/btn_save"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        />
+
 
     <VideoView
         android:id="@+id/video_view"

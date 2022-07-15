@@ -79,7 +79,10 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.1'
     //datastore
     implementation "androidx.datastore:datastore-preferences:1.0.0"
-
     //Tapsell
     implementation 'ir.tapsell.plus:tapsell-plus-sdk-android:2.1.3'
+    //zoomage
+    implementation 'com.jsibbold:zoomage:1.3.1'
+
+
 }
