@@ -101,7 +101,7 @@
         <com.gauravk.bubblenavigation.BubbleNavigationLinearView
             android:id="@+id/bubble_navigation"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_45sdp"
+            android:layout_height="wrap_content"
             android:background="@color/dark_green"
             android:orientation="horizontal"
             android:layoutDirection="ltr"
