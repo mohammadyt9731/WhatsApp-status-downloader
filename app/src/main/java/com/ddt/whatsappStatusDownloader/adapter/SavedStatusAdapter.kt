@@ -144,7 +144,8 @@ class SavedStatusAdapter(activity: Activity) :
     private fun deleteStatus(position: Int) {
 
         FileOperation.deleteFile(activity, differ.currentList[position])
-        notifyItemRemoved(position);
+
+
     }
 
 

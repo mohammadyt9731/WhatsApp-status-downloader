@@ -12,6 +12,7 @@ object Constants {
     //MainActivity
     const val DIRECTORY_KEY = "directory_key"
     const val TAB_COLOR_CODE = "#ece5dd"
+    const val MAX_NUMBER_OF_OPEN_APP=2
 
     val WHATSAPP_DIRECTORY =
         Environment.getExternalStorageDirectory().path + "/WhatsApp/Media/.Statuses"

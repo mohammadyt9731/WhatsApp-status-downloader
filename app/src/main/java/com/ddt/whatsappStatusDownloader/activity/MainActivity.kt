@@ -4,7 +4,13 @@ import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.res.ResourcesCompat
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.coroutineScope
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.ddt.whatsappStatusDownloader.R
@@ -12,21 +18,19 @@ import com.ddt.whatsappStatusDownloader.databinding.ActivityMainBinding
 import com.ddt.whatsappStatusDownloader.dialog.AboutUsDialog
 import com.ddt.whatsappStatusDownloader.dialog.CommentDialog
 import com.ddt.whatsappStatusDownloader.dialog.ExitDialog
-import com.ddt.whatsappStatusDownloader.utils.Constants
-import com.ddt.whatsappStatusDownloader.utils.MyIntent
-import com.ddt.whatsappStatusDownloader.utils.gone
-import com.ddt.whatsappStatusDownloader.utils.visible
-import com.flarebit.flarebarlib.Flaretab
+import com.ddt.whatsappStatusDownloader.utils.*
 import com.gauravk.bubblenavigation.listener.BubbleNavigationChangeListener
-
-
-
+import kotlinx.coroutines.flow.*
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
+    private val dataStore: DataStore<Preferences> by preferencesDataStore("dataStore")
+    private val NUMBER_OF_OPEN_APP_KEY = intPreferencesKey("NUMBER_OF_OPEN_APP_KEY")
+    private val IS_REGISTER_COMMENT_KEY = booleanPreferencesKey("IS_REGISTER_COMMENT")
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         setUpBottomNavigation()
         toolBarButtonClick()
         setUpNavigationView()
+        checkRegisterComment()
     }
 
     //navController
@@ -74,7 +79,10 @@ class MainActivity : AppCompatActivity() {
                     0 -> navController.navigate(R.id.guide_fragment)
                     1 -> {
                         if (Build.VERSION.SDK_INT >= 30)
-                            bundle.putString(Constants.DIRECTORY_KEY, Constants.NEW_WHATSAPP_DIRECTORY)
+                            bundle.putString(
+                                Constants.DIRECTORY_KEY,
+                                Constants.NEW_WHATSAPP_DIRECTORY
+                            )
                         else
                             bundle.putString(Constants.DIRECTORY_KEY, Constants.WHATSAPP_DIRECTORY)
 
@@ -101,7 +109,7 @@ class MainActivity : AppCompatActivity() {
                     else -> return@BubbleNavigationChangeListener
                 }
 
-        })
+            })
     }
 
 
@@ -168,5 +176,42 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    //checkRegisterComment
+    private fun checkRegisterComment() {
+
+
+        lifecycle.coroutineScope.launchWhenCreated {
+            if (getIsRegisterComment().first()==false){
+                val numberOfOpenApp=getNumberOfOpenApp().first()
+
+                if (numberOfOpenApp==Constants.MAX_NUMBER_OF_OPEN_APP)
+                    CommentDialog(this@MainActivity).show()
+
+                setNumberOfOpenapp((numberOfOpenApp+1)%(Constants.MAX_NUMBER_OF_OPEN_APP+1))
+            }
+
+        }
+    }
+
+    private fun getNumberOfOpenApp() :Flow<Int>{
+        return dataStore.data .map {
+            it[NUMBER_OF_OPEN_APP_KEY] ?: 0 }
+
+    }
+
+    private suspend fun setNumberOfOpenapp(numberOfOpenApp: Int) {
+
+        dataStore.edit {
+            it[NUMBER_OF_OPEN_APP_KEY]=numberOfOpenApp
+        }
+    }
+
+    private fun getIsRegisterComment() = dataStore.data.map { it[IS_REGISTER_COMMENT_KEY]?:false }
+
+    public suspend fun setIsRegisterComment(isRegisterComment:Boolean){
+        dataStore.edit {
+            it[IS_REGISTER_COMMENT_KEY]=isRegisterComment
+        }
+    }
 
 }

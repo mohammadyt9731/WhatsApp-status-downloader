@@ -2,21 +2,30 @@ package com.ddt.whatsappStatusDownloader.dialog
 
 import android.app.Dialog
 import android.content.Context
+import android.util.Log
 import android.view.View
 import android.widget.AbsListView
 import android.widget.RatingBar
 import android.widget.Toast
+import androidx.datastore.preferences.preferencesDataStore
 import com.ddt.whatsappStatusDownloader.R
+import com.ddt.whatsappStatusDownloader.activity.MainActivity
 import com.ddt.whatsappStatusDownloader.databinding.DialogCommentBinding
 import com.ddt.whatsappStatusDownloader.utils.Constants
 import com.ddt.whatsappStatusDownloader.utils.MyIntent
 import com.ddt.whatsappStatusDownloader.utils.UtilsMethod
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
 
-class CommentDialog(context: Context) : Dialog(context) {
+class CommentDialog(mainActivity: MainActivity) : Dialog(mainActivity) {
 
     private var binding: DialogCommentBinding = DialogCommentBinding.inflate(layoutInflater)
-
+    private lateinit var mainActivity: MainActivity
     init {
+
+        this.mainActivity=mainActivity
+
         setContentView(binding.root)
         config()
         setOnClick()
@@ -74,7 +83,13 @@ class CommentDialog(context: Context) : Dialog(context) {
                         return@OnClickListener
                     }
                     in 1f..3f->MyIntent.emailIntent(context)
-                    else->MyIntent.commentIntent(context)
+                    else->{
+                        MyIntent.commentIntent(context)
+                        CoroutineScope(IO).launch {
+
+                            mainActivity.setIsRegisterComment(true)
+                        }
+                    }
                 }
 
                 cancel()
