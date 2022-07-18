@@ -2,10 +2,12 @@ package com.ddt.whatsappStatusDownloader.fragment
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.GridLayoutManager
 import com.ddt.whatsappStatusDownloader.R
 import com.ddt.whatsappStatusDownloader.adapter.SavedStatusAdapter
@@ -73,8 +75,7 @@ class StatusFragment : Fragment() {
 
     private fun setUpList() {
 
-
-        statusFileList.clear()
+       statusFileList.clear()
         val statusDirectory = File(directoryAddress)
 
         if (statusDirectory.exists())
@@ -167,12 +168,7 @@ class StatusFragment : Fragment() {
 
         if (directoryAddress == Constants.SAVED_DIRECTORY) {
             val statusAdapter:SavedStatusAdapter
-            statusAdapter = SavedStatusAdapter(requireActivity(),object : MyCallBack{
-                override fun callBack(position: Int) {
-                    statusFileList.removeAt(position)
-                }
-
-            })
+            statusAdapter = SavedStatusAdapter(requireActivity())
             statusAdapter.differ.submitList(statusFileList)
 
             binding.rvStatus.apply {
@@ -193,10 +189,6 @@ class StatusFragment : Fragment() {
     }
 
 
-
-    interface MyCallBack{
-        fun callBack(position:Int)
-    }
 
 
 }

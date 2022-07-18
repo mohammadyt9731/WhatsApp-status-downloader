@@ -27,15 +27,13 @@ import java.io.File
 
 private lateinit var binding: SavedStatusBinding
 
-class SavedStatusAdapter(activity: Activity,myCallBack: StatusFragment.MyCallBack) :
+class SavedStatusAdapter(activity: Activity) :
     RecyclerView.Adapter<SavedStatusAdapter.ViewHolder>() {
 
     var activity: Activity
     var itemWidth: Int
-    private lateinit var myCallBack: StatusFragment.MyCallBack
 
     init {
-        this.myCallBack=myCallBack
         this.activity = activity
         itemWidth = UtilsMethod.getScreenWidth(activity, 44)
     }
@@ -146,7 +144,7 @@ class SavedStatusAdapter(activity: Activity,myCallBack: StatusFragment.MyCallBac
     private fun deleteStatus(position: Int) {
 
         FileOperation.deleteFile(activity, differ.currentList[position])
-        myCallBack.callBack(position)
+        notifyItemRemoved(position)
 
     }
 
