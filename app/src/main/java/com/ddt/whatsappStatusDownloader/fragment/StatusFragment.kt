@@ -62,6 +62,8 @@ class StatusFragment : Fragment() {
 
     override fun onPause() {
         super.onPause()
+
+        if(state!=null)
         state = binding.rvStatus.layoutManager?.onSaveInstanceState()!!
     }
 
