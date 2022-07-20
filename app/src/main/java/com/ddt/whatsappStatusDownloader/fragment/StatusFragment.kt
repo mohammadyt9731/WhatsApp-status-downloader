@@ -2,6 +2,7 @@ package com.ddt.whatsappStatusDownloader.fragment
 
 import android.os.Build
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +24,7 @@ class StatusFragment : Fragment() {
     private lateinit var binding: FragmentWhatsappStatusBinding
     private var statusFileList: ArrayList<File> = ArrayList()
     private lateinit var directoryAddress: String
+    private  var state: Parcelable?=null
 
 
     override fun onCreateView(
@@ -32,17 +34,16 @@ class StatusFragment : Fragment() {
     ): View {
 
         init()
-
         binding = FragmentWhatsappStatusBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
     private fun init() {
 
+
         if (arguments != null) {
             this.directoryAddress = arguments?.getString(Constants.DIRECTORY_KEY).toString()
         } else {
-
             directoryAddress = if (Build.VERSION.SDK_INT >= 30)
                 Constants.NEW_WHATSAPP_DIRECTORY
             else
@@ -56,8 +57,22 @@ class StatusFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setOnClick()
-        setUpList()
     }
+
+
+    override fun onPause() {
+        super.onPause()
+        state = binding.rvStatus.layoutManager?.onSaveInstanceState()!!
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        setUpList()
+
+            binding.rvStatus.layoutManager?.onRestoreInstanceState(state)
+    }
+
 
     private fun setOnClick() {
 
@@ -169,7 +184,7 @@ class StatusFragment : Fragment() {
 
         if (directoryAddress == Constants.SAVED_DIRECTORY) {
             val statusAdapter:SavedStatusAdapter
-            statusAdapter = SavedStatusAdapter(requireActivity(), statusFileList)
+            statusAdapter = SavedStatusAdapter(requireActivity(),statusFileList)
 
             binding.rvStatus.apply {
                 layoutManager = GridLayoutManager(context, 2)

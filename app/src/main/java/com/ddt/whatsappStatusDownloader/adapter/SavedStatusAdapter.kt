@@ -20,13 +20,13 @@ import com.ddt.whatsappStatusDownloader.utils.FileOperation
 import com.ddt.whatsappStatusDownloader.utils.UtilsMethod
 import java.io.File
 
-class SavedStatusAdapter(activity: Activity, statusList: ArrayList<File>) :
+class SavedStatusAdapter(activity: Activity, statusList: MutableList<File>) :
     RecyclerView.Adapter<SavedStatusAdapter.ViewHolder>() {
 
     private lateinit var binding: SavedStatusBinding
     var activity: Activity
     var itemWidth: Int
-    private var statusList = ArrayList<File>()
+    private  var statusList : MutableList<File>
 
     init {
         this.activity = activity
