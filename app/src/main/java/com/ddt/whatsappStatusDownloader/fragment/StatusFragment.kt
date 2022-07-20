@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.GridLayoutManager
 import com.ddt.whatsappStatusDownloader.R
 import com.ddt.whatsappStatusDownloader.adapter.SavedStatusAdapter
@@ -16,7 +15,6 @@ import com.ddt.whatsappStatusDownloader.adapter.WhatsAppStatusAdapter
 import com.ddt.whatsappStatusDownloader.databinding.FragmentWhatsappStatusBinding
 import com.ddt.whatsappStatusDownloader.utils.*
 import java.io.File
-import java.text.FieldPosition
 
 
 class StatusFragment : Fragment() {
@@ -24,7 +22,7 @@ class StatusFragment : Fragment() {
     private lateinit var binding: FragmentWhatsappStatusBinding
     private var statusFileList: ArrayList<File> = ArrayList()
     private lateinit var directoryAddress: String
-    private  var state: Parcelable?=null
+    private var state: Parcelable? = null
 
 
     override fun onCreateView(
@@ -63,15 +61,15 @@ class StatusFragment : Fragment() {
     override fun onPause() {
         super.onPause()
 
-        if(state!=null)
-        state = binding.rvStatus.layoutManager?.onSaveInstanceState()!!
+
+        state = binding.rvStatus.layoutManager?.onSaveInstanceState()
     }
 
     override fun onResume() {
         super.onResume()
 
         setUpList()
-
+        if (state != null)
             binding.rvStatus.layoutManager?.onRestoreInstanceState(state)
     }
 
@@ -93,7 +91,7 @@ class StatusFragment : Fragment() {
 
     private fun setUpList() {
 
-       statusFileList.clear()
+        statusFileList.clear()
         val statusDirectory = File(directoryAddress)
 
         if (statusDirectory.exists())
@@ -185,8 +183,8 @@ class StatusFragment : Fragment() {
     private fun setUpRecyclerView() {
 
         if (directoryAddress == Constants.SAVED_DIRECTORY) {
-            val statusAdapter:SavedStatusAdapter
-            statusAdapter = SavedStatusAdapter(requireActivity(),statusFileList)
+            val statusAdapter: SavedStatusAdapter
+            statusAdapter = SavedStatusAdapter(requireActivity(), statusFileList)
 
             binding.rvStatus.apply {
                 layoutManager = GridLayoutManager(context, 2)
