@@ -15,6 +15,7 @@ import com.ddt.whatsappStatusDownloader.adapter.WhatsAppStatusAdapter
 import com.ddt.whatsappStatusDownloader.databinding.FragmentWhatsappStatusBinding
 import com.ddt.whatsappStatusDownloader.utils.*
 import java.io.File
+import java.text.FieldPosition
 
 
 class StatusFragment : Fragment() {
@@ -168,8 +169,7 @@ class StatusFragment : Fragment() {
 
         if (directoryAddress == Constants.SAVED_DIRECTORY) {
             val statusAdapter:SavedStatusAdapter
-            statusAdapter = SavedStatusAdapter(requireActivity())
-            statusAdapter.differ.submitList(statusFileList)
+            statusAdapter = SavedStatusAdapter(requireActivity(), statusFileList)
 
             binding.rvStatus.apply {
                 layoutManager = GridLayoutManager(context, 2)
@@ -187,8 +187,5 @@ class StatusFragment : Fragment() {
 
 
     }
-
-
-
 
 }

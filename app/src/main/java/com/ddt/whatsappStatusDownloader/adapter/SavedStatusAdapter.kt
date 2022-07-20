@@ -1,40 +1,36 @@
 package com.ddt.whatsappStatusDownloader.adapter
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.media.MediaMetadataRetriever
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
-import androidx.recyclerview.widget.AsyncListDiffer
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.ddt.whatsappStatusDownloader.R
 import com.ddt.whatsappStatusDownloader.databinding.SavedStatusBinding
-import com.ddt.whatsappStatusDownloader.fragment.StatusFragment
 import com.ddt.whatsappStatusDownloader.utils.Constants
 import com.ddt.whatsappStatusDownloader.utils.FileOperation
 import com.ddt.whatsappStatusDownloader.utils.UtilsMethod
 import java.io.File
 
-private lateinit var binding: SavedStatusBinding
-
-class SavedStatusAdapter(activity: Activity) :
+class SavedStatusAdapter(activity: Activity, statusList: ArrayList<File>) :
     RecyclerView.Adapter<SavedStatusAdapter.ViewHolder>() {
 
+    private lateinit var binding: SavedStatusBinding
     var activity: Activity
     var itemWidth: Int
+    private var statusList = ArrayList<File>()
 
     init {
         this.activity = activity
+        this.statusList = statusList
         itemWidth = UtilsMethod.getScreenWidth(activity, 44)
     }
 
@@ -53,7 +49,7 @@ class SavedStatusAdapter(activity: Activity) :
 
     override fun getItemCount(): Int {
 
-        return differ.currentList.size
+        return statusList.size
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -68,7 +64,7 @@ class SavedStatusAdapter(activity: Activity) :
             binding.apply {
                 clRoot.layoutParams.width = itemWidth
 
-                if (UtilsMethod.isVideoFile(differ.currentList[position].path))
+                if (UtilsMethod.isVideoFile(statusList[position].path))
                     ivVideo.visibility = View.VISIBLE
                 else
                     ivVideo.visibility = View.GONE
@@ -78,10 +74,10 @@ class SavedStatusAdapter(activity: Activity) :
 
         fun setStatusImage(position: Int) {
 
-            if (UtilsMethod.isVideoFile(differ.currentList[position].path)) {
+            if (UtilsMethod.isVideoFile(statusList[position].path)) {
                 try {
                     val retriever = MediaMetadataRetriever()
-                    retriever.setDataSource(differ.currentList[position].path)
+                    retriever.setDataSource(statusList[position].path)
                     val bitmap = retriever.getFrameAtTime(1)
 
                     Glide.with(activity).load(bitmap)
@@ -95,7 +91,7 @@ class SavedStatusAdapter(activity: Activity) :
 
 
             } else {
-                Glide.with(activity).load(differ.currentList[position])
+                Glide.with(activity).load(statusList[position])
                     .placeholder(ColorDrawable(Color.WHITE))
                     .transition(DrawableTransitionOptions.withCrossFade())
                     .into(binding.ivStatus)
@@ -105,7 +101,7 @@ class SavedStatusAdapter(activity: Activity) :
         fun setOnClickListener(position: Int) {
             binding.apply {
                 ivShareStatus.setOnClickListener() {
-                    FileOperation.shareFile(activity, differ.currentList[position])
+                    FileOperation.shareFile(activity, statusList[position])
                 }
 
                 ivDelete.setOnClickListener() {
@@ -114,10 +110,10 @@ class SavedStatusAdapter(activity: Activity) :
 
                 ivStatus.setOnClickListener() {
 
-                    val bundle=Bundle()
-                    bundle.putSerializable(Constants.MEDIA_PATH_KEY, differ.currentList[position])
-                    activity.findNavController(R.id.nav_controller).navigate(R.id.show_media_fragment,bundle)
-
+                    val bundle = Bundle()
+                    bundle.putSerializable(Constants.MEDIA_PATH_KEY, statusList[position])
+                    activity.findNavController(R.id.nav_controller)
+                        .navigate(R.id.show_media_fragment, bundle)
 
 
                 }
@@ -143,21 +139,11 @@ class SavedStatusAdapter(activity: Activity) :
 
     private fun deleteStatus(position: Int) {
 
-        FileOperation.deleteFile(activity, differ.currentList[position])
+        FileOperation.deleteFile(activity, statusList[position])
+        statusList.removeAt(position)
         notifyItemRemoved(position)
 
     }
 
 
-    private val differCallBack = object : DiffUtil.ItemCallback<File>() {
-        override fun areItemsTheSame(oldItem: File, newItem: File): Boolean {
-            return oldItem.name == newItem.name
-        }
-
-        override fun areContentsTheSame(oldItem: File, newItem: File): Boolean {
-            return oldItem == newItem
-        }
-    }
-
-    val differ = AsyncListDiffer(this, differCallBack)
 }
