@@ -1,13 +1,10 @@
 package com.ddt.whatsappStatusDownloader.dialog
 
 import android.app.Dialog
-import android.content.Context
-import android.util.Log
 import android.view.View
 import android.widget.AbsListView
 import android.widget.RatingBar
 import android.widget.Toast
-import androidx.datastore.preferences.preferencesDataStore
 import com.ddt.whatsappStatusDownloader.R
 import com.ddt.whatsappStatusDownloader.activity.MainActivity
 import com.ddt.whatsappStatusDownloader.databinding.DialogCommentBinding
@@ -15,9 +12,7 @@ import com.ddt.whatsappStatusDownloader.utils.Constants
 import com.ddt.whatsappStatusDownloader.utils.MyIntent
 import com.ddt.whatsappStatusDownloader.utils.MySharedPreferences
 import com.ddt.whatsappStatusDownloader.utils.UtilsMethod
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.launch
+
 
 class CommentDialog(mainActivity: MainActivity) : Dialog(mainActivity) {
 

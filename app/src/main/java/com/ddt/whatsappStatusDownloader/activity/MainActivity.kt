@@ -2,17 +2,15 @@ package com.ddt.whatsappStatusDownloader.activity
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import androidx.appcompat.app.AppCompatActivity
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.booleanPreferencesKey
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.intPreferencesKey
-import androidx.datastore.preferences.preferencesDataStore
-import androidx.lifecycle.coroutineScope
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import com.adivery.sdk.Adivery
+import com.adivery.sdk.AdiveryAdListener
+import com.adivery.sdk.AdiveryBannerAdView
+import com.adivery.sdk.AdiveryListener
 import com.ddt.whatsappStatusDownloader.R
 import com.ddt.whatsappStatusDownloader.databinding.ActivityMainBinding
 import com.ddt.whatsappStatusDownloader.dialog.AboutUsDialog
@@ -20,7 +18,6 @@ import com.ddt.whatsappStatusDownloader.dialog.CommentDialog
 import com.ddt.whatsappStatusDownloader.dialog.ExitDialog
 import com.ddt.whatsappStatusDownloader.utils.*
 import com.gauravk.bubblenavigation.listener.BubbleNavigationChangeListener
-import kotlinx.coroutines.flow.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -35,11 +32,75 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
+
+
+        setUpAdivery()
         setUpNavController()
         setUpBottomNavigation()
         toolBarButtonClick()
         setUpNavigationView()
         checkRegisterComment()
+
+
+    }
+
+
+    private fun setUpAdivery(){
+
+        Adivery.configure(application, Constants.ADIVERY_APP_ID)
+        showAdvertising()
+
+
+
+
+
+        Adivery.prepareInterstitialAd(this, "0fe9b48f-2451-4798-8cc9-4959450a70f6");
+        Adivery.showAd("0fe9b48f-2451-4798-8cc9-4959450a70f6");
+
+
+        Adivery.addGlobalListener(object : AdiveryListener() {
+            override fun onAppOpenAdLoaded(placementId: String) {
+                // تبلیغ اجرای اپلیکیشن بارگذاری شده است.
+            }
+
+            override fun onInterstitialAdLoaded(placementId: String) {
+            Log.i("aaa","load")
+            }
+
+            override fun onRewardedAdLoaded(placementId: String) {
+                // تبلیغ جایزه‌ای بارگذاری شده
+            }
+
+            override fun onRewardedAdClosed(placementId: String, isRewarded: Boolean) {
+                // بررسی کنید که آیا کاربر جایزه دریافت می‌کند یا خیر
+            }
+
+            override fun log(placementId: String, log: String) {
+                // پیغام را چاپ کنید
+            }
+        })
+    }
+
+    private fun showAdvertising() {
+
+        val bannerAd: AdiveryBannerAdView = binding.bannerAd
+
+        bannerAd.setBannerAdListener(object : AdiveryAdListener() {
+            override fun onAdLoaded() {
+                // تبلیغ به‌طور خودکار نمایش داده می‌شود، هر کار دیگری لازم است اینجا انجام دهید.
+            }
+
+            override fun onError(reason: String) {
+                // خطا را چاپ کنید تا از دلیل آن مطلع شوید
+            }
+
+            override fun onAdClicked() {
+                // کاربر روی بنر کلیک کرده
+            }
+        })
+
+        bannerAd.loadAd()
+
     }
 
     //navController

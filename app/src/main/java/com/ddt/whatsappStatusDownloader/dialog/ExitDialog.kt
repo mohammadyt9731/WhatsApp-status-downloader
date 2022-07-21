@@ -3,15 +3,13 @@ package com.ddt.whatsappStatusDownloader.dialog
 import android.app.Activity
 import android.app.Dialog
 import android.widget.AbsListView
+import com.adivery.sdk.AdiveryAdListener
+import com.adivery.sdk.AdiveryBannerAdView
 import com.ddt.whatsappStatusDownloader.R
 import com.ddt.whatsappStatusDownloader.databinding.DialogExitBinding
 import com.ddt.whatsappStatusDownloader.utils.Constants
-import com.ddt.whatsappStatusDownloader.utils.MyTapsell
-import com.ddt.whatsappStatusDownloader.utils.MyTapsell.showStandardBanner
 import com.ddt.whatsappStatusDownloader.utils.UtilsMethod
-import ir.tapsell.plus.TapsellPlus
-import ir.tapsell.plus.TapsellPlusBannerType
-import ir.tapsell.sdk.Tapsell
+
 
 class ExitDialog(activity: Activity) : Dialog(activity) {
 
@@ -42,12 +40,23 @@ class ExitDialog(activity: Activity) : Dialog(activity) {
 
     private fun showAdvertising() {
 
-        showStandardBanner(
-            activity,
-            Constants.STANDARD_BANNER_EXIT_DIALOG,
-            binding.rlAdvertising,
-            TapsellPlusBannerType.BANNER_300x250
-        )
+        val bannerAd: AdiveryBannerAdView = binding.bannerAd
+
+        bannerAd.setBannerAdListener(object : AdiveryAdListener() {
+            override fun onAdLoaded() {
+                // تبلیغ به‌طور خودکار نمایش داده می‌شود، هر کار دیگری لازم است اینجا انجام دهید.
+            }
+
+            override fun onError(reason: String) {
+                // خطا را چاپ کنید تا از دلیل آن مطلع شوید
+            }
+
+            override fun onAdClicked() {
+                // کاربر روی بنر کلیک کرده
+            }
+        })
+
+        bannerAd.loadAd()
 
     }
 

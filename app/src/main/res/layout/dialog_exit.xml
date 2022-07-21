@@ -32,14 +32,18 @@
                 android:layout_width="match_parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_exit" />
 
-
-            <RelativeLayout
-                android:id="@+id/rl_advertising"
-                android:layout_width="match_parent"
+            <com.adivery.sdk.AdiveryBannerAdView
+                android:id="@+id/banner_ad"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center|bottom"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:placement_id="4f069038-44b4-4aff-b9c3-7516e6217e63"
                 app:layout_constraintBottom_toTopOf="@id/btn_no"
-                app:layout_constraintTop_toBottomOf="@id/view_horizontal_divider" />
+                app:layout_constraintTop_toBottomOf="@id/view_horizontal_divider"
+                app:banner_size="large_banner"/>
+
+
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_no"
@@ -49,7 +53,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/btn_yes"
-                app:layout_constraintTop_toBottomOf="@id/rl_advertising" />
+                app:layout_constraintTop_toBottomOf="@id/banner_ad" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_yes"
