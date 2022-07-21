@@ -176,18 +176,17 @@ class MainActivity : AppCompatActivity() {
     //checkRegisterComment
     private fun checkRegisterComment() {
 
+        if(!MySharedPreferences.getInstance(this).isCommentRegister){
 
+            val numberOfOpenApp=MySharedPreferences.getInstance(this).numberOfOpenApp
 
-        val numberOfOpenApp=MySharedPreferences.getInstance(this).numberOfOpenApp
+            if (numberOfOpenApp==Constants.MAX_NUMBER_OF_OPEN_APP)
+                CommentDialog(this@MainActivity).show()
 
-        if (numberOfOpenApp==Constants.MAX_NUMBER_OF_OPEN_APP)
-            CommentDialog(this@MainActivity).show()
-
-        MySharedPreferences
-            .getInstance(this)
-            .numberOfOpenApp=(numberOfOpenApp+1)%(Constants.MAX_NUMBER_OF_OPEN_APP+1)
-
-
+            MySharedPreferences
+                .getInstance(this)
+                .numberOfOpenApp=(numberOfOpenApp+1)%(Constants.MAX_NUMBER_OF_OPEN_APP+1)
+        }
 
 
     }

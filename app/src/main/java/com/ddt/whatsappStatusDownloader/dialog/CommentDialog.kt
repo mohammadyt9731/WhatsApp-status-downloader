@@ -85,11 +85,12 @@ class CommentDialog(mainActivity: MainActivity) : Dialog(mainActivity) {
                     }
                     in 1f..3f->MyIntent.emailIntent(context)
                     else->{
-                        MyIntent.commentIntent(context)
-                        CoroutineScope(IO).launch {
 
-                            MySharedPreferences.getInstance(context).setIsCommentRegister(true)
-                        }
+
+                        MySharedPreferences.getInstance(context).setIsCommentRegister(true)
+                        MyIntent.commentIntent(context)
+
+
                     }
                 }
 
