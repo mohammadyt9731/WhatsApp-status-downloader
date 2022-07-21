@@ -27,9 +27,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
-    private val dataStore: DataStore<Preferences> by preferencesDataStore("dataStore")
-    private val NUMBER_OF_OPEN_APP_KEY = intPreferencesKey("NUMBER_OF_OPEN_APP_KEY")
-    private val IS_REGISTER_COMMENT_KEY = booleanPreferencesKey("IS_REGISTER_COMMENT")
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -180,38 +177,21 @@ class MainActivity : AppCompatActivity() {
     private fun checkRegisterComment() {
 
 
-        lifecycle.coroutineScope.launchWhenCreated {
-            if (getIsRegisterComment().first()==false){
-                val numberOfOpenApp=getNumberOfOpenApp().first()
 
-                if (numberOfOpenApp==Constants.MAX_NUMBER_OF_OPEN_APP)
-                    CommentDialog(this@MainActivity).show()
+        val numberOfOpenApp=MySharedPreferences.getInstance(this).numberOfOpenApp
 
-                setNumberOfOpenapp((numberOfOpenApp+1)%(Constants.MAX_NUMBER_OF_OPEN_APP+1))
-            }
+        if (numberOfOpenApp==Constants.MAX_NUMBER_OF_OPEN_APP)
+            CommentDialog(this@MainActivity).show()
 
-        }
-    }
+        MySharedPreferences
+            .getInstance(this)
+            .numberOfOpenApp=(numberOfOpenApp+1)%(Constants.MAX_NUMBER_OF_OPEN_APP+1)
 
-    private fun getNumberOfOpenApp() :Flow<Int>{
-        return dataStore.data .map {
-            it[NUMBER_OF_OPEN_APP_KEY] ?: 0 }
+
+
 
     }
 
-    private suspend fun setNumberOfOpenapp(numberOfOpenApp: Int) {
 
-        dataStore.edit {
-            it[NUMBER_OF_OPEN_APP_KEY]=numberOfOpenApp
-        }
-    }
-
-    private fun getIsRegisterComment() = dataStore.data.map { it[IS_REGISTER_COMMENT_KEY]?:false }
-
-    public suspend fun setIsRegisterComment(isRegisterComment:Boolean){
-        dataStore.edit {
-            it[IS_REGISTER_COMMENT_KEY]=isRegisterComment
-        }
-    }
 
 }

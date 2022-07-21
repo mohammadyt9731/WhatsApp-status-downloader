@@ -13,6 +13,7 @@ import com.ddt.whatsappStatusDownloader.activity.MainActivity
 import com.ddt.whatsappStatusDownloader.databinding.DialogCommentBinding
 import com.ddt.whatsappStatusDownloader.utils.Constants
 import com.ddt.whatsappStatusDownloader.utils.MyIntent
+import com.ddt.whatsappStatusDownloader.utils.MySharedPreferences
 import com.ddt.whatsappStatusDownloader.utils.UtilsMethod
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
@@ -87,7 +88,7 @@ class CommentDialog(mainActivity: MainActivity) : Dialog(mainActivity) {
                         MyIntent.commentIntent(context)
                         CoroutineScope(IO).launch {
 
-                            mainActivity.setIsRegisterComment(true)
+                            MySharedPreferences.getInstance(context).setIsCommentRegister(true)
                         }
                     }
                 }

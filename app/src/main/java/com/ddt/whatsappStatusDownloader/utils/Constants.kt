@@ -4,6 +4,9 @@ import android.os.Environment
 
 object Constants {
 
+
+
+
     //SplashActivity
     const val SPLASH_DELAY: Long = 500
     const val REQUEST_CODE = 1234
@@ -11,8 +14,8 @@ object Constants {
 
     //MainActivity
     const val DIRECTORY_KEY = "directory_key"
-    const val TAB_COLOR_CODE = "#ece5dd"
-    const val MAX_NUMBER_OF_OPEN_APP=2
+    const val MAX_NUMBER_OF_OPEN_APP = 2
+
 
     val WHATSAPP_DIRECTORY =
         Environment.getExternalStorageDirectory().path + "/WhatsApp/Media/.Statuses"
@@ -48,6 +51,12 @@ object Constants {
     const val STANDARD_BANNER_EXIT_DIALOG = "6297f016305e375a5fb6a42f"
     const val INTERSTITIAL_START_APP = "6297f06ce309116932dfa497"
     const val INTERSTITIAL_VIDEO = "6297f0d873843918417ab379"
+
+    //MySharedPreferences
+    const val SHARED_PREFERENCES_NAME="shared_preferences_name"
+    const val IS_REGISTER_COMMENT="is_register_comment"
+    const val NUMBER_OF_OPEN_APP="NUMBER_OF_OPEN_APP"
+
 
 
 }
