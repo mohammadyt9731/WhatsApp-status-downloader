@@ -112,7 +112,7 @@ class SavedStatusAdapter(activity: Activity, statusList: MutableList<File>) :
 
                     val bundle = Bundle()
                     bundle.putSerializable(Constants.MEDIA_PATH_KEY, statusList[position])
-                    activity.findNavController(R.id.nav_controller)
+                    activity.findNavController(R.id.nav_host)
                         .navigate(R.id.show_media_fragment, bundle)
 
 

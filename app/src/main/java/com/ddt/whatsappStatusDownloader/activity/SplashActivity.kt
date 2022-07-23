@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.ddt.whatsappStatusDownloader.R
 import com.ddt.whatsappStatusDownloader.utils.Constants
+import com.ddt.whatsappStatusDownloader.utils.UtilsMethod
 import java.util.*
 import kotlin.concurrent.timerTask
 
@@ -53,7 +54,7 @@ class SplashActivity : AppCompatActivity() {
 
 
         //check for android > 11
-        if (SDK_INT >= Build.VERSION_CODES.R)
+        if (UtilsMethod.isAndroid11orHigher())
             return checkStorageForApi30()
         else {
             for (permission in PERMISSION_LIST) {
@@ -100,7 +101,7 @@ class SplashActivity : AppCompatActivity() {
         if (arePermissionsDenied()) {
 
             // android >= 11
-            if (SDK_INT >= Build.VERSION_CODES.R) {
+            if (UtilsMethod.isAndroid11orHigher()) {
                 val intent = Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION)
                 startActivityForResult(intent, Constants.REQUEST_CODE)
                 return
@@ -125,7 +126,7 @@ class SplashActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == Constants.REQUEST_CODE) {
 
-            if (SDK_INT >= Build.VERSION_CODES.R) {
+            if (UtilsMethod.isAndroid11orHigher()) {
                 if (Environment.isExternalStorageManager()) {
                     goToMainActivity()
                 } else {

@@ -1,6 +1,7 @@
 package com.ddt.whatsappStatusDownloader.utils
 
 import android.content.Context
+import android.os.Build
 
 object UtilsMethod {
 
@@ -17,5 +18,8 @@ object UtilsMethod {
 
         return (fileName.endsWith(".mp4")||fileName.endsWith(".mkv"))
     }
+
+    fun isAndroid11orHigher()= (Build.VERSION.SDK_INT >= 30)
+
 
 }

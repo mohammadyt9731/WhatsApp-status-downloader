@@ -44,11 +44,9 @@
                     android:gravity="center"
                     android:text="@string/app_name"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_16"
-                    android:textStyle="bold"
+                    android:textSize="@dimen/text_size_14"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
 
 
                 <ImageView
@@ -65,28 +63,28 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.appcompat.widget.Toolbar>
 
+
         <fragment
-            android:id="@+id/nav_controller"
+            android:id="@+id/nav_host"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@id/banner_ad"
+            app:layout_constraintBottom_toTopOf="@id/main_banner_ad"
             app:layout_constraintTop_toBottomOf="@id/toolbar"
             app:navGraph="@navigation/nav_main" />
 
 
         <com.adivery.sdk.AdiveryBannerAdView
-            android:id="@+id/banner_ad"
+            android:id="@+id/main_banner_ad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginBottom="@dimen/space_2x_small"
-            app:placement_id="d819f392-4812-47c7-b2b9-b95a0e9ffdca"
+            app:banner_size="banner"
             app:layout_constraintBottom_toTopOf="@id/bubble_navigation"
-            app:layout_constraintTop_toBottomOf="@id/nav_controller"
-            app:banner_size="banner"/>
-
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nav_host"
+            app:placement_id="d819f392-4812-47c7-b2b9-b95a0e9ffdca" />
 
 
         <com.gauravk.bubblenavigation.BubbleNavigationLinearView
@@ -94,56 +92,56 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/dark_green"
-            android:orientation="horizontal"
             android:layoutDirection="ltr"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:orientation="horizontal"
+            android:padding="@dimen/space_small"
             android:weightSum="4"
-            android:padding="@dimen/space_small">
+            app:layout_constraintBottom_toBottomOf="parent">
 
 
             <com.gauravk.bubblenavigation.BubbleToggleView
                 android:id="@+id/bubble_item_guide"
-                style="@style/bubble_navigation_style"
+                style="@style/bubble_navigation_item_style"
                 app:bt_icon="@drawable/ic_guide"
-                app:bt_title="@string/guide"/>
-
+                app:bt_title="@string/guide" />
 
             <com.gauravk.bubblenavigation.BubbleToggleView
                 android:id="@+id/bubble_item_whatsapp"
-                style="@style/bubble_navigation_style"
+                style="@style/bubble_navigation_item_style"
                 app:bt_active="true"
                 app:bt_icon="@drawable/ic_whats_app"
-                app:bt_title="@string/whatsapp_status"/>
+                app:bt_title="@string/whatsapp_status" />
 
             <com.gauravk.bubblenavigation.BubbleToggleView
                 android:id="@+id/bubble_item_business"
-                style="@style/bubble_navigation_style"
+                style="@style/bubble_navigation_item_style"
                 app:bt_icon="@drawable/ic_business_whatsapp"
-                app:bt_title="@string/business_status"/>
+                app:bt_title="@string/business_status" />
 
             <com.gauravk.bubblenavigation.BubbleToggleView
                 android:id="@+id/bubble_item_downloads"
-                style="@style/bubble_navigation_style"
+                style="@style/bubble_navigation_item_style"
                 app:bt_icon="@drawable/ic_download"
-                app:bt_title="@string/downloads"/>
+                app:bt_title="@string/downloads" />
 
         </com.gauravk.bubblenavigation.BubbleNavigationLinearView>
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="right"
+        android:backgroundTint="@color/white"
         android:fitsSystemWindows="true"
         android:layoutDirection="rtl"
         app:headerLayout="@layout/header_menu"
+        app:itemIconSize="@dimen/_18sdp"
         app:itemIconTint="@color/green"
         app:itemTextColor="@color/black"
         app:menu="@menu/navigation_view_menu" />
-
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

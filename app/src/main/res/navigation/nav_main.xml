@@ -9,31 +9,26 @@
         android:id="@+id/guide_fragment"
         android:name="com.ddt.whatsappStatusDownloader.fragment.GuideFragment"
         android:label="GuideFragment"
-        tools:layout="@layout/fragment_guide"
-        />
+        tools:layout="@layout/fragment_guide" />
     <fragment
         android:id="@+id/whatsapp_status_fragment"
         android:name="com.ddt.whatsappStatusDownloader.fragment.StatusFragment"
         android:label="WhatsappStatusFragment"
-        tools:layout="@layout/fragment_whatsapp_status"/>
+        tools:layout="@layout/fragment_whatsapp_status" />
     <fragment
         android:id="@+id/wb_status_fragment"
         android:name="com.ddt.whatsappStatusDownloader.fragment.StatusFragment"
         android:label="WbStatusFragment"
-        tools:layout="@layout/fragment_whatsapp_status"/>
+        tools:layout="@layout/fragment_whatsapp_status" />
     <fragment
         android:id="@+id/saved_status_fragment"
         android:name="com.ddt.whatsappStatusDownloader.fragment.StatusFragment"
         android:label="SavedStatusFragment"
         tools:layout="@layout/fragment_whatsapp_status">
-        <argument
-            android:name="directory_key"
-            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/show_media_fragment"
         android:name="com.ddt.whatsappStatusDownloader.fragment.ShowMediaFragment"
         android:label="ShowMediaFragment"
-        tools:layout="@layout/fragment_show_media"
-        />
+        tools:layout="@layout/fragment_show_media" />
 </navigation>

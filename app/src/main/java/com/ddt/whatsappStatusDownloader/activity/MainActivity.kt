@@ -1,6 +1,5 @@
 package com.ddt.whatsappStatusDownloader.activity
 
-import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
 import androidx.appcompat.app.AppCompatActivity
@@ -16,12 +15,10 @@ import com.ddt.whatsappStatusDownloader.dialog.ExitDialog
 import com.ddt.whatsappStatusDownloader.utils.*
 import com.gauravk.bubblenavigation.listener.BubbleNavigationChangeListener
 
-
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,29 +34,27 @@ class MainActivity : AppCompatActivity() {
         checkRegisterComment()
     }
 
-
-    private fun showAdvertising(){
+    //advertising
+    private fun showAdvertising() {
 
         //config
         Adivery.configure(application, Constants.ADIVERY_APP_ID)
 
-        //standard banner
+        //show standard banner
         showBannerAd()
     }
 
     private fun showBannerAd() {
 
-        val bannerAd: AdiveryBannerAdView = binding.bannerAd
+        val bannerAd: AdiveryBannerAdView = binding.mainBannerAd
         bannerAd.loadAd()
     }
-
-
 
     //navController
     private fun setUpNavController() {
         //init
-        navController = findNavController(R.id.nav_controller)
-        //destinationChange
+        navController = findNavController(R.id.nav_host)
+        //destinationChangeListener
         navController.addOnDestinationChangedListener { _, destination, _ ->
 
             binding.apply {
@@ -79,16 +74,15 @@ class MainActivity : AppCompatActivity() {
     //bottomNavigation
     private fun setUpBottomNavigation() {
 
-
         binding.bubbleNavigation
-            .setNavigationChangeListener(BubbleNavigationChangeListener { view, position ->
+            .setNavigationChangeListener(BubbleNavigationChangeListener { _, position ->
 
                 val bundle = Bundle()
                 when (position) {
 
                     0 -> navController.navigate(R.id.guide_fragment)
                     1 -> {
-                        if (Build.VERSION.SDK_INT >= 30)
+                        if (UtilsMethod.isAndroid11orHigher())
                             bundle.putString(
                                 Constants.DIRECTORY_KEY,
                                 Constants.NEW_WHATSAPP_DIRECTORY
@@ -100,7 +94,7 @@ class MainActivity : AppCompatActivity() {
                         navController.navigate(R.id.whatsapp_status_fragment, bundle)
                     }
                     2 -> {
-                        if (Build.VERSION.SDK_INT >= 30)
+                        if (UtilsMethod.isAndroid11orHigher())
                             bundle.putString(
                                 Constants.DIRECTORY_KEY,
                                 Constants.NEW_WHATSAPP_BUSINESS_DIRECTORY
@@ -123,12 +117,13 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    //toolbar
+    //toolbar click
     private fun toolBarButtonClick() {
 
         binding.apply {
 
             ivWhatsapp.setOnClickListener {
+
                 MyIntent.openWhatsApp(this@MainActivity)
             }
 
@@ -144,6 +139,7 @@ class MainActivity : AppCompatActivity() {
     //navigationView
     private fun setUpNavigationView() {
 
+        //item click listener
         binding.navigationView.setNavigationItemSelectedListener {
 
             when (it.itemId) {
@@ -166,6 +162,30 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    //checkRegisterComment
+    private fun checkRegisterComment() {
+
+        if (!MySharedPreferences.getInstance(this).isCommentRegister) {
+
+            val numberOfOpenApp = MySharedPreferences.getInstance(this).numberOfOpenApp
+
+            if (numberOfOpenApp == Constants.MAX_NUMBER_OF_OPEN_APP)
+            //show CommentDialog
+                CommentDialog(this@MainActivity).show()
+            else//show ad
+                MyAdivery.showInterstitialAd(this, Constants.INTERSTITIAL_MAIN_ID)
+
+            //increment number of open app
+            MySharedPreferences
+                .getInstance(this)
+                .numberOfOpenApp = (numberOfOpenApp + 1) % (Constants.MAX_NUMBER_OF_OPEN_APP + 1)
+        }
+
+
+    }
+
+
+    //onBackPressed
     override fun onBackPressed() {
 
         binding.apply {
@@ -181,31 +201,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //closeDrawer
     private fun closeDrawer() {
         binding.drawerLayout.closeDrawer(Gravity.RIGHT)
 
     }
-
-    //checkRegisterComment
-    private fun checkRegisterComment() {
-
-        if(!MySharedPreferences.getInstance(this).isCommentRegister){
-
-            val numberOfOpenApp=MySharedPreferences.getInstance(this).numberOfOpenApp
-
-            if (numberOfOpenApp==Constants.MAX_NUMBER_OF_OPEN_APP)
-                CommentDialog(this@MainActivity).show()
-            else
-                MyAdivery.showInterstitialAd(this,Constants.INTERSTITIAL_MAIN_ID)
-
-            MySharedPreferences
-                .getInstance(this)
-                .numberOfOpenApp=(numberOfOpenApp+1)%(Constants.MAX_NUMBER_OF_OPEN_APP+1)
-        }
-
-
-    }
-
 
 
 }
