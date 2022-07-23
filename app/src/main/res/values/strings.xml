@@ -1,6 +1,10 @@
 <resources>
+
+    <!--application info-->
     <string name="app_name">دانلود وضعیت واتساپ</string>
     <string name="version">نسخه : 1.0.0</string>
+
+    <!--SplashActivity-->
     <string name="storage_permission_request">درخواست مجوز حافظه</string>
     <string name="need_access_storage">این برنامه برای مشاهده وذخیره وضعیت های واتساپ نیاز به مجوز حافظه دارد</string>
     <string name="accept">موافقم</string>

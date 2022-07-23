@@ -19,7 +19,6 @@ import com.ddt.whatsappStatusDownloader.utils.Constants
 import java.util.*
 import kotlin.concurrent.timerTask
 
-
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
 
@@ -82,8 +81,7 @@ class SplashActivity : AppCompatActivity() {
 
     private fun showRequestPermissionDialog() {
 
-        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
-        builder.apply {
+        AlertDialog.Builder(this).apply {
             setTitle(resources.getString(R.string.storage_permission_request))
             setMessage(resources.getString(R.string.need_access_storage))
             setPositiveButton(resources.getString(R.string.accept)) { _, _ -> requestPermission() }
