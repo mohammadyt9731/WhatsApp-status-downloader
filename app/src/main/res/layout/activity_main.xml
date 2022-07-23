@@ -82,7 +82,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginBottom="@dimen/space_2x_small"
-            app:placement_id="4f069038-44b4-4aff-b9c3-7516e6217e63"
+            app:placement_id="d819f392-4812-47c7-b2b9-b95a0e9ffdca"
             app:layout_constraintBottom_toTopOf="@id/bubble_navigation"
             app:layout_constraintTop_toBottomOf="@id/nav_controller"
             app:banner_size="banner"/>

@@ -18,6 +18,7 @@ import com.ddt.whatsappStatusDownloader.R
 import com.ddt.whatsappStatusDownloader.databinding.FragmentShowMediaBinding
 import com.ddt.whatsappStatusDownloader.utils.Constants
 import com.ddt.whatsappStatusDownloader.utils.FileOperation
+import com.ddt.whatsappStatusDownloader.utils.MyAdivery
 import com.ddt.whatsappStatusDownloader.utils.UtilsMethod
 import java.io.File
 
@@ -38,6 +39,7 @@ class ShowMediaFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        MyAdivery.showInterstitialAd(requireContext(),Constants.INTERSTITIAL_SECOND_ID)
 
         statusFile= arguments?.getSerializable(Constants.MEDIA_PATH_KEY) as File
 

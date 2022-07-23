@@ -47,6 +47,8 @@ object Constants {
 
     //MyAdivery
     const val ADIVERY_APP_ID: String="b5322e41-d51e-4a96-8cdf-bc3adc2ce83d"
+    const val INTERSTITIAL_MAIN_ID: String="0fe9b48f-2451-4798-8cc9-4959450a70f6"
+    const val INTERSTITIAL_SECOND_ID: String="b92850dc-b111-463b-a2f2-90d8c68f0060"
 
     //MySharedPreferences
     const val SHARED_PREFERENCES_NAME="shared_preferences_name"
