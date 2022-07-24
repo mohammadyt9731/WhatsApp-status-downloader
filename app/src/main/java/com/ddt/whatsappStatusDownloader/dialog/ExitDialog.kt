@@ -8,15 +8,15 @@ import com.adivery.sdk.AdiveryBannerAdView
 import com.ddt.whatsappStatusDownloader.R
 import com.ddt.whatsappStatusDownloader.databinding.DialogExitBinding
 import com.ddt.whatsappStatusDownloader.utils.Constants
+import com.ddt.whatsappStatusDownloader.utils.MyIntent
 import com.ddt.whatsappStatusDownloader.utils.UtilsMethod
 
 
-class ExitDialog(activity: Activity) : Dialog(activity) {
+class ExitDialog(private var activity: Activity) : Dialog(activity) {
 
     private var binding: DialogExitBinding = DialogExitBinding.inflate(layoutInflater)
-    private var activity:Activity
+
     init {
-        this.activity=activity
         setContentView(binding.root)
         config()
         showAdvertising()
@@ -45,31 +45,25 @@ class ExitDialog(activity: Activity) : Dialog(activity) {
         bannerAd.setBannerAdListener(object : AdiveryAdListener() {
             override fun onAdLoaded() {
                 // تبلیغ به‌طور خودکار نمایش داده می‌شود، هر کار دیگری لازم است اینجا انجام دهید.
-            }
-
-            override fun onError(reason: String) {
-                // خطا را چاپ کنید تا از دلیل آن مطلع شوید
-            }
-
-            override fun onAdClicked() {
-                // کاربر روی بنر کلیک کرده
-            }
-        })
+            }})
 
         bannerAd.loadAd()
-
     }
 
     private fun setOnClick() {
 
         binding.apply {
 
-            btnNo.setOnClickListener{
+            btnClose.setOnClickListener{
                 cancel()
             }
 
-            btnYes.setOnClickListener{
+            btnExit.setOnClickListener{
                 activity.finish()
+            }
+
+            btnOtherApp.setOnClickListener{
+                MyIntent.otherAppIntent(activity)
             }
 
         }

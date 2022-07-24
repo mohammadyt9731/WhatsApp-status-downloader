@@ -14,13 +14,11 @@ import com.ddt.whatsappStatusDownloader.utils.MySharedPreferences
 import com.ddt.whatsappStatusDownloader.utils.UtilsMethod
 
 
-class CommentDialog(mainActivity: MainActivity) : Dialog(mainActivity) {
+class CommentDialog(private var mainActivity: MainActivity) : Dialog(mainActivity) {
 
     private var binding: DialogCommentBinding = DialogCommentBinding.inflate(layoutInflater)
-    private lateinit var mainActivity: MainActivity
-    init {
 
-        this.mainActivity=mainActivity
+    init {
 
         setContentView(binding.root)
         config()

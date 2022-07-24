@@ -35,35 +35,36 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <View
-                android:layout_width="match_parent"
                 android:id="@+id/view_horizontal_divider"
                 style="@style/view_divider_menu_style"
+                android:layout_width="match_parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_comment" />
 
             <TextView
                 android:id="@+id/tv_rating"
                 style="@style/tv_dialog_style"
-                android:text="@string/how_main_point"
                 android:layout_width="match_parent"
+                android:text="@string/how_main_point"
                 app:layout_constraintTop_toBottomOf="@id/view_horizontal_divider" />
 
             <RatingBar
                 android:id="@+id/rating_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layoutDirection="rtl"
                 android:layout_margin="@dimen/space_large"
+                android:layoutDirection="rtl"
                 android:numStars="5"
                 android:stepSize="1"
+                android:theme="@style/rating_bar_style"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_rating" />
 
             <LinearLayout
-                android:layoutDirection="rtl"
                 android:id="@+id/cl_point"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="@id/rating_bar"
                 app:layout_constraintLeft_toLeftOf="@id/rating_bar"
@@ -104,7 +105,7 @@
                 android:paddingHorizontal="@dimen/space_medium"
                 android:text="@string/please_register_your_comment"
                 android:textColor="@color/dark_green"
-                android:textSize="@dimen/text_size_14"
+                android:textSize="@dimen/text_size_12"
                 android:visibility="gone"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -113,10 +114,10 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_comment"
                 style="@style/btn_dialog_style"
-                android:textColor="@color/white"
-                android:text="@string/comment"
-                app:backgroundTint="@color/dark_green"
                 android:alpha="0.5"
+                android:text="@string/comment"
+                android:textColor="@color/white"
+                app:backgroundTint="@color/dark_green"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
