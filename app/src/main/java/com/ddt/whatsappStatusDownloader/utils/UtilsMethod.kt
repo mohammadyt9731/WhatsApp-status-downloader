@@ -2,6 +2,8 @@ package com.ddt.whatsappStatusDownloader.utils
 
 import android.content.Context
 import android.os.Build
+import android.widget.Toast
+import com.ddt.whatsappStatusDownloader.R
 
 object UtilsMethod {
 
@@ -21,5 +23,7 @@ object UtilsMethod {
 
     fun isAndroid11orHigher()= (Build.VERSION.SDK_INT >= 30)
 
-
+     fun showError(context: Context) {
+        context.showToast( context.getString(R.string.unknown_error))
+    }
 }

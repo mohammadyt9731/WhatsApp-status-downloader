@@ -15,24 +15,14 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.ddt.whatsappStatusDownloader.R
 import com.ddt.whatsappStatusDownloader.databinding.SavedStatusBinding
-import com.ddt.whatsappStatusDownloader.utils.Constants
-import com.ddt.whatsappStatusDownloader.utils.FileOperation
-import com.ddt.whatsappStatusDownloader.utils.UtilsMethod
+import com.ddt.whatsappStatusDownloader.utils.*
 import java.io.File
 
-class SavedStatusAdapter(activity: Activity, statusList: MutableList<File>) :
+class SavedStatusAdapter(var activity: Activity, private var statusList: MutableList<File>) :
     RecyclerView.Adapter<SavedStatusAdapter.ViewHolder>() {
 
     private lateinit var binding: SavedStatusBinding
-    var activity: Activity
-    var itemWidth: Int
-    private  var statusList : MutableList<File>
-
-    init {
-        this.activity = activity
-        this.statusList = statusList
-        itemWidth = UtilsMethod.getScreenWidth(activity, 44)
-    }
+    var itemWidth: Int = UtilsMethod.getScreenWidth(activity, Constants.PERCENTAGE_OF_WIDTH)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         binding = SavedStatusBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -46,7 +36,6 @@ class SavedStatusAdapter(activity: Activity, statusList: MutableList<File>) :
         holder.setOnClickListener(position)
     }
 
-
     override fun getItemCount(): Int {
 
         return statusList.size
@@ -58,22 +47,23 @@ class SavedStatusAdapter(activity: Activity, statusList: MutableList<File>) :
 
     inner class ViewHolder() : RecyclerView.ViewHolder(binding.root) {
 
-
         fun setUpViews(position: Int) {
 
             binding.apply {
+                //root width
                 clRoot.layoutParams.width = itemWidth
 
+                //check video file
                 if (UtilsMethod.isVideoFile(statusList[position].path))
-                    ivVideo.visibility = View.VISIBLE
+                    ivVideo.visible()
                 else
-                    ivVideo.visibility = View.GONE
+                    ivVideo.gone()
 
             }
         }
 
         fun setStatusImage(position: Int) {
-
+            //video
             if (UtilsMethod.isVideoFile(statusList[position].path)) {
                 try {
                     val retriever = MediaMetadataRetriever()
@@ -89,7 +79,7 @@ class SavedStatusAdapter(activity: Activity, statusList: MutableList<File>) :
 
                 }
 
-
+            //image
             } else {
                 Glide.with(activity).load(statusList[position])
                     .placeholder(ColorDrawable(Color.WHITE))
@@ -100,6 +90,7 @@ class SavedStatusAdapter(activity: Activity, statusList: MutableList<File>) :
 
         fun setOnClickListener(position: Int) {
             binding.apply {
+
                 ivShareStatus.setOnClickListener() {
                     FileOperation.shareFile(activity, statusList[position])
                 }
@@ -114,8 +105,6 @@ class SavedStatusAdapter(activity: Activity, statusList: MutableList<File>) :
                     bundle.putSerializable(Constants.MEDIA_PATH_KEY, statusList[position])
                     activity.findNavController(R.id.nav_host)
                         .navigate(R.id.show_media_fragment, bundle)
-
-
                 }
             }
         }
@@ -125,17 +114,16 @@ class SavedStatusAdapter(activity: Activity, statusList: MutableList<File>) :
 
     fun showDeleteDialog(position: Int) {
 
-        val deleteDialog = AlertDialog.Builder(activity)
-            .setTitle("حذف پست")
-            .setMessage("آیا میخواید این پست را حذف کنید؟")
+        AlertDialog.Builder(activity)
+            .setTitle(activity.getString(R.string.delete_status))
+            .setMessage(activity.getString(R.string.do_you_want_to_delete))
             .setCancelable(true)
-            .setPositiveButton("بله") { _, _ -> deleteStatus(position) }
-            .setNegativeButton("خیر") { dialog, _ -> dialog.cancel() }
+            .setPositiveButton(activity.getString(R.string.yes)) { _, _ -> deleteStatus(position) }
+            .setNegativeButton(activity.getString(R.string.no)) { dialog, _ -> dialog.cancel() }
             .create()
             .show()
 
     }
-
 
     private fun deleteStatus(position: Int) {
 
@@ -144,6 +132,5 @@ class SavedStatusAdapter(activity: Activity, statusList: MutableList<File>) :
         notifyItemRemoved(position)
 
     }
-
 
 }

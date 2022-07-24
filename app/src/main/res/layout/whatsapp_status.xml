@@ -5,7 +5,8 @@
     android:id="@+id/cl_root"
     android:layout_width="@dimen/_200sdp"
     android:layout_height="wrap_content"
-android:layout_margin="@dimen/space_medium">
+    android:layout_margin="@dimen/space_medium"
+    android:background="@color/white">
 
 
     <com.google.android.material.card.MaterialCardView
@@ -56,7 +57,6 @@ android:layout_margin="@dimen/space_medium">
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.55" />
 
-
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline_horizontal_3"
                 android:layout_width="wrap_content"
@@ -76,17 +76,16 @@ android:layout_margin="@dimen/space_medium">
                 app:layout_constraintRight_toLeftOf="@id/lottie_download"
                 app:layout_constraintTop_toTopOf="@id/guideline_horizontal_3" />
 
-
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/lottie_download"
                 android:layout_width="0dp"
-                app:lottie_rawRes="@raw/lottie_download"
                 android:layout_height="0dp"
                 android:padding="@dimen/space_small"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/iv_share_status"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@id/guideline_horizontal_3" />
+                app:layout_constraintTop_toTopOf="@id/guideline_horizontal_3"
+                app:lottie_rawRes="@raw/lottie_download" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

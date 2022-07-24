@@ -34,6 +34,7 @@ object Constants {
 
 
     //WhatsappStatusAdepter
+    const val PERCENTAGE_OF_WIDTH: Int = 44
     const val LOTTIE_START_FRAME: Int = 22
     const val LOTTIE_END_FRAME: Int = 100
     const val MEDIA_PATH_KEY = "media_path_key"

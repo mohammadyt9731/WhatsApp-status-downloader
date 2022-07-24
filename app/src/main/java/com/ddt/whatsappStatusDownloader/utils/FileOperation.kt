@@ -10,57 +10,25 @@ import java.io.File
 object FileOperation {
 
 
-    fun deleteFile(context: Context,file: File){
+    fun deleteFile(context: Context, file: File) {
 
         try {
-           file.delete()
-
-            Toast.makeText(context,context.getString(R.string.deleted_successfully),Toast.LENGTH_SHORT).show()
+            file.delete()
+            context.showToast(context.getString(R.string.deleted_successfully))
         } catch (e: Exception) {
-            Toast.makeText(context, e.message.toString(), Toast.LENGTH_LONG).show()
+            UtilsMethod.showError(context)
         }
     }
 
-    fun shareFile(context:Context,file: File){
-        if (UtilsMethod.isImageFile(file.name))
-           sharePhoto(context,file.absolutePath)
-        else if (UtilsMethod.isVideoFile(file.name))
-           shareVideo(context,file.absolutePath)
-
-    }
-
-    private fun sharePhoto(context: Context, photoPath: String) {
+    fun shareFile(context: Context, file: File){
 
         try {
             val sharePhotoIntent = Intent(Intent.ACTION_SEND).apply {
-                type = "image/*"
+                type =if (UtilsMethod.isVideoFile(file.name)){
+                    "video/*"
+                }else
+                    "image/*"
 
-                val shareMessage = """
-                ${context.getString(R.string.app_link_download)}${context.getString(R.string.app_name)}           
-                ${context.getString(R.string.app_id_caffe_bazaar)}${context.packageName}                               
-                """.trimIndent()
-
-                putExtra(
-                    Intent.EXTRA_TEXT,
-                    shareMessage
-                )
-                val fileURI = FileProvider.getUriForFile(
-                    context, context.packageName + ".provider",
-                    File(photoPath)
-                )
-                putExtra(Intent.EXTRA_STREAM, fileURI)
-            }
-            context.startActivity(sharePhotoIntent)
-        } catch (e: Exception) {
-            Toast.makeText(context, context.getString(R.string.unknown_error), Toast.LENGTH_SHORT)
-                .show()        }
-    }
-
-    private fun shareVideo(context: Context, videoPath: String) {
-
-        try {
-            val sharePhotoIntent = Intent(Intent.ACTION_SEND).apply {
-                type = "video/*"
 
                 val shareMessage = """
                 ${context.getString(R.string.app_link_download)}${context.getString(R.string.app_name)}           
@@ -73,15 +41,34 @@ object FileOperation {
                 )
                 val fileURI = FileProvider.getUriForFile(
                     context, context.packageName + ".provider",
-                    File(videoPath)
+                    File(file.absolutePath)
                 )
                 putExtra(Intent.EXTRA_STREAM, fileURI)
             }
             context.startActivity(sharePhotoIntent)
 
         } catch (e: Exception) {
-            Toast.makeText(context, context.getString(R.string.unknown_error), Toast.LENGTH_SHORT)
-                .show()
+            UtilsMethod.showError(context)
         }
+    }
+
+    fun saveFile(context: Context,file: File):Boolean {
+        val sourceFile = File(file.path)
+        val destinationFile =
+            File(Constants.SAVED_DIRECTORY + "/" + file.name)
+
+        if (destinationFile.exists()) {
+            context.showToast(context.getString(R.string.already_saved))
+        } else {
+            try {
+                sourceFile.copyTo(destinationFile)
+                context.showToast(context.getString(R.string.saved_successfully))
+                return true
+
+            } catch (e: Exception) {
+                UtilsMethod.showError(context)
+            }
+        }
+        return false
     }
 }

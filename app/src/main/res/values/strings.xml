@@ -30,26 +30,41 @@
 
 
     <!--MyIntent-->
-    <string name="no_connection">اتصال به اینترنت برقرار نیست</string>
-    <string name="unknown_error">خطای ناشناخته</string>
-    <string name="share_app_with">اشتراک گذاری با</string>
-    <string name="app_link_download">لینک دانلود برنامه&#160;</string>
+    <string name="app_link_download">لینک برنامه&#160;</string>
     <string name="app_id_caffe_bazaar">https://cafebazaar.ir/app/?id=</string>
+    <string name="share_app_with">اشتراک گذاری با</string>
     <string name="developer_caffe_bazaar_link">https://cafebazaar.ir/developer/mohammad_yazdi</string>
     <string name="comment_caffe_bazaar_link">bazaar://details?id=</string>
     <string name="need_install_caffe_bazaar">برای ثبت نظر باید اپلیکیشن کافه بازار را نصب داشته باشید</string>
     <string name="email_address">ddt.supp@gmail.com</string>
     <string name="send_email">ارسال ایمیل</string>
+    <string name="whatsapp_is_not_installed">واتساپ روی تلفن شما نصب نیست</string>
+    <string name="whatsapp_business_is_not_installed">واتساپ تجاری روی تلفن شما نصب نیست</string>
+    <string name="unknown_error">خطای ناشناخته</string>
+
+
+
+    <!--StatusFragment-->
+    <string name="directory_not_exist">پوشه مورد نظر وجود ندارد</string>
+    <string name="no_w_status_was_observed">شما هنوز در واتساپ وضعیتی را تماشا نکرده اید.لطفا روی علامت سوال پایین صفحه کلیک کنید و طبق آموزش وضعیت ها رو دانلود کنید</string>
+    <string name="no_wb_status_was_observed">شما هنوز در واتساپ تجاری وضعیتی را تماشا نکرده اید.لطفا روی علامت سوال پایین صفحه کلیک کنید و طبق آموزش وضعیت ها رو دانلود کنید</string>
+    <string name="no_status_saved">هیچ وضعیتی ذخیره نشده است\nلطفا روی علامت سوال پایین صفحه کلیک کنید و طبق آموزش وضعیت ها رو دانلود کنید</string>
+    <string name="open_whatsapp">باز کردن واتساپ</string>
+    <string name="open_business_whatsapp">باز کردن واتساپ تجاری</string>
+
+
+    <!--ShowMediaFragment-->
     <string name="save">ذخیره</string>
     <string name="share">ارسال</string>
     <string name="delete">حذف</string>
     <string name="preview">پیش نمایش</string>
-    <string name="directory_not_exist">پوشه مورد نظر وجود ندارد</string>
-    <string name="no_status_was_observed">شما هنوز در واتساپ وضعیتی را تماشا نکرده اید.لطفا روی علامت سوال پایین صفحه کلیک کنید و طبق آموزش وضعیت ها رو دانلود کنید</string>
-    <string name="no_status_saved">هیچ وضعیتی ذخیره نشده است\nلطفا روی علامت سوال پایین صفحه کلیک کنید و طبق آموزش وضعیت ها رو دانلود کنید</string>
-    <string name="whatsapp_is_not_installed">واتساپ روی تلفن شما نصب نیست</string>
-    <string name="whatsapp_business_is_not_installed">واتساپ تجاری روی تلفن شما نصب نیست</string>
 
+
+    <!--adapter-->
+    <string name="already_saved">قبلا ذخیره شده است</string>
+    <string name="saved_successfully">با موفقیت ذخیره شد</string>
+    <string name="delete_status">حذف وضعیت</string>
+    <string name="do_you_want_to_delete">آیا میخواید این پست را حذف کنید؟</string>
 
 
     <!--dialog_about_us-->
@@ -72,12 +87,11 @@
     <string name="deleted_successfully">با موفقیت حذف شد</string>
 
 
-    <string name="open_whatsapp">باز کردن واتساپ</string>
-
 
     <!--dialog-exit-->
     <string name="do_you_want_to_exit">آیا مایل به خروج هستید؟</string>
     <string name="yes">بله</string>
     <string name="no">خیر</string>
+
 
 </resources>

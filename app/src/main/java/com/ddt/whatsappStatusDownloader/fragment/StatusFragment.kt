@@ -1,9 +1,7 @@
 package com.ddt.whatsappStatusDownloader.fragment
 
-import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +20,7 @@ class StatusFragment : Fragment() {
     private lateinit var binding: FragmentWhatsappStatusBinding
     private var statusFileList: ArrayList<File> = ArrayList()
     private lateinit var directoryAddress: String
-    private var state: Parcelable? = null
+    private var recyclerViewState: Parcelable? = null
 
 
     override fun onCreateView(
@@ -38,17 +36,14 @@ class StatusFragment : Fragment() {
 
     private fun init() {
 
-
         if (arguments != null) {
             this.directoryAddress = arguments?.getString(Constants.DIRECTORY_KEY).toString()
         } else {
-            directoryAddress = if (Build.VERSION.SDK_INT >= 30)
+            directoryAddress = if (UtilsMethod.isAndroid11orHigher())
                 Constants.NEW_WHATSAPP_DIRECTORY
             else
                 Constants.WHATSAPP_DIRECTORY
         }
-
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -61,16 +56,19 @@ class StatusFragment : Fragment() {
     override fun onPause() {
         super.onPause()
 
-
-        state = binding.rvStatus.layoutManager?.onSaveInstanceState()
+        //save position of recyclerView
+        recyclerViewState = binding.rvStatus.layoutManager?.onSaveInstanceState()
     }
 
     override fun onResume() {
         super.onResume()
 
+
         setUpList()
-        if (state != null)
-            binding.rvStatus.layoutManager?.onRestoreInstanceState(state)
+
+        //load position of recyclerView
+        if (recyclerViewState != null)
+            binding.rvStatus.layoutManager?.onRestoreInstanceState(recyclerViewState)
     }
 
 
@@ -80,9 +78,11 @@ class StatusFragment : Fragment() {
             if (directoryAddress == Constants.WHATSAPP_BUSINESS_DIRECTORY
                 || directoryAddress == Constants.NEW_WHATSAPP_BUSINESS_DIRECTORY
             ) {
+                //open whatsapp
                 MyIntent.openWhatsAppBusiness(requireContext())
 
             } else {
+                //open business whatsapp
                 MyIntent.openWhatsApp(requireContext())
             }
         }
@@ -107,7 +107,6 @@ class StatusFragment : Fragment() {
             tvWarning.gone()
             ivWarning.gone()
             btnOpenWhatsapp.gone()
-
         }
 
     }
@@ -145,16 +144,23 @@ class StatusFragment : Fragment() {
     private fun showNoStatusWasObserved() {
 
         binding.apply {
-            if (directoryAddress == Constants.SAVED_DIRECTORY)
-                tvWarning.text = getString(R.string.no_status_saved)
-            else
-                tvWarning.text = getString(R.string.no_status_was_observed)
 
+            when(directoryAddress){
+                Constants.WHATSAPP_DIRECTORY,Constants.NEW_WHATSAPP_DIRECTORY ->{
+                    tvWarning.text = getString(R.string.no_w_status_was_observed)
+                    btnOpenWhatsapp.text=getString(R.string.open_whatsapp)
+                }
 
-            if (directoryAddress != Constants.SAVED_DIRECTORY)
-                btnOpenWhatsapp.visible()
+                Constants.WHATSAPP_BUSINESS_DIRECTORY,Constants.NEW_WHATSAPP_BUSINESS_DIRECTORY->{
+                    tvWarning.text = getString(R.string.no_wb_status_was_observed)
+                    btnOpenWhatsapp.text=getString(R.string.open_business_whatsapp)
+                }
 
-
+                Constants.SAVED_DIRECTORY,Constants.SAVED_DIRECTORY->{
+                    tvWarning.text = getString(R.string.no_status_saved)
+                    btnOpenWhatsapp.gone()
+                }
+            }
         }
 
     }
@@ -163,19 +169,21 @@ class StatusFragment : Fragment() {
 
         binding.apply {
 
-            tvWarning.text = when (directoryAddress) {
+            when (directoryAddress) {
 
-                Constants.WHATSAPP_DIRECTORY, Constants.NEW_WHATSAPP_DIRECTORY -> getString(R.string.whatsapp_is_not_installed)
+                Constants.WHATSAPP_DIRECTORY, Constants.NEW_WHATSAPP_DIRECTORY -> {
+                    tvWarning.text = getString(R.string.whatsapp_is_not_installed)
+                }
 
-                Constants.WHATSAPP_BUSINESS_DIRECTORY, Constants.NEW_WHATSAPP_BUSINESS_DIRECTORY -> getString(
-                    R.string.whatsapp_business_is_not_installed
-                )
+                Constants.WHATSAPP_BUSINESS_DIRECTORY, Constants.NEW_WHATSAPP_BUSINESS_DIRECTORY -> {
+                    tvWarning.text = getString( R.string.whatsapp_business_is_not_installed)
+                }
 
-                Constants.SAVED_DIRECTORY -> getString(R.string.no_status_saved)
+                Constants.SAVED_DIRECTORY ->tvWarning.text = getString(R.string.no_status_saved)
 
-                else -> getString(R.string.directory_not_exist)
+                else -> tvWarning.text = getString(R.string.directory_not_exist)
             }
-
+            btnOpenWhatsapp.gone()
             hiddenList()
         }
     }
@@ -183,14 +191,14 @@ class StatusFragment : Fragment() {
     private fun setUpRecyclerView() {
 
         if (directoryAddress == Constants.SAVED_DIRECTORY) {
-            val statusAdapter: SavedStatusAdapter
-            statusAdapter = SavedStatusAdapter(requireActivity(), statusFileList)
 
+            val statusAdapter = SavedStatusAdapter(requireActivity(), statusFileList)
             binding.rvStatus.apply {
                 layoutManager = GridLayoutManager(context, 2)
                 adapter = statusAdapter
             }
         } else {
+
             val statusAdapter = WhatsAppStatusAdapter(requireActivity())
             statusAdapter.differ.submitList(statusFileList)
             binding.rvStatus.apply {

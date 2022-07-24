@@ -5,7 +5,8 @@
     android:id="@+id/cl_root"
     android:layout_width="@dimen/_200sdp"
     android:layout_height="wrap_content"
-android:layout_margin="@dimen/space_medium">
+    android:layout_margin="@dimen/space_medium"
+    android:background="@color/white">
 
 
     <com.google.android.material.card.MaterialCardView

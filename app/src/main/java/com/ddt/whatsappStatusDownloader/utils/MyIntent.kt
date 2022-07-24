@@ -28,11 +28,9 @@ object MyIntent {
             )
 
         } catch (e: Exception) {
-            showErrorToast(context)
+            UtilsMethod.showError(context)
         }
     }
-
-
 
     fun otherAppIntent(context: Context) {
         try {
@@ -42,7 +40,7 @@ object MyIntent {
             )
             context.startActivity(otherAppIntent)
         } catch (e: Exception) {
-            showErrorToast(context)
+            UtilsMethod.showError(context)
         }
     }
 
@@ -79,7 +77,7 @@ object MyIntent {
                 )
             )
         } catch (e: Exception) {
-            showErrorToast(context)
+            UtilsMethod.showError(context)
         }
     }
 
@@ -118,8 +116,4 @@ object MyIntent {
     }
 
 
-    private fun showErrorToast(context: Context) {
-        Toast.makeText(context, context.getString(R.string.unknown_error), Toast.LENGTH_SHORT)
-            .show()
-    }
 }
