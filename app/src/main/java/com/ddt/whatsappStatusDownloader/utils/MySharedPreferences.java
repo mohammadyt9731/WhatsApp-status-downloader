@@ -41,7 +41,5 @@ public class MySharedPreferences {
         return sharedPreferences.getBoolean(Constants.IS_REGISTER_COMMENT, false);
     }
 
-
-
 }
 

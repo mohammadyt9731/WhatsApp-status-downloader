@@ -8,9 +8,6 @@ fun View.visible(){
     visibility=View.VISIBLE
 }
 
-fun View.inVisible(){
-    visibility=View.INVISIBLE
-}
 
 fun View.gone(){
     visibility=View.GONE
@@ -19,3 +16,4 @@ fun View.gone(){
 fun Context.showToast(text:String){
     Toast.makeText(this,text,Toast.LENGTH_SHORT).show()
 }
+

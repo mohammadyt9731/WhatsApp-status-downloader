@@ -125,11 +125,11 @@ class ShowMediaFragment : Fragment() {
 
             btnSave.setOnClickListener() {
 
-                FileOperation.saveFile(requireContext(),statusFile)
+                FileOperation.saveFile(requireActivity(),statusFile)
             }
 
             btnShare.setOnClickListener() {
-                FileOperation.shareFile(requireContext(), statusFile)
+                FileOperation.shareFile(requireActivity(), statusFile)
             }
 
 
@@ -144,7 +144,7 @@ class ShowMediaFragment : Fragment() {
             .setMessage(requireContext().getString(R.string.do_you_want_to_delete))
             .setCancelable(true)
             .setPositiveButton(requireContext().getString(R.string.yes)) { _, _ ->
-                FileOperation.deleteFile(requireContext(), statusFile)
+                FileOperation.deleteFile(requireActivity(), statusFile)
                 findNavController().navigateUp()
             }
             .setNegativeButton(requireContext().getString(R.string.no)) { dialog, _ -> dialog.cancel() }

@@ -5,8 +5,6 @@ import android.os.Environment
 object Constants {
 
 
-
-
     //SplashActivity
     const val SPLASH_DELAY: Long = 500
     const val REQUEST_CODE = 1234
@@ -16,7 +14,6 @@ object Constants {
     //MainActivity
     const val DIRECTORY_KEY = "directory_key"
     const val MAX_NUMBER_OF_OPEN_APP = 2
-
 
     val WHATSAPP_DIRECTORY =
         Environment.getExternalStorageDirectory().path + "/WhatsApp/Media/.Statuses"
