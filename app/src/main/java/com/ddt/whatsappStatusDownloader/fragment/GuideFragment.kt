@@ -24,7 +24,7 @@ class GuideFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //setUp view
+        //setUp lottie anim
         binding.lottieDownload2.frame=Constants.LOTTIE_END_FRAME
 
     }
