@@ -3,6 +3,7 @@ package com.ddt.whatsappStatusDownloader.utils
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.widget.Toast
 import com.ddt.whatsappStatusDownloader.R
 
@@ -103,7 +104,6 @@ object MyIntent {
         try {
             val whatsAppIntent = context.packageManager.getLaunchIntentForPackage(Constants.WHATSAPP_BUSINESS_PACKAGE)
             context.startActivity(whatsAppIntent)
-
         } catch (e: Exception) {
 
             Toast.makeText(

@@ -2,6 +2,7 @@ package com.ddt.whatsappStatusDownloader.fragment
 
 import android.os.Bundle
 import android.os.Parcelable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -78,11 +79,11 @@ class StatusFragment : Fragment() {
             if (directoryAddress == Constants.WHATSAPP_BUSINESS_DIRECTORY
                 || directoryAddress == Constants.NEW_WHATSAPP_BUSINESS_DIRECTORY
             ) {
-                //open whatsapp
+                //open business whatsapp
                 MyIntent.openWhatsAppBusiness(requireContext())
 
             } else {
-                //open business whatsapp
+                //open whatsapp
                 MyIntent.openWhatsApp(requireContext())
             }
         }
@@ -149,11 +150,13 @@ class StatusFragment : Fragment() {
                 Constants.WHATSAPP_DIRECTORY,Constants.NEW_WHATSAPP_DIRECTORY ->{
                     tvWarning.text = getString(R.string.no_w_status_was_observed)
                     btnOpenWhatsapp.text=getString(R.string.open_whatsapp)
+                    btnOpenWhatsapp.visible()
                 }
 
                 Constants.WHATSAPP_BUSINESS_DIRECTORY,Constants.NEW_WHATSAPP_BUSINESS_DIRECTORY->{
                     tvWarning.text = getString(R.string.no_wb_status_was_observed)
                     btnOpenWhatsapp.text=getString(R.string.open_business_whatsapp)
+                    btnOpenWhatsapp.gone()
                 }
 
                 Constants.SAVED_DIRECTORY,Constants.SAVED_DIRECTORY->{

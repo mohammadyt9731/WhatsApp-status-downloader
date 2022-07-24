@@ -22,10 +22,10 @@ object Constants {
         Environment.getExternalStorageDirectory().path + "/Android/media/com.whatsapp/WhatsApp/Media/.Statuses"
 
     val WHATSAPP_BUSINESS_DIRECTORY =
-        Environment.getExternalStorageDirectory().path + "/WhatsAppBg/Media/.Statuses"
+        Environment.getExternalStorageDirectory().path + "/WhatsApp Business/Media/.Statuses"
 
     val NEW_WHATSAPP_BUSINESS_DIRECTORY =
-        Environment.getExternalStorageDirectory().path + "/Android/media/com.whatsapp/WhatsAppBg/Media/.Statuses"
+        Environment.getExternalStorageDirectory().path + "/Android/media/com.whatsapp.w4b/WhatsApp Business/Media/.Statuses"
 
     val SAVED_DIRECTORY = Environment.getExternalStorageDirectory().path + "/saveDirectory"
 
@@ -45,7 +45,7 @@ object Constants {
 
     //MyIntent
     const val WHATSAPP_PACKAGE = "com.whatsapp"
-    const val WHATSAPP_BUSINESS_PACKAGE = "com.com.whatsapp.w4b"
+    const val WHATSAPP_BUSINESS_PACKAGE = "com.whatsapp.w4b"
 
 
     //MyAdivery
