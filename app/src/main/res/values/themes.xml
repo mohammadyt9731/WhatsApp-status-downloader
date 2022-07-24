@@ -45,7 +45,7 @@
     </style>
 
 
-    <style name="tv_medial_activity_style" >
+    <style name="btn_media_action_style" >
         <item name="android:width">0dp</item>
         <item name="android:height">0dp</item>
         <item name="android:layout_marginLeft">@dimen/space_medium</item>

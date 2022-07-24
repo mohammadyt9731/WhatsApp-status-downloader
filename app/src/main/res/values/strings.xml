@@ -63,8 +63,8 @@
     <!--adapter-->
     <string name="already_saved">قبلا ذخیره شده است</string>
     <string name="saved_successfully">با موفقیت ذخیره شد</string>
-    <string name="delete_status">حذف وضعیت</string>
-    <string name="do_you_want_to_delete">آیا میخواید این پست را حذف کنید؟</string>
+    <string name="delete_status">حذف پست</string>
+    <string name="do_you_want_to_delete">آیا میخواهید این پست را حذف کنید؟</string>
 
 
     <!--dialog_about_us-->

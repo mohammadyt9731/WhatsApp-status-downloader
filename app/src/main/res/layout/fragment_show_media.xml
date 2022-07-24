@@ -23,8 +23,7 @@
                 android:layout_width="@dimen/_35sdp"
                 android:layout_height="@dimen/_40sdp"
                 android:layout_margin="@dimen/space_small"
-                android:rotation="180"
-                android:layoutDirection="ltr"
+                android:layoutDirection="rtl"
                 android:src="@drawable/ic_back"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -36,8 +35,7 @@
                 android:gravity="center"
                 android:text="@string/preview"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_size_16"
-                android:textStyle="bold"
+                android:textSize="@dimen/text_size_14"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,25 +43,22 @@
     </androidx.appcompat.widget.Toolbar>
 
 
-
-
     <com.jsibbold.zoomage.ZoomageView
-        android:id="@+id/iv_preview"
+        android:id="@+id/zoomage_view_preview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:src="@drawable/ic_sample_status"
         android:layout_marginVertical="@dimen/space_2x_small"
-        app:zoomage_restrictBounds="false"
-        app:zoomage_animateOnReset="true"
-        app:zoomage_autoResetMode="UNDER"
-        app:zoomage_autoCenter="true"
-        app:zoomage_zoomable="true"
-        app:zoomage_translatable="true"
-        app:zoomage_minScale="0.4"
-        app:zoomage_maxScale="10"
+        android:src="@drawable/ic_sample_status"
         app:layout_constraintBottom_toTopOf="@id/btn_save"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
-        />
+        app:zoomage_animateOnReset="true"
+        app:zoomage_autoCenter="true"
+        app:zoomage_autoResetMode="UNDER"
+        app:zoomage_maxScale="10"
+        app:zoomage_minScale="0.4"
+        app:zoomage_restrictBounds="false"
+        app:zoomage_translatable="true"
+        app:zoomage_zoomable="true" />
 
 
     <VideoView
@@ -77,10 +72,9 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_save"
-        style="@style/tv_medial_activity_style"
+        style="@style/btn_media_action_style"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:backgroundTint="@color/green"
@@ -92,7 +86,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_share"
-        style="@style/tv_medial_activity_style"
+        style="@style/btn_media_action_style"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:backgroundTint="@color/blue"
@@ -104,7 +98,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_delete"
-        style="@style/tv_medial_activity_style"
+        style="@style/btn_media_action_style"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:backgroundTint="@color/red"

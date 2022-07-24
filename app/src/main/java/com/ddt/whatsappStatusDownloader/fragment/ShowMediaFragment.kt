@@ -16,10 +16,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.ddt.whatsappStatusDownloader.R
 import com.ddt.whatsappStatusDownloader.databinding.FragmentShowMediaBinding
-import com.ddt.whatsappStatusDownloader.utils.Constants
-import com.ddt.whatsappStatusDownloader.utils.FileOperation
-import com.ddt.whatsappStatusDownloader.utils.MyAdivery
-import com.ddt.whatsappStatusDownloader.utils.UtilsMethod
+import com.ddt.whatsappStatusDownloader.utils.*
 import java.io.File
 
 
@@ -27,104 +24,112 @@ class ShowMediaFragment : Fragment() {
 
     private lateinit var binding: FragmentShowMediaBinding
     private lateinit var statusFile: File
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding= FragmentShowMediaBinding.inflate(layoutInflater,container,false)
+        binding = FragmentShowMediaBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        MyAdivery.showInterstitialAd(requireContext(),Constants.INTERSTITIAL_SECOND_ID)
-
-        statusFile= arguments?.getSerializable(Constants.MEDIA_PATH_KEY) as File
-
-
-        Glide.with(this).load(statusFile)
-            .placeholder(ColorDrawable(Color.WHITE))
-            .transition(DrawableTransitionOptions.withCrossFade())
-            . into(binding.ivPreview)
-
-        checkFileType(statusFile)
+        showAd()
+        init()
+        setUpView(statusFile)
         setOnclick()
-
-
     }
 
     override fun onResume() {
         super.onResume()
-        binding.apply {
-            if(videoView.isPlaying)
-                videoView.pause()
 
+        binding.apply {
+            if (videoView.isPlaying)
+                videoView.pause()
         }
     }
 
-    private fun checkFileType(file: File){
+    private fun showAd() {
+
+        MyAdivery.showInterstitialAd(requireContext(), Constants.INTERSTITIAL_SECOND_ID)
+    }
+
+    private fun init() {
+        //get file
+        statusFile = arguments?.getSerializable(Constants.MEDIA_PATH_KEY) as File
+    }
+
+    private fun setUpView(file: File) {
         binding.apply {
 
-            if(UtilsMethod.isImageFile(file.name))
-            {
-                ivPreview.visibility= View.VISIBLE
-                videoView.visibility= View.GONE
+            //image
+            if (UtilsMethod.isImageFile(file.name)) {
+                //show image
+                Glide.with(requireContext()).load(statusFile)
+                    .placeholder(ColorDrawable(Color.WHITE))
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into(binding.zoomageViewPreview)
 
+                zoomageViewPreview.visible()
+                videoView.gone()
 
-            }else{
-
-                ivPreview.visibility= View.GONE
-                videoView.visibility= View.VISIBLE
-
+                //video
+            } else {
 
                 setUpVideoView(statusFile)
+
+                zoomageViewPreview.gone()
+                videoView.visible()
             }
         }
     }
 
-    private fun setUpVideoView(file: File){
+    private fun setUpVideoView(file: File) {
 
         binding.apply {
 
-            val mediaController= MediaController(context)
+            val mediaController = MediaController(context)
 
-            videoView.setOnPreparedListener(MediaPlayer.OnPreparedListener { mp ->
-                mp.setOnVideoSizeChangedListener { _, _, _ ->
-                    mediaController.setAnchorView(videoView)
-                    mediaController.setMediaPlayer(videoView)
-                }
-            })
+            videoView.apply {
+                setOnPreparedListener(MediaPlayer.OnPreparedListener { mp ->
+                    mp.setOnVideoSizeChangedListener { _, _, _ ->
+                        mediaController.setAnchorView(videoView)
+                        mediaController.setMediaPlayer(videoView)
+                    }
+                })
 
-            videoView.setVideoPath(file.path)
-            videoView.seekTo(1)
-            videoView.setMediaController(mediaController)
-            videoView.start()
-
+                setVideoPath(file.path)
+                seekTo(1)
+                setMediaController(mediaController)
+                start()
+            }
 
         }
 
     }
 
-    private fun setOnclick(){
+    private fun setOnclick() {
 
         binding.apply {
 
-            ivBack.setOnClickListener(){
-               findNavController().navigateUp()
+            ivBack.setOnClickListener() {
+                findNavController().navigateUp()
             }
 
-            btnDelete.setOnClickListener(){
+            btnDelete.setOnClickListener() {
                 showDeleteDialog()
             }
 
-            btnSave.setOnClickListener(){
-                saveFile()
+            btnSave.setOnClickListener() {
+
+                FileOperation.saveFile(requireContext(),statusFile)
             }
 
-            btnShare.setOnClickListener(){
-                FileOperation.shareFile(requireContext(),statusFile)
+            btnShare.setOnClickListener() {
+                FileOperation.shareFile(requireContext(), statusFile)
             }
 
 
@@ -132,53 +137,23 @@ class ShowMediaFragment : Fragment() {
 
     }
 
-    private fun showDeleteDialog(){
+    private fun showDeleteDialog() {
 
-        val deleteDialog= AlertDialog.Builder(requireContext())
-            .setTitle("حذف پست")
-            .setMessage("آیا میخواید این پست را حذف کنید؟")
+        AlertDialog.Builder(requireContext())
+            .setTitle(requireContext().getString(R.string.delete_status))
+            .setMessage(requireContext().getString(R.string.do_you_want_to_delete))
             .setCancelable(true)
-            .setPositiveButton("بله") { _, _ ->
-                FileOperation.deleteFile(requireContext(),statusFile)
+            .setPositiveButton(requireContext().getString(R.string.yes)) { _, _ ->
+                FileOperation.deleteFile(requireContext(), statusFile)
                 findNavController().navigateUp()
             }
-            .setNegativeButton("خیر") { dialog,_  -> dialog.cancel() }
+            .setNegativeButton(requireContext().getString(R.string.no)) { dialog, _ -> dialog.cancel() }
             .create()
             .show()
 
-    }
-
-    private fun saveFile() {
-
-        val sourceFile = statusFile
-        val destinationFile =
-            File(Constants.SAVED_DIRECTORY + "/" + sourceFile.name)
-
-        if (destinationFile.exists()) {
-
-            Toast.makeText(requireContext(), "قبلا ذخیره شده است.", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-
-        try {
-            sourceFile.copyTo(destinationFile)
-            Toast.makeText(
-                requireContext(),
-                "در پوشه saveDirectory ذخیره شد",
-                Toast.LENGTH_SHORT
-            ).show()
-
-        } catch (e: Exception) {
-            Toast.makeText(
-                requireContext(),
-                this.getString(R.string.unknown_error),
-                Toast.LENGTH_SHORT
-            ).show()
-            Toast.makeText(requireContext(), e.message.toString(), Toast.LENGTH_LONG).show()
-        }
-
 
     }
+
+
 
 }
