@@ -27,7 +27,7 @@ object Constants {
     val NEW_WHATSAPP_BUSINESS_DIRECTORY =
         Environment.getExternalStorageDirectory().path + "/Android/media/com.whatsapp.w4b/WhatsApp Business/Media/.Statuses"
 
-    val SAVED_DIRECTORY = Environment.getExternalStorageDirectory().path + "/saveDirectory"
+    val SAVED_DIRECTORY = Environment.getExternalStorageDirectory().path + "/whatsappStatusDirectory"
 
 
     //WhatsappStatusAdepter
