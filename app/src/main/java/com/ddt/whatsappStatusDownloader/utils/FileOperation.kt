@@ -32,7 +32,7 @@ object FileOperation {
 
                 val shareMessage = """
                 ${context.getString(R.string.app_link_download)}${context.getString(R.string.app_name)}           
-                ${context.getString(R.string.app_id_caffe_bazaar)}${context.packageName}                             
+                ${context.getString(R.string.app_link_download)}${context.packageName}                             
                 """.trimIndent()
 
                 putExtra(
