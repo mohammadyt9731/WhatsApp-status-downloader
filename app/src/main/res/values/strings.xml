@@ -39,21 +39,21 @@
     <string name="whatsapp_business_is_not_installed">واتساپ تجاری روی تلفن شما نصب نیست</string>
     <string name="unknown_error">خطای ناشناخته</string>
 
-    <!--caffe bazaar
+    <!--caffe bazaar-->
 
     <string name="developer_applications_link">https://cafebazaar.ir/developer/mohammad_yazdi</string>
     <string name="market_app_id">http://cafebazaar.ir/app/?id=</string>
     <string name="comment_market_link">bazaar://details?id=</string>
    <string name="need_install_market">برای ثبت نظر باید اپلیکیشن کافه بازار را نصب داشته باشید</string>
-    -->
 
 
-    <!--mayket-->
+
+    <!--mayket
     <string name="developer_applications_link">https://myket.ir/developer/dev-76806</string>
     <string name="market_app_id">https://myket.ir/app/</string>
     <string name="comment_market_link">myket://comment?id=</string>
     <string name="need_install_market">برای ثبت نظر باید اپلیکیشن مایکت را نصب داشته باشید</string>
-
+    -->
 
 
 
