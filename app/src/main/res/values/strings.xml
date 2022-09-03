@@ -27,35 +27,32 @@
     <string name="comment">ثبت نظر</string>
 
 
-
-
     <!--MyIntent-->
     <string name="app_link_download">لینک برنامه&#160;</string>
     <string name="share_app_with">اشتراک گذاری با</string>
-    <string name="need_install_caffe_bazaar">برای ثبت نظر باید اپلیکیشن کافه بازار را نصب داشته باشید</string>
     <string name="email_address">ddt.supp@gmail.com</string>
     <string name="send_email">ارسال ایمیل</string>
     <string name="whatsapp_is_not_installed">واتساپ روی تلفن شما نصب نیست</string>
     <string name="whatsapp_business_is_not_installed">واتساپ تجاری روی تلفن شما نصب نیست</string>
     <string name="unknown_error">خطای ناشناخته</string>
 
-    <!--caffe bazaar-->
+    <!--caffe bazaar
 
     <string name="developer_applications_link">https://cafebazaar.ir/developer/mohammad_yazdi</string>
     <string name="market_app_id">http://cafebazaar.ir/app/?id=</string>
     <string name="comment_market_link">bazaar://details?id=</string>
    <string name="need_install_market">برای ثبت نظر باید اپلیکیشن کافه بازار را نصب داشته باشید</string>
+    <string name="please_register_your_comment">ممنون از نظر شما\nلطفا نظر خود را در کافه بازار ثبت کنید</string>
+
+    -->
 
 
-
-    <!--mayket
+    <!--mayket-->
     <string name="developer_applications_link">https://myket.ir/developer/dev-76806</string>
     <string name="market_app_id">https://myket.ir/app/</string>
     <string name="comment_market_link">myket://comment?id=</string>
     <string name="need_install_market">برای ثبت نظر باید اپلیکیشن مایکت را نصب داشته باشید</string>
-    -->
-
-
+    <string name="please_register_your_comment">ممنون از نظر شما\nلطفا نظر خود را در مایکت ثبت کنید</string>
 
 
     <!--StatusFragment-->
@@ -90,7 +87,6 @@
     <!--dialog_comment-->
     <string name="how_main_point">چه امتیازی به این برنامه می دهید؟</string>
     <string name="close">بستن</string>
-    <string name="please_register_your_comment">ممنون از نظر شما\nلطفا نظر خود را در کافه بازار ثبت کنید</string>
     <string name="please_send_email">ممنون از نظر شما\nلطفا انتقادات و پیشنهادات خود را از طریق ایمیل برای ماارسال کنید </string>
     <string name="number_5">5</string>
     <string name="number_4">4</string>
@@ -99,7 +95,6 @@
     <string name="number_1">1</string>
     <string name="submitt_comment">لطفا امتیاز خود را مشخص کنید</string>
     <string name="deleted_successfully">با موفقیت حذف شد</string>
-
 
 
     <!--dialog-exit-->
